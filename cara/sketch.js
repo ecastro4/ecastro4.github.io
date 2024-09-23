@@ -7,6 +7,8 @@ function setup() {
 }
 
 function draw() {
+ let leftEyeSize = 30+10*cos(frameCount*0,1);//mida variable segons el temps
+ let rightEyeSize = 30+10*sin(frameCount*0,1);//mida variable segons el temps
  let vol=mic.getLevel(); //Apliquem el mètode "getLevel" que ens donarà el nivell de volum entre 0 i 1
  //Registrat pel objecte "mic" que és una entrada de àudio. Aquell número el guardarem en una variable local
  //Perquè afecta nomès al "draw" a diferència de la variable global "mic" que està al principi i afecta a tot el codi.
@@ -20,8 +22,6 @@ function draw() {
  background(127);
  fill(255,223,196);//cara
  ellipse(300,200,220,300);
- let leftEyeSize = 30+10*cos(frameCount*0,1);//mida variable segons el temps
- let rightEyeSize = 30+10*sin(frameCount*0,1);//mida variable segons el temps
  fill(81,209,246);//ulls
  ellipse(250,150,50,leftEyeSize);
  ellipse(350,150,50,rightEyeSize);
