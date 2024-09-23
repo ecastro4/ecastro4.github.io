@@ -7,8 +7,8 @@ function setup() {
 }
 
 function draw() {
- let leftEyeSize = 30+10*cos(frameCount*0,1);//mida variable segons el temps
- let rightEyeSize = 30+10*sin(frameCount*0,1);//mida variable segons el temps
+ let leftEyeSize = 30+10*cos(frameCount*0.1);//mida variable segons el temps
+ let rightEyeSize = 30+10*sin(frameCount*0.1);//mida variable segons el temps
  let vol=mic.getLevel(); //Apliquem el mètode "getLevel" que ens donarà el nivell de volum entre 0 i 1
  //Registrat pel objecte "mic" que és una entrada de àudio. Aquell número el guardarem en una variable local
  //Perquè afecta nomès al "draw" a diferència de la variable global "mic" que està al principi i afecta a tot el codi.
@@ -31,9 +31,8 @@ function draw() {
  fill(255,0)
  arc(300,250,120,h,0,PI); // La variable "h" determina la alçada de la boca 
 
- console.log(mic);
- console.log(vol);
- console.log(h);
+
+ console.log(frameCount);
  // El "console.log" ens serveixen per veure el valor de les variables en cada moment
  //
 }
