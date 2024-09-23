@@ -32,7 +32,7 @@ function draw() {
  arc(300,250,120,h,0,PI); // La variable "h" determina la alçada de la boca 
 
 
- console.log(frameCount);
+ console.log(frameCount*0.1);
  // El "console.log" ens serveixen per veure el valor de les variables en cada moment
  //
 }
