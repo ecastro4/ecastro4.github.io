@@ -28,7 +28,7 @@ function draw() {
  fill(0,0,0);//pupil·la
  ellipse(250,150,25,leftEyeSize/2);
  ellipse(350,150,25,rightEyeSize/2);
- fill(255,0)
+ fill(0,0,0);
  arc(300,250,120,h,0,PI); // La variable "h" determina la alçada de la boca 
 
 
