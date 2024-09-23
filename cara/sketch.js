@@ -23,6 +23,9 @@ function draw() {
  fill(81,209,246);
  ellipse(250,150,50,30);
  ellipse(350,150,50,30);
+ fill(0,0,0);
+ ellipse(250,150,25,15);
+ ellipse(350,150,25,15);
  fill(2550,0)
  arc(300,250,120,h,0,PI); // La variable "h" determina la alçada de la boca 
  console.log(mic);
