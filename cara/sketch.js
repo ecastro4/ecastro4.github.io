@@ -7,6 +7,8 @@ function setup() {
 }
 
 function draw() {
+ let faceX=300;
+ let faceY=200;
  let leftEyeSize = 30+10*cos(frameCount*0.1);//mida variable segons el temps
  let rightEyeSize = 30+10*sin(frameCount*0.1);//mida variable segons el temps
  let vol=mic.getLevel(); //Apliquem el mètode "getLevel" que ens donarà el nivell de volum entre 0 i 1
@@ -21,15 +23,15 @@ function draw() {
  // Si el número és 0,67 de volum es convertira en 200 de "h" o alçada de la boca o arc.
  background(127);
  fill(255,223,196);//cara
- ellipse(300,200,220,300);
+ ellipse(faceX,faceY,220,300);
  fill(81,209,246);//ulls
- ellipse(250,150,50,leftEyeSize);
- ellipse(350,150,50,rightEyeSize);
+ ellipse(faceX-50,faceY-50,50,leftEyeSize);
+ ellipse(faceX+50,faceY-50,50,rightEyeSize);
  fill(0,0,0);//pupil·la
- ellipse(250,150,25,leftEyeSize/2);
- ellipse(350,150,25,rightEyeSize/2);
+ ellipse(faceX-50,faceY-50,25,leftEyeSize/2);
+ ellipse(faceX+50,faceY-50,25,rightEyeSize/2);
  fill(0,0,0);
- arc(300,250,120,h,0,PI); // La variable "h" determina la alçada de la boca 
+ arc(faceX,faceY+50,120,h,0,PI); // La variable "h" determina la alçada de la boca 
 
 
  console.log(frameCount*0.1);
