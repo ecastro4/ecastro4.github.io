@@ -181,7 +181,7 @@
          let y1 =a1*Math.sin(q1);//Posició en y del primer braç
          let y2 =a2*Math.sin(q1+q2);//Posició en Y del segon braç
          let x1 =a1*Math.cos(q1);//Posició en X del primer braç
-         output += "<div class='equation'>Desglossant els càlculs:</div>
+         output += "<div class='equation'>Desglossant els càlculs:</div>;
          output += "<div class='equation'>\\[ x_1 = a_1 \\cos(q_1) = ${a1} \\times \\cos(${q1_deg}&deg;) = ${x1.toFixed(2)}\\] </div>";
          output += "<div class='equation'>\\[ x_2 = a_2 \\cos(q_1+q_2) = ${a2} \\times \\cos(${q1_deg}&deg;) + ${q2_deg}&deg;) = ${x2.toFixed(2)}\\] </div>";
          output += "<div class='equation'>\\[ y_1 = a_1 \\sin(q_1) = ${a1} \\times \\cos(${q1_deg}&deg;) = ${y1.toFixed(2)}\\] </div>";
@@ -189,6 +189,21 @@
     //Càlcul de les coordenades finals (x,y) de la mà del robot
          let x = x1 +x2;
          let x = y1 +y2;
+         output += "<div class='equation'>Calculant els resultats numèrics totals:</div>;
+         output += "<div class='equation'> \\[x = {$(x.toFixed(2))} \\] </div>;
+         output += "<div class='equation'> \\[y = {$(x.toFixed(2))} \\] </div>;
+         /* .toFixed(2) és un metode d'arrodoniment que apliquem amb la sintaxi del punt a la lletra x i la lletra y
+            que corresponen a la posició final del robot. let x = x1 + x2; emmagatzema el valor de la posició x 
+            final en x i el $ seleciona el valor x i el posa 2 decimals arrodonots amb .toFixed i els \\[
+            indiquen que estem escrivint un codi MathJax3 que es un derivat de Latex per escriure formules matemàtiques 
+            que renderitzin bé a la pantalla. output += el que fa es sumar un elemet div anomenat output o sortida
+            d'informació que al principi està buit pero quan cliquem calculate comença a sortir tot el output. Ens 
+            hem d'adonar que el div output te al seu interior molts divs anomenats equation però no son "id" perquè si fosin
+            "id" haurien de ser 1, i son classes*/
+    //Mosrtar el resultat
+        document.getElementById('output').innerHTML = output;
+        MathJax.typeset(); //REnderitzar les fórmules matemàtiques amb MathJax
+         
     </script>
     <p>Em dic Eric i sóc alumne de programació i robòtica de 1r de batxillerat tecnològic de <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'institut Pompeu Fabra</a></p>
     <p>A continuació veuràs un llistat amb diferents projectes que farem durant el curs:</p>
