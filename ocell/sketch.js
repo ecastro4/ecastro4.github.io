@@ -18,9 +18,9 @@ function draw() {
   vertex(120*sc,30*sc);
   vertex(130*sc,40*sc);
   vertex(140*sc,60*sc);
-  vertex(160*sc,60*sc+h);
+  vertex(160*sc,70*sc-h);
   vertex(140*sc,70*sc); 
-  vertex(160*sc,80*sc-h); 
+  vertex(160*sc,70*sc+h); 
   vertex(140*sc,80*sc); 
   vertex(120*sc,120*sc);
   vertex(100*sc,140*sc);
