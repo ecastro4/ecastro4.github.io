@@ -10,7 +10,7 @@ function draw() {
  let h = map(vol,0,1,0,255);
   background(220);
 //mano derecha
-  fill(255,202,h);
+  fill(255-h,202,h);
   beginShape();
 vertex(334, 436.1875);
 vertex(328, 430.1875);
@@ -86,7 +86,7 @@ vertex(335, 435.1875);
 endShape(close);
 
 //manga derecha
-  fill(h,134,198);
+  fill(h,134,198-h);
   beginShape();
 vertex(471, 363.1875);
 vertex(455, 353.1875);
@@ -133,7 +133,7 @@ vertex(471, 363.1875);
 endShape(close);
   
   //mano derecha
-  fill(255,202,h);
+  fill(255-h,202,h);
   beginShape();
 vertex(176, 436.1875);
 vertex(187, 427.1875);
@@ -208,7 +208,7 @@ vertex(175, 436.1875);
 endShape(close);
   
   //manga derecha
-  fill(h,134,198);
+  fill(h,134,198-h);
   beginShape();
 vertex(135, 496.1875);
 vertex(144, 487.1875);
