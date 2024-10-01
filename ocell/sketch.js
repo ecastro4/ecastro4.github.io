@@ -3,6 +3,7 @@ let mic
 function setup() {
  createCanvas(200*sc,170*sc);
   mic = new p5.AudioIn();
+  mic.start();
 }
 
 function draw() {
