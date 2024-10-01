@@ -253,4 +253,3 @@ vertex(128, 489.1875);
 vertex(134, 496.1875);
 endShape(close);
 }
-}
