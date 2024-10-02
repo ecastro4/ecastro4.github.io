@@ -12,17 +12,17 @@ function draw() {
 //mano derecha
   fill(255-h,202,h);
   beginShape();
-vertex(334, 436.1875);
-vertex(328, 430.1875);
-vertex(322, 424.1875);
-vertex(314, 418.1875);
-vertex(303, 414.1875);
-vertex(293, 410.1875);
-vertex(286, 406.1875);
-vertex(278, 400.1875);
-vertex(271, 395.1875);
-vertex(266, 388.1875);
-vertex(262, 380.1875);
+vertex(334, 436.1875+h);
+vertex(328, 430.1875+h);
+vertex(322, 424.1875+h);
+vertex(314, 418.1875+h);
+vertex(303, 414.1875+h);
+vertex(293, 410.1875+h);
+vertex(286, 406.1875+h);
+vertex(278, 400.1875+h);
+vertex(271, 395.1875+h);
+vertex(266, 388.1875+h);
+vertex(262, 380.1875+h);
 vertex(258, 372.1875);
 vertex(257, 366.1875);
 vertex(256, 359.1875);
