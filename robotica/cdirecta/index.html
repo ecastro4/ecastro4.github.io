@@ -174,6 +174,8 @@
     o tooltip o informació del que fa el botó-->
 </div><!--aquest és el divisor que conté l'entrada de numeros de l'usuri i el botó calcula la posició-->
     <div id="output"></div>
+    <div id="robotCanvas" width="400" height="400" ></div>
+    
     <!--l'anterior és un divisor buit que és una part de la pantalla que ara està buida que té un nom, output,
     anomenat així perqué serà on estaran tots els calculs quan apretem el botó calcula la posició-->
     <canvas id="robotCanvas" width="400" height="400"></canvas>
@@ -211,8 +213,8 @@
          com que la "_" indica subíndex, si poso una \\ davant de sinus o cosinus es veu es veu escrit com a la fòrmula */
     //Substituir les variables en les equacions
          output += "<div class='equation'> Substituir els valors:</div>";
-         output += "<div class='equation'>\\[ x = ${a1} \\cdot \\cos(${q1_deg}°) + ${a2} \\cdot \\cos(${q1_deg}° + ${q2_deg}°) \\]</div>";
-         output += "<div class='equation'>\\[ y = ${a1} \\cdot \\sin(${q1_deg}°) + ${a2} \\cdot \\sin(${q1_deg}° + ${q2_deg}°) \\]</div>";
+         output += '<div class='equation'>\\[ x = ${a1} \\cdot \\cos(${q1_deg}°) + ${a2} \\cdot \\cos(${q1_deg}° + ${q2_deg}°) \\]</div>';
+         output += '<div class='equation'>\\[ y = ${a1} \\cdot \\sin(${q1_deg}°) + ${a2} \\cdot \\sin(${q1_deg}° + ${q2_deg}°) \\]</div>';
     //Càlculs numèrics
          let x1 =a1*Math.cos(q1);//Posició en X del primer braç
          let x2 =a2*Math.cos(q1+q2);//Posició en X del segon braç
@@ -239,8 +241,28 @@
             "id" haurien de ser 1, i son classes*/
     //Mosrtar el resultat
         document.getElementById('output').innerHTML = output;
-        MathJax.typeset(); //REnderitzar les fórmules matemàtiques amb MathJax
+        MathJax.typeset(); //Renderitzar les fórmules matemàtiques amb MathJax
         }
+    //Dibuixar gràficament al robot amb els dos braços
+        let canvas = document.getElementById('robotCanvas');
+        */Agafa un element que s'anomena robotcanvas i ques està situat en el div buit de sota del dev buit de l'output,
+        es a dir, hi ha un divisor buit HTML anomenat output on surten totes les fòrmles i un divisor buit anomenat HTML anomenat
+        robotCanvas on sortirà el dibuix del robot.*/
+        let ctx = canvas.getContext('2d');// el dibuix ha de ser 2D i no 3D
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        //Netejem el canvas abans de dibuixar
+        //ctx l'hem anomenat així perque significa context de canvas en 2D
+        /*Posem el punt davant de .clearRect perquè és un mètode que s'aplica 
+          al context (ctx) i té 4 arguments o paràmetres els dos primers son la
+          cantonada superior esquerra del rectangles, que sempre es el punt de referència
+          de qualsevol dibuix i la cantonada inferior dreta son els 2 darrers números.
+          Quins son els dos darrers números? Son 400 perquè son canvas.height i canvas.width.
+          clearRect. significa netejar un rectangles i només necessitem dos coordenades per
+          netejar-lo, la cantonada superior esquerr i la cantonada inferior dreta.*/
+    // Definim el centre del canvas i l'escala
+        let centerX = canvas.width / 2;
+        let centerY = canvas.height / 2;
+        let scale = 80; //Aixó es l'escala per dibuixar les distàncies
             
     </script>
     <p>Em dic Eric i sóc alumne de programació i robòtica de 1r de batxillerat tecnològic de <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'institut Pompeu Fabra</a></p>
