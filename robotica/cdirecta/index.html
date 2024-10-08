@@ -271,9 +271,18 @@ canvas{
           clearRect. significa netejar un rectangles i només necessitem dos coordenades per
           netejar-lo, la cantonada superior esquerr i la cantonada inferior dreta.*/
     // Definim el centre del canvas i l'escala
-        let centerX = canvas.width / 2;
-        let centerY = canvas.height / 2;
+        let centerX = canvas.width / 2; //punt mitjà de X
+        let centerY = canvas.height / 2; //punt mitjà de Y
+        //Si el canvas fa 400,400 i centerY serien 200,200
         let scale = 80; //Aixó es l'escala per dibuixar les distàncies
+        /*La escala del dibuix vol dir que si poso una unitat física en la entrada de text 
+        corresponent a a1 o a a2 equival a 80px en el canvas. Per exemple, si el robot té
+        un braç de un metre serien 80px.*/
+        let x1_screen = centerX + x1*scale;
+        let y1_screen = centerY + y1*scale;
+        let x2_screen = centerX + x2*scale;
+        let y2_screen = centerY + y2*scale;
+        /* x1_screen, y1_screen, x2_screen i y2_screen són les coordenades del robot
             
     </script>
     <p>Em dic Eric i sóc alumne de programació i robòtica de 1r de batxillerat tecnològic de <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'institut Pompeu Fabra</a></p>
