@@ -282,8 +282,19 @@ canvas{
         let y1_screen = centerY + y1*scale;
         let x2_screen = centerX + x2*scale;
         let y2_screen = centerY + y2*scale;
-        /* x1_screen, y1_screen, x2_screen i y2_screen són les coordenades del robot
-            
+        /* x1_screen, y1_screen, x2_screen i y2_screen són les coordenades del robot que comencen
+        pel centre perquè el braç del robot es pot moure en qualsevol direcció i el que faig és
+        aplicar l'escala a les distàncies dels braços introduides*/
+        //Aqui lo que farem és dibuixar el primer braç
+        ctx.beginPath();
+        /*Estic aplicant el mètode beginPath amb la sintaxi del punt amb ctx que és el context ctx
+        de 2D i el que fa és iniciar un nou camí de dibuix (path) i es PREPARA per dibuixar un línia.*/
+        ctx.moveTo(centerX, centerY);
+        //Estic avisant que es mogui al centre del canvas per començar a dibuixar des de el centre del dibuix
+        ctx.lineTo(x1_screen, y1_screen);
+        /*Això vol dir dibuixa una linia des de el centre del canvas, que és l'inici del primer braç fins a la posició
+        x1_screen i y1_screen */
+        
     </script>
     <p>Em dic Eric i sóc alumne de programació i robòtica de 1r de batxillerat tecnològic de <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'institut Pompeu Fabra</a></p>
     <p>A continuació veuràs un llistat amb diferents projectes que farem durant el curs:</p>
