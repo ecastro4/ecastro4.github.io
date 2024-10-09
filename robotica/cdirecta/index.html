@@ -231,11 +231,11 @@ canvas{
          output += `<div class='equation'>\\[ y_1 = a_1 \\sin(q_1) = ${a1} \\times \\cos(${q1_deg}&deg;) = ${y1.toFixed(2)}\\] </div>`;
          output += `<div class='equation'>\\[ y_2 = a_2 \\sin(q_1+q_2) = ${a2} \\times \\cos(${q1_deg}&deg;) + (${q2_deg}&deg;) = ${y2.toFixed(2)}\\] </div>`;
     //Càlcul de les coordenades finals (x,y) de la mà del robot
-         let x = x1 +x2;
-         let y = y1 +y2;
-         output += "<div class='equation'>Calculant els resultats numèrics totals:</div>";
-         output += "<div class='equation'> \\[x = {$(x.toFixed(2))} \\] </div>";
-         output += "<div class='equation'> \\[y = {$(x.toFixed(2))} \\] </div>";
+         let x = x1 + x2;
+         let y = y1 + y2;
+         output += "<div class='equation'> Calculant els resultats numèrics totals: </div>";
+         output += `<div class='equation'>\\[ x = ${x.toFixed(2)} \\]</div>`;
+         output += `<div class='equation'>\\[ y = ${y.toFixed(2)} \\]</div>`;
          /* .toFixed(2) és un metode d'arrodoniment que apliquem amb la sintaxi del punt a la lletra x i la lletra y
             que corresponen a la posició final del robot. let x = x1 + x2; emmagatzema el valor de la posició x 
             final en x i el $ seleciona el valor x i el posa 2 decimals arrodonots amb .toFixed i els \\[
