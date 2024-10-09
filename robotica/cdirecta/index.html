@@ -218,8 +218,8 @@ canvas{
          com que la "_" indica subíndex, si poso una \\ davant de sinus o cosinus es veu es veu escrit com a la fòrmula */
     //Substituir les variables en les equacions
          output += "<div class='equation'> Substituir els valors:</div>";
-         output += "<div class='equation'>\\[ x = ${a1} \\cdot \\cos(${q1_deg}°) + ${a2} \\cdot \\cos(${q1_deg}° + ${q2_deg}°) \\]</div>";
-         output += "<div class='equation'>\\[ y = ${a1} \\cdot \\sin(${q1_deg}°) + ${a2} \\cdot \\sin(${q1_deg}° + ${q2_deg}°) \\]</div>";
+         output += `<div class='equation'>\\[ x = ${a1} \\cdot \\cos(${q1_deg}°) + ${a2} \\cdot \\cos(${q1_deg}° + ${q2_deg}°) \\]</div>`;
+         output += `<div class='equation'>\\[ y = ${a1} \\cdot \\sin(${q1_deg}°) + ${a2} \\cdot \\sin(${q1_deg}° + ${q2_deg}°) \\]</div>`;
     //Càlculs numèrics
          let x1 =a1*Math.cos(q1);//Posició en X del primer braç
          let x2 =a2*Math.cos(q1+q2);//Posició en X del segon braç
