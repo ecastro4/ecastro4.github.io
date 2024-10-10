@@ -293,7 +293,23 @@ canvas{
         //Estic avisant que es mogui al centre del canvas per començar a dibuixar des de el centre del dibuix
         ctx.lineTo(x1_screen, y1_screen);
         /*Això vol dir dibuixa una linia des de el centre del canvas, que és l'inici del primer braç fins a la posició
-        x1_screen i y1_screen */
+        x1_screen i y1_screen és el final del braç */
+        ctx.strokeStyle = '220,30,84';
+        //strokeStyle indica el color de la línia, en aquest cas blau pel primer braç
+        ctx.lineWidth='5';
+        //lineWidth és l'amplada de la linia en pixels, en aquest cas 5px de gruix
+        ctx.stroke();
+        /*Dibuixa la línia, sé que és una funció perquè té doble parèntesis i dintre dels parentesis no hi han paràmetres,
+        amb aquesta funció conseguim dibuixar la linia en canvas*/
+        //A partir d'aqui dibuixem el segon braç i el vull blau amb 5px de gruix
+        ctx.beginPath(); //També és una funció
+        ctx.moveTo(x1_screen, y1_screen);//Ara posem que conecti al final de l'altre braç perque és línici del primer braç
+        ctx.lineTo(x2_screen, y2_screen);/*Ara la línia pot anar a x1_screen, y2_screen (surt d'aquí), així que posem que vagi
+        cap a x2_screen, y2_screen que és el final del segon braç*/
+        ctx.strokeStyle = '35,57,194';
+        ctx.lineWidth='5';
+        ctx.stroke();
+        
         
     </script>
     <p>Em dic Eric i sóc alumne de programació i robòtica de 1r de batxillerat tecnològic de <a href="https://agora.xtec.cat/ies-pompeu-fabra-martorell/">l'institut Pompeu Fabra</a></p>
