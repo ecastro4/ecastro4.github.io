@@ -2,8 +2,8 @@ let mic; //creem variable gloalper a un micròfon, ara es un espai a la memòria
 function setup() {
  mic=new p5.AudioIn(); // la variable mix és una instància de la "classe entrada audio" (audioIn)
  //Hem creat un nou objecte de laclasse "entrada d àudio" 
+ mic.start();
  createCanvas(600,400);
- // put setup code here
 }
 
 function draw() {
