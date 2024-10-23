@@ -65,7 +65,7 @@
         }
 
         .dropdown-menu {
-            background-color: #ff5733; /* Color de fondo del menú desplegable */
+            background-color: #cc3f33; /* Color de fondo del menú desplegable, más oscuro */
             border: none;
             border-radius: 10px;
         }
@@ -134,6 +134,18 @@
 
         a:hover {
             color: #ff7f50;
+        }
+
+        /* Ajustar color del menú superior */
+        .navbar-nav .nav-link {
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil para mejorar la legibilidad */
+            padding: 10px 15px; /* Espaciado para el texto */
+            border-radius: 5px; /* Bordes redondeados */
+            transition: background-color 0.3s ease; /* Transición para el hover */
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Color al pasar el ratón */
         }
 
         /* Animación para que aparezca la caja de contenido */
