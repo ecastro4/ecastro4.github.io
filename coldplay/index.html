@@ -1,197 +1,169 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <title>Reproductor de Audio</title>
+    <title>SVG Audio Visualizer</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #f8f9fa, #ffe4b5);
-            color: #333;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: #fff;
         }
-
-        .navbar {
-            background: linear-gradient(45deg, #ff6b6b, #ff3d3d);
-            padding: 10px 20px;
-            border-bottom: 4px solid #ffdd40;
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            color: #fff !important;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: color 0.2s ease-in-out;
-        }
-
-        .navbar-brand:hover {
-            color: #000 !important;
-        }
-
-        .navbar-brand img {
-            margin-right: 15px;
-            border-radius: 0;
-        }
-
-        .nav-link {
-            color: #ffffff !important;
-            font-weight: 600;
-            margin-right: 15px;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #ffdd40 !important;
-        }
-
-        .content-container {
-            margin: 50px auto;
-            padding: 40px;
-            max-width: 900px;
-            background-color: #ffffff;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            border-left: 8px solid #ffdd40;
-            border-right: 8px solid #ffdd40;
-        }
-
-        button {
-            background: linear-gradient(45deg, #ff6b6b, #ff3d3d);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            margin: 20px auto;
+        svg {
             display: block;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(45deg, #ff3d3d, #ff6b6b);
-        }
-
-        canvas {
-            border: 5px solid #ffdd40;
-            border-radius: 10px;
             margin: 20px auto;
-            display: block;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #000;
+        }
+        .controls {
+            margin: 20px;
         }
     </style>
 </head>
 <body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="logo.png" alt="Logo" width="50">
-            Web d'Eric
-        </a>
+    <h1>SVG Audio Visualizer</h1>
+    <div class="controls">
+        <label for="songSelect">Choose Song:</label>
+        <select id="songSelect">
+            <option value="song1">Song 1</option>
+            <option value="song2">Song 2</option>
+            <!-- Easily add more songs here -->
+        </select>
+        <br><br>
+        <input type="file" id="audioFile" accept="audio/*">
+        <br><br>
+        <audio id="audioPlayer" controls></audio>
     </div>
-</nav>
 
-<!-- Content -->
-<div class="content-container">
-    <h1>Reproductor de Audio con Visualización</h1>
-    
-    <audio id="audioPlayer" controls>
-        <source src="good_feelings.mp3" type="audio/mp3">
-        Tu navegador no soporta la etiqueta de audio.
-    </audio>
-    
-    <label for="shapeSelector">Selecciona la forma:</label>
-    <select id="shapeSelector">
-        <option value="sphere">Esfera</option>
-        <option value="heart">Corazón</option>
-    </select>
-    
-    <button onclick="startVisualization()">Iniciar Visualización</button>
+    <svg id="svgVisualizer" width="400" height="400" viewBox="0 0 100 100">
+        <circle id="circle" cx="50" cy="50" r="25" fill="hsl(200, 100%, 50%)" />
+        <path id="heart" d="M50,30 C60,20 70,20 75,30 80,40 70,50 50,70 30,50 20,40 25,30 30,20 40,20 50,30" fill="hsl(200, 100%, 50%)" style="display:none;" />
+        <path id="wepray" d="M36.5,11.2c0-6.4,5.2-11.4,11.4-11.4c6.4,0,11.4,5.2,11.4,11.4c0,6.4-5.2,11.4-11.4,11.4S36.5,17.4,36.5,11.2z M54.1,24.9 c-2.9-1.6-6.6-0.5-8.2,2.4l-3.2,5.8c-0.4-3-1.2-5.8-1.9-7c-1.6-3.3-3.7-4.6-3.7-4.6c-11.2-6.4-17.2,5.4-17.3,5.8 c-1.1,2.6-2.6,6.9-2.5,15.3c0.4,19.2,11.5,45.1,11.5,45.1H7.3C3.4,87.7,0,90,0,94.2c0,3.7,3.2,6,7,6h29.9c4.5,0,7.9-2.5,8.1-11 l0.3-35.5l11.4-20.8C58.1,30,57,26.4,54.1,24.9z" fill="hsl(200, 100%, 50%)" style="display:none;" />
+        <path id="cross" d="M35,19L41,19L41,30L52,30L52,36L41,36L41,57L35,57L35,36L24,36L24,30L35,30L35,19Z" fill="hsl(200, 100%, 50%)" style="display:none;" />
+        <g id="coldplay" style="display:none;" fill="hsl(200, 100%, 50%)">
+                      <!-- Paths -->
+            <path d="M 52.052996,16.980703 C 33.451377,19.950086 17.293884,53.581773 51.100807,66.970622 5.1483425,68.415607 19.416639,10.249047 52.052996,16.980703 Z" />
+            <path d="M 163.7765,20.313364 C 145.96421,56.266758 187.0831,68.34424 199.95968,56.179148 170.72448,84.278014 137.89693,40.104811 163.7765,20.313364 Z" />
+            <!-- Circles -->
+            <circle cx="104.26469" cy="42.055012" r="25.709103" />
+            <circle cx="524.97351" cy="29.359158" r="8.093606" />
 
-    <canvas id="visualCanvas" width="600" height="400"></canvas>
-</div>
+    <path d="m 225.19268,18.250288 c 44.99697,-4.174294 42.27784,55.063459 -0.31739,49.196429 28.37951,-13.011974 19.75892,-41.161638 0.31739,-49.196429 z" />
 
-<script>
-    let audioContext, analyser, dataArray, bufferLength;
-    let canvas = document.getElementById('visualCanvas');
-    let ctx = canvas.getContext('2d');
-    
-    function startVisualization() {
-        let audioPlayer = document.getElementById('audioPlayer');
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        let source = audioContext.createMediaElementSource(audioPlayer);
-        
-        analyser = audioContext.createAnalyser();
-        source.connect(analyser);
-        analyser.connect(audioContext.destination);
-        
-        analyser.fftSize = 256;
-        bufferLength = analyser.frequencyBinCount;
-        dataArray = new Uint8Array(bufferLength);
+<path d="m 281.21313,30.470046 c 29.49604,-31.44835306 64.49876,15.019663 35.23099,35.548387 12.45541,-19.491564 -5.30028,-48.988541 -35.23099,-35.548387 z" />
+    <path d="m 359.45133,22.217742 c -31.2637,28.678816 20.55628,61.326966 35.54838,34.754896 -22.12538,15.262315 -51.70162,-7.305059 -35.54838,-34.754896 z" />
+    <path d="m 418.48704,50.78341 c 9.07623,-27.461167 38.79822,-24.560657 49.03773,0.793491 4.28895,-36.343906 -52.51059,-42.6516151 -49.03773,-0.793491 z"/>
+    <path d="m 486.25115,21.265553 c 35.63671,-7.300115 44.13556,53.322581 1.90438,48.561636 28.86049,-7.128449 21.61231,-44.49379 -1.90438,-48.561636 z"/>
+        </g>
+    </svg>
+        </g>
+    </svg>
 
-        audioPlayer.play();
-        visualize();
-    }
+    <script>
+        const fileInput = document.getElementById('audioFile');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const songSelect = document.getElementById('songSelect');
+        const shapes = {
+            circle: document.getElementById('circle'),
+            heart: document.getElementById('heart'),
+            wepray: document.getElementById('wepray'),
+            cross: document.getElementById('cross'),
+            coldplay: document.getElementById('coldplay')
+        };
 
-    function visualize() {
-        requestAnimationFrame(visualize);
-        analyser.getByteFrequencyData(dataArray);
+        let audioContext, analyser, frequencyData;
+        let currentShapeIndex = 0;
+        let cycleInterval;
 
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        let shape = document.getElementById('shapeSelector').value;
-        let barWidth = (canvas.width / bufferLength) * 2.5;
-        let barHeight;
-        let x = 0;
-
-        for (let i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i] / 2;
-
-            let r = barHeight + 25 * (i / bufferLength);
-            let g = 250 * (i / bufferLength);
-            let b = 50;
-
-            ctx.fillStyle = `rgb(${r},${g},${b})`;
-
-            if (shape === 'sphere') {
-                ctx.beginPath();
-                ctx.arc(x + barWidth / 2, canvas.height - barHeight, barHeight / 2, 0, 2 * Math.PI);
-                ctx.fill();
-            } else if (shape === 'heart') {
-                ctx.save();
-                ctx.translate(x + barWidth / 2, canvas.height - barHeight);
-                ctx.scale(0.1 * barHeight / 10, 0.1 * barHeight / 10);
-                ctx.beginPath();
-                ctx.moveTo(75, 40);
-                ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
-                ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
-                ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
-                ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
-                ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
-                ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
-                ctx.fill();
-                ctx.restore();
+        // Configuration for each song (easily scalable)
+        const songConfig = {
+            song1: {
+                shapeOrder: ['circle', 'heart', 'wepray', 'cross', 'coldplay'],
+                durations: [5000, 6000, 7000, 9000, 999999]
+            },
+            song2: {
+                shapeOrder: ['circle', 'heart', 'wepray', 'cross'],
+                durations: [4000, 8000, 6000, 10000, 999999]
             }
-            
-            x += barWidth + 5;
-        }
-    }
-</script>
+        };
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+        fileInput.addEventListener('change', handleFileUpload);
+        songSelect.addEventListener('change', resetVisualizer);
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('audio/')) {
+                const audioURL = URL.createObjectURL(file);
+                audioPlayer.src = audioURL;
+                audioPlayer.load();
+                initAudio();
+            } else {
+                alert('Please upload a valid audio file.');
+            }
+        }
+
+        function initAudio() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 256;
+            frequencyData = new Uint8Array(analyser.frequencyBinCount);
+
+            const source = audioContext.createMediaElementSource(audioPlayer);
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+
+            visualize();
+            startCycleShapes();
+        }
+
+        function visualize() {
+            requestAnimationFrame(visualize);
+            analyser.getByteFrequencyData(frequencyData);
+
+            const averageFrequency = frequencyData.reduce((a, b) => a + b) / frequencyData.length;
+            const scale = averageFrequency / 255;
+
+            const selectedShape = shapes[getCurrentShape()];
+            const hue = Math.round((averageFrequency / 255) * 360);
+            selectedShape.setAttribute('fill', `hsl(${hue}, 100%, 50%)`);
+            selectedShape.setAttribute('transform', `scale(${scale + 0.5})`);
+        }
+
+        function startCycleShapes() {
+            const songData = songConfig[songSelect.value];
+            let totalTime = 0;
+
+            songData.shapeOrder.forEach((shape, index) => {
+                setTimeout(() => {
+                    currentShapeIndex = index;
+                    updateShapeVisibility();
+                }, totalTime);
+                totalTime += songData.durations[index];
+            });
+
+            cycleInterval = setInterval(() => {
+                currentShapeIndex = (currentShapeIndex + 1) % songData.shapeOrder.length;
+                updateShapeVisibility();
+            }, totalTime);
+        }
+
+        function resetVisualizer() {
+            clearInterval(cycleInterval);
+            audioPlayer.currentTime = 0;
+            audioPlayer.pause();
+            updateShapeVisibility();
+        }
+
+        function getCurrentShape() {
+            return songConfig[songSelect.value].shapeOrder[currentShapeIndex];
+        }
+
+        function updateShapeVisibility() {
+            Object.keys(shapes).forEach(key => {
+                shapes[key].style.display = key === getCurrentShape() ? 'block' : 'none';
+            });
+        }
+    </script>
 </body>
 </html>
-
