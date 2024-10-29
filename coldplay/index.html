@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVG Audio Visualizer</title>
+    <title>Coldplay</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,7 +26,7 @@
     <div class="controls">
         <label for="songSelect">Choose Song:</label>
         <select id="songSelect">
-            <option value="song1">Song 1</option>
+            <option value="song1">Good Feelings</option>
             <option value="song2">Song 2</option>
             <!-- Easily add more songs here -->
         </select>
@@ -58,6 +58,15 @@
         </g>
     </svg>
         </g>
+
+        <g id="lemonade" style="display:none;" fill="hsl(200, 100%, 50%)">
+    <path
+    d="m 528.45466,1167.4903 c 1.51497,8.1256 5.12963,15.0701 10.83582,20.8381 6.94102,5.6093 13.58729,8.8605 20.00459,10.2801 l 324.79679,0.903 c 4.11048,0.011 16.18733,-4.2109 22.55573,-11.085 4.67163,-5.0426 7.855,-11.4689 8.56252,-17.88 L 967.5835,695.9725 C 848.44998,575.66309 861.68772,571.68773 783.40171,494.86112 l -259.82607,0.62022 -137.52456,-286.24755 -37.72102,18.27112 129.27959,270.94286 c -5.83013,1.81732 -10.8339,5.70056 -15.55913,10.28014 -6.44683,6.31566 -8.11503,12.41384 -9.23823,18.54592 z"/>
+    <circle
+    cx="965.77728"
+    cy="513.45123"
+    r="184.48679" />
+  </g>
     </svg>
 
     <script>
@@ -79,12 +88,12 @@
         // Configuration for each song (easily scalable)
         const songConfig = {
             song1: {
-                shapeOrder: ['circle', 'heart', 'wepray', 'cross', 'coldplay'],
-                durations: [5000, 6000, 7000, 9000, 999999]
+                shapeOrder: ['circle', 'heart', 'wepray', 'cross', 'coldplay','lemonade'],
+                durations: [5000, 5000, 5000, 5000, 5000, 5000]
             },
             song2: {
-                shapeOrder: ['circle', 'heart', 'wepray', 'cross'],
-                durations: [4000, 8000, 6000, 10000, 999999]
+                shapeOrder: ['circle', 'lemonade', 'heart', 'wepray', 'cross'],
+                durations: [5000, 5000, 5000, 5000, 5000]
             }
         };
 
