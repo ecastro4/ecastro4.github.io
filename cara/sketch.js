@@ -31,7 +31,7 @@ function draw() {
  ellipse(faceX-50,faceY-50,25,leftEyeSize/2);
  ellipse(faceX+50,faceY-50,25,rightEyeSize/2);
  fill(0,0,0);
- arc(faceX, faceY + 50, 120, h, 0, PI); // La variable "h" determina la alçada de la boca 
+ arc(faceX, faceY + 50, 120, 30+h, 0, PI); // La variable "h" determina la alçada de la boca 
 
 
  console.log(vol);
