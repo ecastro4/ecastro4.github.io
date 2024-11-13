@@ -269,6 +269,7 @@
         let audioContext, analyser, frequencyData;
         let currentShapeIndex = 0;
         let cycleTimeout;
+        let isInitialized = false; // Asegura que initAudio solo se ejecute una vez
     
         const songConfig = {
             song1: {
@@ -280,8 +281,7 @@
                 durations: [5000, 5000, 5000, 5000, 5000, 5000, 5000]
             }
         };
-        //COPIADLO DE AQUÍ HASTA EL FINAL
-        
+    
         fileInput.addEventListener('change', handleFileUpload);
         songSelect.addEventListener('change', resetVisualizer);
         audioPlayer.addEventListener('play', startCycleShapes);
@@ -293,7 +293,9 @@
                 const audioURL = URL.createObjectURL(file);
                 audioPlayer.src = audioURL;
                 audioPlayer.load();
-                initAudio();
+                if (!isInitialized) {
+                    initAudio();
+                }
             } else {
                 alert('Please upload a valid audio file.');
             }
@@ -309,37 +311,42 @@
             source.connect(analyser);
             analyser.connect(audioContext.destination);
     
+            isInitialized = true; // Marca el contexto como inicializado
             visualize();
         }
     
         function visualize() {
-            requestAnimationFrame(visualize);
-            analyser.getByteFrequencyData(frequencyData);
+            if (audioContext && audioContext.state === 'running') { // Verifica que el contexto esté activo
+                requestAnimationFrame(visualize);
+                analyser.getByteFrequencyData(frequencyData);
     
-            const averageFrequency = frequencyData.reduce((a, b) => a + b) / frequencyData.length;
-            const scale = averageFrequency / 255;
+                const averageFrequency = frequencyData.reduce((a, b) => a + b) / frequencyData.length;
+                const scale = averageFrequency / 255;
     
-            const selectedShape = shapes[getCurrentShape()];
-            const hue = Math.round((averageFrequency / 255) * 360);
-            selectedShape.setAttribute('fill', `hsl(${hue}, 100%, 50%)`);
-            selectedShape.setAttribute('transform', `scale(${scale + 0.5})`);
+                const selectedShape = shapes[getCurrentShape()];
+                const hue = Math.round((averageFrequency / 255) * 360);
+                selectedShape.setAttribute('fill', `hsl(${hue}, 100%, 50%)`);
+                selectedShape.setAttribute('transform', `scale(${scale + 0.5})`);
+            }
         }
     
         function startCycleShapes() {
+            if (!isInitialized) { // Asegura que initAudio se haya ejecutado
+                initAudio();
+            }
             const songData = songConfig[songSelect.value];
             updateShapeVisibility();
     
-            // Avanzar a la siguiente forma después de la duración actual solo si el audio está reproduciéndose
             cycleTimeout = setTimeout(() => {
                 currentShapeIndex = (currentShapeIndex + 1) % songData.shapeOrder.length;
                 if (!audioPlayer.paused) {
-                    startCycleShapes(); // Recursión controlada para que avance solo al reproducirse
+                    startCycleShapes();
                 }
             }, songData.durations[currentShapeIndex]);
         }
     
         function stopCycleShapes() {
-            clearTimeout(cycleTimeout); // Detiene el cambio de formas cuando el audio se pausa
+            clearTimeout(cycleTimeout);
         }
     
         function resetVisualizer() {
