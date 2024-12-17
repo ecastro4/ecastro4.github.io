@@ -7,12 +7,3 @@ y:-100,transformOrigin:"50% 50%"})})();(function(){k=gsap.timeline({onUpdate:t})
 ".treePotMask"],{drawSVG:"0% 0%",stroke:"#FFF",stagger:{each:6},duration:gsap.utils.wrap([6,1,2]),ease:"linear"}).from(".treeStar",{duration:3,scaleY:0,scaleX:.15,transformOrigin:"50% 50%",ease:"elastic(1,0.5)"},"-=4").to(".sparkle",{duration:3,opacity:0,ease:"rough({strength: 2, points: 100, template: linear, taper: both, randomize: true, clamp: false})"},"-=0").to(".treeStarOutline",{duration:1,opacity:1,ease:"rough({strength: 2, points: 16, template: linear, taper: none, randomize: true, clamp: false})"},
 "+=1");c.add(k,0);gsap.globalTimeline.timeScale(1.5); k.vars.onComplete = function() { gsap.to('foreignObject', { opacity: 1 }) } })();
 
-// Tiempo en milisegundos antes de redirigir (10 segundos = 10000 ms)
-const tiempoRedireccion = 8000; 
-// URL a la que se redirigirá
-const urlRedireccion = 'https://ecastro4.github.io/inici2';
-
-// Función que redirige a la URL especificada
-setTimeout(() => {
-    window.location.href = urlRedireccion;
-}, tiempoRedireccion);
