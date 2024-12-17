@@ -10,7 +10,7 @@ y:-100,transformOrigin:"50% 50%"})})();(function(){k=gsap.timeline({onUpdate:t})
 // Tiempo en milisegundos antes de redirigir (10 segundos = 10000 ms)
 const tiempoRedireccion = 8000; 
 // URL a la que se redirigirá
-const urlRedireccion = 'https://ecastro4.github.io';
+const urlRedireccion = 'https://ecastro4.github.io/inici2';
 
 // Función que redirige a la URL especificada
 setTimeout(() => {
