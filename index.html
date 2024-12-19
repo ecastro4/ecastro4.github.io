@@ -272,6 +272,16 @@
   <li></li>
   <li></li>
 </ul>
-</script>
+<script>
+        // Tiempo en milisegundos antes de redirigir (10 segundos = 10000 ms)
+        const tiempoRedireccion = 4000; 
+        // URL a la que se redirigirá
+        const urlRedireccion = 'https://ecastro4.github.io/inici2';
+
+        // Función que redirige a la URL especificada
+        setTimeout(() => {
+            window.location.href = urlRedireccion;
+        }, tiempoRedireccion);
+    </script>
 </body>
 </html>
