@@ -1,9 +1,286 @@
-<h1>Conceptes generals de microcontroladors</h1>
-<p>Els diferents microcontroladors tenen en comú els següents aspectes:</p>
-<ul>
-  <li>Tipus d'entrades i sortides: el microcontrolador té un processador tipus AVR o Espressif on es conecta
-  entrades digitals, entrades analògiques, sortides digitals i sortides analògiques</li>
-  <li>Les entrades i sortides digitals només funcionen amb 0 o 1 es a dir codi binari, zero significa 
-  0 volts i 1 pot significar 5 volts o 3,3 volts depenent del microcontrolador i del pin que utilitzem.
-  A aquestes entrades podem connectar per exemple interruptors, sensor "foscor/claror" </li>
-</ul>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <title>Arduino</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #f8f9fa, #ffe4b5);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ff3d3d);
+            padding: 10px 20px;
+            border-bottom: 4px solid #ffdd40;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: #fff !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .navbar-brand:hover {
+            color: #000 !important;
+        }
+
+        .navbar-brand img {
+            margin-right: 15px;
+            border-radius: 0;
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            font-weight: 600;
+            margin-right: 15px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ffdd40 !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            width: 0%;
+            height: 3px;
+            background-color: #ffdd40;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .dropdown-menu {
+            background-color: #cc3f33;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .dropdown-item {
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #ff7f50;
+            color: #ffffff;
+        }
+
+        .content-container {
+            margin: 120px auto 50px auto;
+            padding: 40px;
+            max-width: 900px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            border-left: 8px solid #ffdd40;
+            border-right: 8px solid #ffdd40;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        h1 {
+            color: #ff4500;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #ff4500;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #ff7f50;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.25rem;
+            }
+
+            ul li {
+                font-size: 1rem;
+            }
+        }
+
+        table {
+            width 50%; // Ocupa el 50% de l'amplada de la pàgina
+            border-collapse: collapse; // Evita que apareguin dobles linies a les files
+            margin :20px auto; // Marge de 20px a la part superior i centre la taula
+        }
+
+        th,td{
+            border: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://ecastro4.github.io">
+                <img src="logo.png" alt="Logo" width="50">
+                Web d'Eric
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Inici</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tema 1</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Programació p5.js
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="https://ecastro4.github.io/cara">Cara interactiva</a>
+                            <a class="dropdown-item" href="https://ecastro4.github.io/ocell">Ocell</a>
+                            <a class="dropdown-item" href="https://ecastro4.github.io/wepray">We Pray</a>
+                            <a class="dropdown-item" href="https://ecastro4.github.io/coldplay">Coldplay</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Braç robòtic
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                            <a class="dropdown-item" href="https://ecastro4.github.io/robotica/cdirecta">Cinemàtica directa</a>
+                            <a class="dropdown-item" href="https://ecastro4.github.io/robotica/cinversa">Cinemàtica inversa</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tema 2</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content-container">
+        <h1>Conceptes generals de microcontroladors</h1>
+        <p>Els diferents microcontroladors tenen en comú els següents aspectes:</p>
+    <ul>
+        <li>Tipus d'entrades i sortides: el microcontrolador té un processador tipus AVR o Espressif on es conecta
+        entrades digitals, entrades analògiques, sortides digitals i sortides analògiques</li>
+        <li>Les entrades i sortides digitals només funcionen amb 0 o 1 es a dir codi binari, zero significa 
+        0 volts i 1 pot significar 5 volts o 3,3 volts depenent del microcontrolador i del pin que utilitzem.
+        A aquestes entrades podem connectar per exemple interruptors, sensor "foscor/claror" </li>
+    </ul>
+        <h2>Sortides analògiques tipus PWM</h2>
+        <p>PWM significa modulació de l'ample de banda, en anglès <i>Pulse Width Modulatios</i> i és una forma 
+            d'aconseguir una sortida analògica a partir de diverses sortides digitals, molt ràpides</p>
+        <p>PWM es representa amb el síbol "∼" tal com podem veure en la imatge següent d'un Arduino Uno</p>
+        <img src="arduinouno.png" width="600" height="400">
+        <p>Més amunt podem veure que els pins numeros 3, 5, 6, 9, 10 i 11</p>
+        <p>Aquests PWM són sortides analògiques de 8 bits, en el cas de Arduino Uno Rev3 d'acord amb el <a href="https://store.arduino.cc/en-es/products/arduino-uno-rev3">fabricant</a>, 
+        mentres que en el cas d'arduino Uno Rev4 és de 12 bits segons el <a href="https://docs.arduino.cc/resources/datasheets/ABX00080-datasheet.pdf">fabricant</a> que l'anomenar Converter. </p>
+        <p>Tenir 8 o 12 bits en un cinvertidor digital analògic o DAC (Digital Analog Converter) tipus PWM fa que tinguem 2<sup>8</sup> o 2<sup>10</sup> 
+        nivells diferents de corrent, és a dir 256 nivells diferents o 2048 nivells diferents.</p>
+        <p>Suposem que tant Arduino Uno Rev 3 o Rev 4 poden donar 5V com a màxim. Quina seria la resolució en milivolts
+            de cada Arduino?</p>
+        <p>5 volts dividit entre 256 dona 0.01953125 volts = 10,53125 milivolts per Arduino Uno Rev3</p>
+        <p>5 volts dividit entre 2048 dona 0.00244 volts = 2,44 milivolts per Arduino Uno Rev4</p>
+        <p>Els milivolts anteriors són la resolució que aconseguim. Imaginem que volem regular la intensitat d'un llum led amb un Arduino Uno 
+            Rev3 aconseguim un canvi menys fluid i amb graons més grans, es a dir canvis més bruscs perque siguin 2566 canvis
+            són menys que 2048 volts. A continuació veurem una imatge que representa com combinant moltes senyals digitals ràpidament sembla que 
+            generem un senyal analògic, aixo és la base del PWM </p>
+        <img src="pwm.png" width="600" height="400">
+        <p>Quan major és la amplada del pols vol dir que major és el temps que la sortida digital està en voltatge alt, per exemple 5V 
+            i menys temps està a 0V, i per tant el promig de tots els polsos és més alt. En canvi si per exemple si cada pols és més estret 
+            a 5V vol dir que estarà més temps a 0V, i el promig de tots ells polsos és més baix. A la imatge de dalt es pot veure com s'encenderia un LED 
+            o un motor funcionaria a una velocitat del 10%, 30%, 50%, 90%. Quin percentatge del senyal canviaria en un cas i en un altre?</p>
+        <ul>
+            <li>(0,01953125/5)*100 = 0,390625%</li>
+            <li>(0,00244140625/5)*100 = 0,048828125%</li>
+        </ul>
+        <p>A la taula a continuació veuràs els valor per defecte de la freqüència PWM en Arduino Uno Rev3</p>
+        <table>
+            <thead>
+              <tr>
+                <th>PIN de Sortida</th><th>Freqüència PWM (Hz)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PINS: 3, 9, 10, 11</td>
+                <td>490 Hz</td>
+              </tr>
+              <tr>
+                <td>PINS: 5, 6</td>
+                <td>976 Hz</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <!-- Scripts necessaris -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
