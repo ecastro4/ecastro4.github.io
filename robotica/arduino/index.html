@@ -216,6 +216,35 @@
             /* Cambia el color de fondo al pasar el ratón por encima */
             background-color: #e2e2e2;
         }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 50%;
+            background: linear-gradient(135deg, #ffe0b2, #ffccbc); /* Fondo degradado */
+        }
+
+        .custom-button {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 18px 36px; /* Botón más grande */
+            font-size: 20px;
+            font-family: 'Arial', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px; /* Bordes más redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .custom-button:hover {
+            background-color: #ff6f61;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 
@@ -274,6 +303,8 @@
 
     <div class="content-container">
         <h1>Conceptes generals de microcontroladors</h1>
+        <button class="custom-button" onclick='location.href="https://ecastro4.github.io/robotica/arduino/configuracio"'>VEURE CONFIGURACIÓ</button>
+
         <p>Els diferents microcontroladors tenen en comú els següents aspectes:</p>
         <ul>
             <li>Tipus d'entrades i sortides: el microcontrolador té un processador tipus AVR o Espressif on es conecta
