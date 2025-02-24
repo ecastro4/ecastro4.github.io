@@ -362,7 +362,20 @@
     </ul>
     <h4>SPI</h4>
     <p>Exemple de SPI amb Arduino UNO:</p>
-    <li>El PIN 11 és un MOSI que significa Master Out Out Slaif, i el pin 12 és un MISO (Master In Slaif Out)</li>
+    <p>El PIN 11 és un MOSI que significa Master Out Slave In, i el pin 12 és un MISO <i>(Master In Slave Out)</i></p>
+    <p>El pin MOSi envia dades de de l'arduino (mestre o master) cap als perifèrics (slaves o esclaus). Per exemple, si conectem un mòdul SD
+        o tarjeta de memòria o una pantalla o display SPI significa que les dades s'envien pel pin 11 o MOSI.</p>
+    <p>El pin MISO farà el contrari que el pin MOSI, o sigui, rep dades des d'un esclau cap a l'Arduino i l'esclau pot ser el mateix que l'anterior,
+        conectem una tarjeta de memòria o una pantalla.</p>
+    <p>A més s'utilitzen altres pins com el SCK (pin 13 d'Arduino UNO) que significa Serial Clock, que enviarà un senyal de rellotge, que serveix per 
+        sincronitzar la comunicació, l'Arduino és el mestre que genera aquest senyal que segueixen tots els esclaus.</p>
+    <p>El pin 10 és el pin SS que significa <i>Slave Select</i>, diu quin esclau està actiu en un moment determinat.</p>
+    <p>Es necessiten 2 pins més d'alimentació que són el VCC de 5v o el GND que és el terra, que tanca el circuit.</p>
+    <p>A continuació veurem un codi per comprovar si la targeta SD està connectada correctament:</p>
+    <pre><code>
+    #include &lt;SPI.h&gt;
+    #include &lt;SD.h&gt;
+    </code></pre>
 
 
     <p>You can work with different software as you can read under Microcontrollers>Software for microcontollers in this
