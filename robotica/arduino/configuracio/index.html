@@ -373,8 +373,33 @@
     <p>Es necessiten 2 pins més d'alimentació que són el VCC de 5v o el GND que és el terra, que tanca el circuit.</p>
     <p>A continuació veurem un codi per comprovar si la targeta SD està connectada correctament:</p>
     <pre><code>
-    #include &lt;SPI.h&gt;
-    #include &lt;SD.h&gt;
+    #include <SPI.h>; // Afegim la biblioteca de C++ Arduino que controla el protocol de comunicació SPI.
+    #include <SD.h>; // Afegim o importem la biblioteca que controlen els arxius per <i>"Read, Write, Rewrite, Delete"</i>
+    const int chipSelect = 10; // Fem que el pin 10 sigui número enter i constant i s'anomeni "chipSelect" perquè controlarà 
+    // la selecció de la targeta SD, quan l'Arduino vol comunicar-se amb ella.
+
+    void setup() {
+    Serial.begin(9600); // 9600 són bauds, els bauds són la quantitat de símbols transmesos per segon.
+    // 1 baud = 1 bit/segon, però en alguns casos 1 baud pot ser més de 1 bit/segon
+    Serial.print("Iniciant SD ...");
+    if (!SD.begin(chipSelect)) { // ! nega, vol sir que si no s'inicia la targeta SD
+        Serial.println("Error: no s'ha detectat la targeta SD"); // Si es compleix la condició anterior, posa aquest missatge a la consola.
+        return; // Significa que acabi la funció setup si la targeta no està disponible.
+    } // Aquesta clau tanca la condició if si no detecta la targeta
+    Serial.println("Targeta SD detectada correctament");
+    File fitxer = SD.open("dades.txt"); // File és una classe 'objectes que gestiona arxius i quan escric un nom al costat com fitxer declaro una variable per gestionar un fitxer.
+    // Si el fitxer existeix i es pot obrir correctament la variable fitxer serà vàlida i si no existeix o hi ha un problema el fitxer donarà com a resposta un valor nul.
+    if (fitxer) { // Si el fitxer es pot obrir correctament s'executi el codi següent, i si no passa directament a else.
+        Serial.println("Llegint dades.txt:"); // Ha començat a llegir el fitxer
+        while (fitxer.available()) { // Mentre hi hagi dades per llegir dintre del fitxer
+            Serial.write(fitxer.read()); // Mostra el contingut del fitxer. El mètode read el que fa amb la sintaxi del punt aplicada al fitxer va llegir caracter a caracterfins que s'acabin
+        } // Aquesta clau tanca el bucle while
+        fitxer.close(); // Sempre s'ha de tancar el fitxer quan no es necessita per evitar errors i alliverar memòria.
+    } // Aquesta clau tanca la condició if
+    } // Aquesta clau tanca la funció setup
+
+    void loop() { // Aquesta part del codi és la que s'executaria tota l'estona de forma repetitiva. No possariem per exemple llegir un fitxer perquè estriem llegint tota l'estona.
+    }
     </code></pre>
 
 
