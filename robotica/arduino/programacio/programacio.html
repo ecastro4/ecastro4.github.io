@@ -343,14 +343,14 @@
     <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
 //El meu primer codi: Blink
 void setup() { //Codi que s'executa una vegada i és la configuració.
-  pinMode(13, OUTPUT); //Estem dient que el pin 13 és una sortida de corrent o OUTPUT on puc connectar
-      //un led.
+  pinMode(13, OUTPUT); //Estem dient que el pin 13 és una sortida de corrent o OUTPUT on puc 
+    // connectar un led.
 }
 
 void loop() { //És un codi que s'executa sense parar fins que desconnecto l'Arduino o li dono una 
-    instrucció de parada.
+    // instrucció de parada.
  digitalWrite(13, HIGH); // <b>digitalWrite</b> és una sortida digital i permet encendre i apagar
-      //Només té 2 valors, HIGH i LOW (Encès i apagat)
+    // Només té 2 valors, HIGH i LOW (Encès i apagat)
  delay(500);//És el temps en milisegons que ha d'estar, en aquest cas encès.
  digitalWrite(13, LOW);//Aqui <b>digitalWrite</b> fa que s'apagui
  delay(500);
