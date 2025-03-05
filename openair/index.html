@@ -1,17 +1,76 @@
 <html>
-  <head>
-    
-  </head>
-  <body>
-    <h1>Codis de R: tydiverse, dplyr, openair</h1>
-    <p></p>
-    <pre><code>
-      
+
+<head>
+
+</head>
+
+<body>
+  <h1>Codis de R: tidyverse, lares, openair</h1>
+  <p>El primer que fem és instalar les biblioteques necessàries: Tidyverse serveix per ordenar les dades
+    (Els i les analistes dediquem el 80% del temps a netejar i preprar les dades per a l’anàlisi.) Lares la utilitzem
+    nomès per aconseguir una instrucció de remplaçar tot de forma eficaç. Openair ens permet fer gràfics d'anàlisi de
+    contaminació
+    com variacions temporals, rosa dels vents de contaminació, gràfics de tendències plurianuals, etc.</p>
+  <pre><code>
+      install.packages(c("openair","tidyverse", "lares"))
     </code></pre>
-    <h1>Codis de Python: pandas</h1>
-    <p></p>
-    <pre><code>
-      
+  <p>Pujem i guardem a la variable city totes les dades csv que hem descarregat del servidor XVPCA de la Generalitat que
+    conté les
+    dades de contaminants aeris en format horari propi de la Generalitat </p>
+  <pre><code>
+      city<-read.csv('lleida.csv')
     </code></pre>
-  </body>
+  <p>Carreguem la llibreria tidyverse per poder-la utilitzar per instruccions com pivot. La paraula pivot és clau perquè 
+    vol dir canviar files per columnes o columnes per files i reordenar totes les dades.</p>
+  <pre><code>
+    library (tidyverse)
+  </code></pre>
+  <p>Pivot_longer i la seva contrària pivot_wider, transformen files en columnes de la nostra base de dades. </p>
+  <ul>
+    <li>Pivot_longer transforma les columnes en files, fent així la base de dades més llarga (longer). <li>
+    <li>Pivot_wider transforma les files en columnes fent la base de dades més ample (wider)</li>
+  </ul>
+  <p>Els atributs names_to i values_to ens indiquen en què transformem totes les dades</p>
+  <pre><code>
+    city1<-pivot_longer(city,cols=c(h01,h02,h03,h04,h05,h06,h07,h08,h09,h10,h11,h12,h13,h14, h15,h16,h17,h18,h19,h20,h21,h22,h23,h24), names_to="hour", values_to = "value")
+  </code></pre>
+  <p>Creem una nova variable de base de dades o dataframe city2 eliminants amb -c les columnes 1,2,4 i de las 6 a las 16 perquè 
+    no ens interesen les seves dades.</p>
+  <pre><code>
+    city2<-city1[-c(1,2,4,6:16)]
+  </code></pre>
+  <p>Carreguem la llibreria dplyr per transformar dades que és una part de tidyverse</p>
+  <pre><code>
+    library(dplyr)
+  </code></pre>
+  <p>Canviem el nom i la posició de les columnes gràcies a l'operador pipe (%>%) de dplyr que permet encadenar diverses operacions</p>
+  <pre><code>
+    city2 <- city2 %>% mutate(date=paste0(data, " ", hour))
+  </code></pre>
+  <p>Per coneixer el nom de les columnes del nostre dataframe o base de dades city2 hem d'escriure colnames</p>
+  <pre><code>
+    colnames (city2)
+  </code></pre>
+  <p>Eliminem les columnes 1 i 3</p>
+  <pre><code>
+    city2<-city2[-c(1,3)]
+  </code></pre>
+  <p>Reordenem les columnes perquè volem "date en primer lloc</p>
+  <pre><code>
+    city2<-city2[,c(3,1,2)]
+  </code></pre>
+  <p>Obliguem a posar noms a les columnes </p>
+  <pre><code>
+    colnames (city2)<-c("date","pollutant","value")
+  </code></pre>
+
+
+
+
+  <h1>Codis de Python: pandas</h1>
+  <p></p>
+  <pre><code>
+    </code></pre>
+</body>
+
 </html>
