@@ -63,8 +63,55 @@
   <pre><code>
     colnames (city2)<-c("date","pollutant","value")
   </code></pre>
-
-
+  <p>Comprovem que city2 és un dataframe perquè si no no podré treballar correctament</p>
+  <pre><code>
+    class (city2)
+  </code></pre>
+  <p>Obliguem a que sigue un dataframe amb la següent instrucció:</p>
+  <pre><code>
+    city2 <- as.data.frame(city2)
+  </code></pre>
+  <p>Carreguem la llibreria lares per utilitzar una instrucció</p>
+  <pre><code>
+    library (lares)
+  </code></pre>
+  <p>la instrucció replaceall de lares aconsegueix fer 24 sustitucions moltes vegades diferents, fent milions de sustitucions sense penja-se</p>
+  <pre><code>
+    city2<-replaceall(city2, c("T00:00:00.000 h01", "T00:00:00.000 h02","T00:00:00.000 h03","T00:00:00.000 h04","T00:00:00.000 h05","T00:00:00.000 h06","T00:00:00.000 h07","T00:00:00.000 h08","T00:00:00.000 h09","T00:00:00.000 h10","T00:00:00.000 h11","T00:00:00.000 h12","T00:00:00.000 h13","T00:00:00.000 h14","T00:00:00.000 h15","T00:00:00.000 h16","T00:00:00.000 h17","T00:00:00.000 h18","T00:00:00.000 h19","T00:00:00.000 h20","T00:00:00.000 h21","T00:00:00.000 h22","T00:00:00.000 h23","T00:00:00.000 h24"), c(" 01:00:00", " 02:00:00", " 03:00:00", " 04:00:00"," 05:00:00", " 06:00:00"," 07:00:00", " 08:00:00"," 09:00:00", " 10:00:00"," 11:00:00", " 12:00:00"," 13:00:00", " 14:00:00"," 15:00:00", " 16:00:00"," 17:00:00", " 18:00:00"," 19:00:00", " 20:00:00"," 21:00:00", " 22:00:00"," 23:00:00", " 00:00:00"))
+  </code></pre>
+  <p>Carreguem la bibliotexa openair per carregar instruccions</p>
+  <pre><code>
+    library(openair)
+  </code></pre>
+  <p>Comprovem quin tipus de class és la columna de les dades, al principi ens dira character i desprès del codi seüent serà posix.ct</p>
+  <p>les dates tenen format ISO, que és: any-mes-dia hora:minut:segon</p>
+  <pre><code>
+    class(city2$date)
+  </code></pre>
+  <p>Hem de convertir els caràcters de la columna date en una data amb anys, mesos, dies, hores minuts i segons. </p>
+  <pre><code>
+    city2$date<-as.POSIXct(city2$date,"%Y-%m-%d %H:%M:%S", tz="Europe/Madrid")
+  </code></pre>
+  <p>La columna pollutant té escrits els noms dels contaminants i l'ordinador els detecta com a caràcters i hem d'aconseguir que siguin factors, 
+    és a dir, elements que quan tenen els mateixos caràcters són considerats iguals, per exemple no2 sempre serà el mateix i no la suma dels caràcters n, o, 2.
+  </p>
+  <pre><code>
+    city2$pollutant<-as.factor(city2$pollutant)
+  </code></pre>
+  <p>Els levels ens serveixen per conèixer tots els factors que hi han dintre de la columa pollutant, és a dir tots els contaminants</p>
+  <pre><code>
+    levels(city2$pollutant)
+  </code></pre>
+  <p>Creem una nova variable on posem ampliant tots els contaminants en més columnes, de forma què els contaminants que eren factors 
+    que estaven a la mateixa columna ara estàn tots en diferents columnes
+  </p>
+  <pre><code>
+    city3<-pivot_wider(city2,names_from = pollutant, values_from = value)
+  </code></pre>
+  <p>Convertim city 3 en un dataframe</p>
+  <pre><code>
+    city3 <- as.data.frame(city3)
+  </code></pre>
 
 
   <h1>Codis de Python: pandas</h1>
