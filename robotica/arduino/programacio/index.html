@@ -760,6 +760,56 @@ void flash(int duration) {
         </code></pre>
         </div>
 
+        <div class="content-container">
+            <p>Puc crear una funció que em serveix per quatre lletres i nomès quan la crido he de posar el número de repeticions com 
+                paràmetres o arguments</p>
+        </div>
+
+        <div class="content-container">
+            <h1>Normes internacionals de codi Morse</h1>
+            <ul>
+                <li>Una línia (dash) és igual a tres punts</li>
+                <li>L'espai entre les parts d'una meteixa lletra és igual a un punt (dot). (S = ···, l'espai entre cada punt és un punt)</li>
+                <li>L'espai entre dues lletres de la mateixa paraula són tres punts (Per exemple entre las S i la O de SOS)</li>
+                <li>L'espai entre dues parules és igual a set punts (Pa ······· tomàquet)</li> 
+            </ul>
+            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+                void eosz (int numFlashes) {
+                    for (int i = 0; i < numFlashes; i++) {
+                        digitalWrite(ledPin, HIGH);
+                        delay(200);
+                        digitalWrite(ledPin, LOW);
+                        delay(200);
+                    }
+                }
+
+                void loop(){
+                    eosz(1); // Això és la lletra e
+                    eosz(3); // Això és la lletra s
+                    eosz(2); // Això és la lletra o
+                }
+            </code></pre>
+
+            <p>Crearem una funció que serà vàlida pels punts repetits i per les linies repetides amb dos paràametres.</p>
+
+            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+
+
+                void eosztmo (int numFlashes, int d) {
+                    for (int i = 0; i < numFlashes; i++) {
+                        digitalWrite(ledPin, HIGH);
+                        delay(d);
+                        digitalWrite(ledPin, LOW);
+                        delay(d);
+                    }
+                }
+
+                void loop(){
+                    eosztmo(1,600); // Això és la lletra t
+                }
+            </code></pre>
+        </div>
+
         <!-- Scripts necessaris -->
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
