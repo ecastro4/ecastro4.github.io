@@ -479,6 +479,24 @@
   <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
     city3 <- as.data.frame(city3)
   </code></pre>
+
+  <p>La funció timeVariation és una funció de Openair que obliga a que existeixi diverses columnes amb minúscules, cada columna en minúscules 
+    correspon a un pollutant. L'atribut main és un atribut de moltes funcions de openair i correspon al títol del gràfic. La funció time timeVariation
+    pot contenir diversos arguments, el primer és el nom del dataframe o cinjunt de dades a analitzar, el segon argument sempre és pollutant i 
+    pot ser un valor únic (pollutant = "o3") o un vector R (pollutant = c("o3", "no2",...)), el tercer argument és main, altres arguments es 
+    veuen al tutorial de R. És pot utilitzar filter per filtrar les dades xlab i ylab (les etiquetes "label" o títols del eix x i del eix y), 
+    es pot agrupar per anys o per dates o es pot normalitzar en base 100 com a màxim en diferents arguments.
+  </p>
+  <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    timeVariation(city4, pollutant=c("o3","no2","h2s","no","hcnm","co","so2","hct","nox","pm10","pm2.5"), main="Air pollution in Lleida (1991-2024)")
+  </code></pre>
+  <img src="timeVariation.png" width="800" height="500">
+
+  <p>S'utilitza trendLevel per veure les tendències i la evolució temporal de diversos anys.</p>
+  <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    trendLevel(city4, pollutant = "h2s", main="Hydrogen sulfide evolution in Lleida")
+  </code></pre>
+
 </div>
 
 <div class="content-container">
