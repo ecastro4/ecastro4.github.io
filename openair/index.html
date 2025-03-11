@@ -375,7 +375,7 @@
     </ul>
     <p>Els atributs names_to i values_to ens indiquen en què transformem totes les dades</p>
     <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-r">
-    city1<-pivot_longer(city,cols=c(h01,h02,h03,h04,h05,h06,h07,h08,h09,h10,h11,h12,h13,h14, h15,h16,h17,h18,h19,h20,h21,h22,h23,h24), names_to="hour", values_to = "value")
+    city1<-pivot_longer(city,cols=c(h01,h02,h03,h04,h05,h06,h07,h08,h09,h10,h11,h12,h13,h14, h15,h16,h17,h18,h19,h20,h21,h22,h23,h24), names_to="hora", values_to = "value")
   </code></pre>
 
     <p>Creem una nova variable de base de dades o dataframe city2 eliminants amb -c les columnes 1,2,4 i de las 6 a las
@@ -395,7 +395,7 @@
       diverses
       operacions</p>
     <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-r">
-      city2 <- city2 %>% mutate(date=paste0(data, " ", hour))
+      city2 <- city2 %>% mutate(date=paste0(data, " ", hora))
   </code></pre>
 
     <p>Per coneixer el nom de les columnes del nostre dataframe o base de dades city2 hem d'escriure colnames</p>
@@ -546,7 +546,7 @@
       o canviar l'esquema de color o posar en comptes del dia del mes el nivell de contaminant en números.
     </p>
     <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-r">
-    calendarPlot(daily, pollutant="no2", year="2024")
+    calendarPlot(daily, pollutant="no2", any="2024")
   </code></pre>
     <img src="calendarPlot.png" width="800" height="500">
 
@@ -555,16 +555,168 @@
       convertir-lo en un caràcter per desprès convertir-lo en un POSIXct.
     </p>
     <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-r">
-    yearly<-timeAverage(daily,avg.time = "year")
-    yearly<-replaceall(daily, c("-01-01"), c(""))
-    yearly$date<-as.POSIXct(yearly$date,"%Y-%m-%d", tz="Europe/Madrid")
-    yearly2<-timeAverage(yearly,avg.time = "year")
-    yearly2<-replaceall(yearly2, c("-01-01"), c(""))
-    yearly2$date<-as.character(yearly2$date)
-    yearly2$date<-as.POSIXct(yearly2$date,"%Y", tz="Europe/Madrid")
-    timePlot(yearly2, pollutant =  c("co", "h2s", "hcnm", "hct","no", "no2", "nox", "o3", "pm10", "pm2.5", "so2"), avg.time = "year", lwd= 2, lty=1, group = TRUE, main="Lleida line Plot", ref.y = list(h = c(40, 20, 10), lty = c(1, 2, 3), lwd=c(3, 3, 3) ))
+    anyly<-timeAverage(daily,avg.time = "any")
+    anyly<-replaceall(daily, c("-01-01"), c(""))
+    anyly$date<-as.POSIXct(anyly$date,"%Y-%m-%d", tz="Europe/Madrid")
+    anyly2<-timeAverage(anyly,avg.time = "any")
+    anyly2<-replaceall(anyly2, c("-01-01"), c(""))
+    anyly2$date<-as.character(anyly2$date)
+    anyly2$date<-as.POSIXct(anyly2$date,"%Y", tz="Europe/Madrid")
+    timePlot(anyly2, pollutant =  c("co", "h2s", "hcnm", "hct","no", "no2", "nox", "o3", "pm10", "pm2.5", "so2"), avg.time = "any", lwd= 2, lty=1, group = TRUE, main="Lleida line Plot", ref.y = list(h = c(40, 20, 10), lty = c(1, 2, 3), lwd=c(3, 3, 3) ))
   </code></pre>
     <img src="timePlot.png" width="800" height="500">
+
+    <p>Un episodi és un periode temporal regulat legalment pel que fa el seu límit de contaminació, per exemple no es pot superar una sola vegada 
+      cada hora 200 µg/m<sup>3</sup>. El següent codi comprova que en el dataframe cap dada de longitud 1, és a dir, (run.len=1 o dada individual) 
+      superi el límit (threshold=200) i en un codi posterior anomenat criterion em diu el numero de incompliments.
+    </p>
+    <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-r">
+      episodeNO2<-selectRunning(city4, pollutant="no2", threshold=200, run.len=1)
+    </code></pre>
+
+    <p>Criterion és una taula que diu quantes vegades compleix, és a dir, quantes vegades és menor a 200 el no2 i quantes vegades és superior 
+      a 200. Aquests criteris es poden aplicar a dades de 8 hores seguides, com en el cas de l'ozó. A vegades són mitjanes anuals o mitjanes 
+      diàries que no es poden superar.
+    </p>
+    <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-r">
+      table(episodeNO2$criterion)
+    </code></pre>
+
+    <p>Taula amb els límits de la Unió Europea dels contaminants aeris.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th><strong>Contaminant</strong></th>
+          <th><strong>Concentració</strong></th>
+          <th><strong>Mitjana</strong></th>
+          <th><strong>Objectiu legal</strong></th>
+          <th><strong>Nº superacions permese per any</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Partícules en suspensió (PM<sub>2.5</sub>)</th>
+          <td>25 µg/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>Objectiu pel 1.1.2010<br>
+          Data de compliment de l'objectiu 1.1.2015</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Partícules en suspensió (PM<sub>2.5</sub>)</th>
+          <td>20 µg/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>Data de compliment de l'objectiu 1.1.2020 ***</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Diòxid de sulfur (SO<sub>2</sub>)</th>
+          <td>350 µg/m<sup>3</sup></td>
+          <td>1 hora</td>
+          <td>Data de compliment de l'objectiu 1.1.2005</td>
+          <td>24</td>
+        </tr>
+        <tr>
+          <th>Diòxid de sulfur (SO<sub>2</sub>)</th>
+          <td>125 µg/m<sup>3</sup></td>
+          <td>24 hores</td>
+          <td>Data de compliment de l'objectiu 1.1.2005</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <th>Diòxid de Nitrogen (NO<sub>2</sub>)</th>
+          <td>200 µg/m<sup>3</sup></td>
+          <td>1 hora</td>
+          <td>Data de compliment de l'objectiu&nbsp;1.1.2010</td>
+          <td>18</td>
+        </tr>
+        <tr>
+          <th>Diòxid de Nitrogen (NO<sub>2</sub>)</th>
+          <td>40 µg/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>
+          <p>Data de compliment de l'objectiu&nbsp;1.1.2010 *</p>
+          </td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>
+          <p><strong>Partícules en suspensió (PM<sub>10</sub>)</strong></p>
+          </th>
+          <td>50 µg/m<sup>3</sup></td>
+          <td>24 hores</td>
+          <td>Data de compliment de l'objectiu 1.1.2005 **</td>
+          <td>35</td>
+        </tr>
+        <tr>
+          <th>
+          <p><strong>Partícules en suspensió (PM<sub>10</sub>)</strong></p>
+          </th>
+          <td>40 µg/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>Data de compliment de l'objectiu 1.1.2005 **</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Plom (Pb)</th>
+          <td>0.5 µg/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>Data de compliment de l'objectiu 1.1.2005 (or 1.1.2010 in the immediate vicinity of specific, notified industrial sources; and a 1.0 µg/m3 limit value applied from 1.1.2005 to 31.12.2009)</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Monòxid de Carboni (CO)</th>
+          <td>10 mg/m<sup>3</sup></td>
+          <td>Valor màxim de mitjana de 8 hores</td>
+          <td>Data de compliment de l'objectiu 1.1.2005</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Benzè</th>
+          <td>5 µg/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>Data de compliment de l'objectiu 1.1.2010 **</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Ozó</th>
+          <td>120 µg/m<sup>3</sup></td>
+          <td>Valor màxim de mitjana de 8 hores</td>
+          <td>Objectiu pel 1.1.2010</td>
+          <td>Mitjana de 25 dies durant 3 anys</td>
+        </tr>
+        <tr>
+          <th>Arsènic (As)</th>
+          <td>6 ng/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>Objectiu pel 31.12.2012</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Cadmi (Cd)</th>
+          <td>5 ng/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>Objectiu pel 31.12.2012</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Níquel (Ni)</th>
+          <td>20 ng/m<sup>3</sup></td>
+          <td>1 any</td>
+          <td>Objectiu pel 31.12.2012</td>
+          <td>n/d</td>
+        </tr>
+        <tr>
+          <th>Hidrocarbur aromàtics policíclics</th>
+          <td>1 ng/m<sup>3</sup><br>
+          (expressat com concentració de benzopirè)</td>
+          <td>1 any</td>
+          <td>Objectiu pel 31.12.2012</td>
+          <td>n/d</td>
+        </tr>
+      </tbody>
+    </table>
 
 
   </div>
@@ -595,7 +747,7 @@ hores = [f'h{i:02d}' for i in range(1, 25)]
 df['mitjana_diària'] = df[hores].mean(axis=1)
 
 # Pas 5: Afegim columnes 'any' i 'mes'
-df['any'] = df['data'].dt.year
+df['any'] = df['data'].dt.any
 df['mes'] = df['data'].dt.month
 
 # Pas 6: Càlcul de les mitjanes anuals per cada contaminant
