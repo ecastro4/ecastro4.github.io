@@ -21,6 +21,10 @@ function draw() {
  // Entre es números 0 i 300, vol dir que si el volum  fos 0,5 es converteix  150 i s'emmagatzema en "h"
  // Si el número és 0,33 de volum es convertira en 100 de "h" o alçada de la boca o arc.
  // Si el número és 0,67 de volum es convertira en 200 de "h" o alçada de la boca o arc.
+ let x = 100 * noise(0.1 * frameCount);
+ let y = 100 * noise(0.1 * frameCount + 100);
+ // Noise és un tipus de soroll anomenat Perlin que va ser famòs perquè va fer videojocs gràcies a les variacions suaus de números aleatoris
+ // que fa aquesta funció. Permet fer números pseudoaleatoris propers
  background(127);
  fill(255,223,196);//cara
  ellipse(faceX,faceY,220,300);
@@ -32,6 +36,12 @@ function draw() {
  ellipse(faceX+50,faceY-50,25,rightEyeSize/2);
  fill(0,0,0);
  arc(faceX, faceY + 50, 120, 30+h, 0, PI); // La variable "h" determina la alçada de la boca 
+ fill(255);
+ ellipse(90,100,20,35);
+ ellipse(90,100,20,35);
+ fill(0);
+ ellipse(100,100,15,30);
+
 
 
  console.log(vol);
