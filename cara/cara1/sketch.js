@@ -30,8 +30,21 @@ function draw() {
  // que fa aquesta funció. Permet fer números pseudoaleatoris propers
   let ales = 10*random(1);
   background(bgColor);  // Pinta el fons amb el color actual.
+fill(0);
+  print(20, 20, "Fotogrames: ", frameCount);
+  print("Noise: ", noise);
+  print("Tamany ull esquerra: ", leftEyeSize);
+  print("Tamany ull dret: ", rightEyeSize);
+  print("Volum: ", vol);
+  textSize(12);
+  //text("Fotogrames: " + frameCount, 50 , 100);
+  //text("Noise: " + noise, 50 , 100);
+  //text("Tamany ull esquerra: " + leftEyeSize, 50 , 100);
+  //text("Tamany ull dret: " + rightEyeSize, 50 , 100);
+  //text("Volum: " + vol, 50, 100);
+  //text("Ales: " + ales);
+  text("Cara con mosca" , 50, 350)
   fill(255,223,196);//cara
-  print(20, 20, "Fotogrames: ", frameCount)
  ellipse(faceX,faceY,220,300);
  fill(81,209,246);//ulls
  ellipse(faceX-50,faceY-50,50,leftEyeSize);
