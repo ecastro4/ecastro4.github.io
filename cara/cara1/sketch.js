@@ -31,6 +31,7 @@ function draw() {
   let ales = 10*random(1);
   background(bgColor);  // Pinta el fons amb el color actual.
   fill(255,223,196);//cara
+  print(20, 20, "Fotogrames: ", frameCount)
  ellipse(faceX,faceY,220,300);
  fill(81,209,246);//ulls
  ellipse(faceX-50,faceY-50,50,leftEyeSize);
