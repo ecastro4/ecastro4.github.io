@@ -29,6 +29,8 @@ function draw() {
  // Noise és un tipus de soroll anomenat Perlin que va ser famòs perquè va fer videojocs gràcies a les variacions suaus de números aleatoris
  // que fa aquesta funció. Permet fer números pseudoaleatoris propers
   let ales = 10*random(1);
+  let xeye = map(mouseX, 0,600,-10,+10);
+  let yeye = map(mouseY, 0,400,-10,+10);
   background(bgColor);  // Pinta el fons amb el color actual.
 fill(0);
   print(20, 20, "Fotogrames: ", frameCount);
@@ -44,23 +46,16 @@ fill(0);
   //text("Volum: " + vol, 50, 100);
   //text("Ales: " + ales);
   text("Cara con mosca" , 50, 350)
-  fill(255,223,196);
-  //cara
+  fill(255,223,196);//cara
  ellipse(faceX,faceY,220,300);
- fill(81,209,246);
-  //ulls
+ fill(81,209,246);//ulls
  ellipse(faceX-50,faceY-50,50,leftEyeSize);
  ellipse(faceX+50,faceY-50,50,rightEyeSize);
+ fill(0,0,0);//pupil·la
+ ellipse(faceX-50+xeye,faceY-50+yeye,25,leftEyeSize/2);
+ ellipse(faceX+50+xeye,faceY-50+yeye,25,rightEyeSize/2);
  fill(0,0,0);
-//pupil·la
-  let xeye = map(mouseX,0,width,-10,60);
-let yeye = map(mouseY,0,height,-10,60);
- ellipse(xeye-50,yeye-50,25,leftEyeSize/2);
- ellipse(xeye+50,yeye-50,25,rightEyeSize/2);
- fill(0,0,0);
-
- arc(faceX, faceY + 50, 120, 30+h, 0, PI); 
-// La variable "h" determina la alçada de la boca 
+ arc(faceX, faceY + 50, 120, 30+h, 0, PI); // La variable "h" determina la alçada de la boca 
  fill(255);
  noStroke();
  ellipse(x-10,y, 15+ales,25);
