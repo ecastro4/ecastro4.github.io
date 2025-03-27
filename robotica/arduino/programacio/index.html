@@ -813,6 +813,7 @@ void flash(int duration) {
             </code></pre>
         </div>
         <div class="content-container">
+        <h1>Codi ASCII</h1>
         <p>L'objectiu del codi següent és entendre que les cadenes o strings són conjunts de caràcters ASCII i podem accedir 
             amb ells amb arrays que esta formats per parèntesis quadrats i el primer element és el 0. En llenguatge C i derivats
             del C com Arduino podem utilitzar punters o pointers que permeten apuntar a un element. En python o JavaScript no hi
@@ -896,7 +897,19 @@ void flash(int duration) {
             </ul>
             <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
                 const int ledPin = 13;
+
+// Al principi del codi, abans de la funció de configuració "setup" i la funció principal "loop" que s'executa contínuament hem d'escriure sempre
+// variables o constants.
+// A més, al principi del codi trobem les constants i variables globals anomenades així perquè es poden cridar o executar des de qualsevol part del codi, a 
+// diferència de les variables locals que es defineixen i s'utilitzen dintre de la mateixa funció loop o una unció addicional.
+// Davent de les variables globals haurien d'afegir les biblioteques necessàries per fer funcionar el nostre codi, (amb "<i>#include <biblioteca></i>") i l'extensió 
+// "h" deriva de C i significa "biblioteca de headers" o encapçalament.
+
 const int dotDelay = 200;
+
+/* Cons
+
+*/
 
 char* letters[] = {
   ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..",    // A-I
