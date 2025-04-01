@@ -998,6 +998,17 @@ void flash(int duration) {
                   }
                 }
                 
+
+                // El void flashSequence() és una funció que rep un argument
+                // El que fa amb aquest argument és utilitzar un punter i seguir la seqüència que es troba amb letters[7]
+                // que és "....", aquest quatre caràcters o punts són una seqüència de caràcters ordenats gràcies al punter*
+                // El codi seüents el que fa és amb la posició 'i' inicial de 0 que és el pointer al principi de l'array "...."
+                // I el que fa és que mentre (while) aquest element 'i' de la seqüència no sigui (!) = NULL, és a dir mentre
+                // hi hagi un caràcter, crida una funció diferent anomenda "flashDotOrDash()" que rep com a argument el valor de 'i'
+                // concret en aquella seqüència
+                // Despreés de rebre'l passa el següent valor de 'i', si la 'i' era el primer ".", la i++ primera o i = i+1 és 
+                // el segon punt ".". I així fins al cinquè punt que s'atura tot, perquè és NULL, és a dir, no hi ha un cinquè punt.
+                // El delay serveiix per deixar espai entre lletres o sequences.
                 void flashSequence(char* sequence) {
                   int i = 0;
                   while (sequence[i] != NULL) {
@@ -1007,6 +1018,8 @@ void flash(int duration) {
                   delay(dotDelay * 3);    // gap between letters
                 }
                 
+                // La funció "flashSequence" que llegeix una determinada lletra que rep com a argument, letters[7] i reconeix que
+                // està formada per "...." i crida la funció
                 void flashDotOrDash(char dotOrDash) {
                   digitalWrite(ledPin, HIGH);
                   if (dotOrDash == '.') {
@@ -1021,6 +1034,12 @@ void flash(int duration) {
                 }
             </code></pre>
         </div>
+    <div class="content-container">
+    <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+        
+    </code></pre>
+    </div>
+
 
         <!-- Scripts necessaris -->
 
