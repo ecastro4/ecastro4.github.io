@@ -429,7 +429,7 @@ void loop() {
     <div class="content-container">
         <p>En el següent codi podem veure com definir unes variables globals i les apliquem moltes vegades repetides
             dins del mateix codi. És un codi molt repetitiu.</p>
-<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+        <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
 
 int ledPin = 13;
 int delayPeriod = 250;
@@ -670,19 +670,26 @@ void loop() {
 
         </code></pre>
     </div>
-    
-        <div class="content-container">
-            <h1>Funcions en Arduino</h1>
-            <p>Les funcions d'arduino són semblants a les funcions que veiem a cinemàtica directa i inversa. En el cas de la cinemàtica robòtica 
-                utilitzavem funcions Javascript dintre d'un codi HTML. Avans cada funció com per exemple, calculatePosition () era una funció 
-                sense arguments o paràmetres que estava identificada amb un bloc de codianomenat function i s'executava quan clicavem un botó. 
-                Dintre d'aquest bloc hi havien instruccions que permeten fer càlculs matemàtics. En el següent codi d'arduino, tenim una funcion 
-                flash amb dos peràmetres que eren números enters anomenat ledPin i de delayPeriod que identifiquen el pin que està connectat i el 
-                temps que ha d'estar encès o apagat.
-            </p>
-            <p> Ara farem que un bucle for ss'executi 20 o x vegades dintre d'unbucle for localitzat dintre d'un bucle infinit loop. Ho aconseguim 
-                amb la paraula clau static, que fa que una variable s'inicialitzi una vegada que correm el codi  i mai més. La paraula static es deriva 
-                del llenguatge C i Arduino és un derviat de C++ i Processing, </p>
+
+    <div class="content-container">
+        <h1>Funcions en Arduino</h1>
+        <p>Les funcions d'arduino són semblants a les funcions que veiem a cinemàtica directa i inversa. En el cas de la
+            cinemàtica robòtica
+            utilitzavem funcions Javascript dintre d'un codi HTML. Avans cada funció com per exemple, calculatePosition
+            () era una funció
+            sense arguments o paràmetres que estava identificada amb un bloc de codianomenat function i s'executava quan
+            clicavem un botó.
+            Dintre d'aquest bloc hi havien instruccions que permeten fer càlculs matemàtics. En el següent codi
+            d'arduino, tenim una funcion
+            flash amb dos peràmetres que eren números enters anomenat ledPin i de delayPeriod que identifiquen el pin
+            que està connectat i el
+            temps que ha d'estar encès o apagat.
+        </p>
+        <p> Ara farem que un bucle for ss'executi 20 o x vegades dintre d'unbucle for localitzat dintre d'un bucle
+            infinit loop. Ho aconseguim
+            amb la paraula clau static, que fa que una variable s'inicialitzi una vegada que correm el codi i mai més.
+            La paraula static es deriva
+            del llenguatge C i Arduino és un derviat de C++ i Processing, </p>
         <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
             // 03_03_blink_20_faulty
 
@@ -706,15 +713,17 @@ void loop() {
   }
 }
             </code></pre>
-        </div>
+    </div>
 
-        <div class="content-container">
-            <h1>Arrays i Strings</h1>
-            <p>Una Array és una forma de contenir un llistat de valors, moltes vegades són valors enters i s'accedeix amb ells per la 
-                seva posició, sent la primera posició [0] del array o element 0. El codi següent el que fa és a la primera linia defineix una 
-                array amb 9 valors, i els imprimeix en el monitor sèrie els seus valors. Serà útil pel nostre codi morse.
-            </p>
-            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    <div class="content-container">
+        <h1>Arrays i Strings</h1>
+        <p>Una Array és una forma de contenir un llistat de valors, moltes vegades són valors enters i s'accedeix amb
+            ells per la
+            seva posició, sent la primera posició [0] del array o element 0. El codi següent el que fa és a la primera
+            linia defineix una
+            array amb 9 valors, i els imprimeix en el monitor sèrie els seus valors. Serà útil pel nostre codi morse.
+        </p>
+        <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
                 
 int durations[] = {200, 200, 200, 500, 500, 500, 200, 200, 200};
 
@@ -729,12 +738,14 @@ void loop() {
 
 }
             </code></pre>
-        </div>
-        
-        <div class="content-container">
-            <p>El codi següent ja és un codi morse, perquè combina una array, un bucle for que llegeix l'array i l'aplica a la funció flash, 
-                d'aquesta forma és com si escrivis flash(200), flash(200), flash(200), flash(500), flash(500), flash(500), flash(200), flash(200), flash(200).
-            </p>
+    </div>
+
+    <div class="content-container">
+        <p>El codi següent ja és un codi morse, perquè combina una array, un bucle for que llegeix l'array i l'aplica a
+            la funció flash,
+            d'aquesta forma és com si escrivis flash(200), flash(200), flash(200), flash(500), flash(500), flash(500),
+            flash(200), flash(200), flash(200).
+        </p>
         <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
 const int ledPin = 13;
 
@@ -758,22 +769,25 @@ void flash(int duration) {
    delay(duration);
 }
         </code></pre>
-        </div>
+    </div>
 
-        <div class="content-container">
-            <p>Puc crear una funció que em serveix per quatre lletres i nomès quan la crido he de posar el número de repeticions com 
-                paràmetres o arguments</p>
-        </div>
+    <div class="content-container">
+        <p>Puc crear una funció que em serveix per quatre lletres i nomès quan la crido he de posar el número de
+            repeticions com
+            paràmetres o arguments</p>
+    </div>
 
-        <div class="content-container">
-            <h1>Normes internacionals de codi Morse</h1>
-            <ul>
-                <li>Una línia (dash) és igual a tres punts</li>
-                <li>L'espai entre les parts d'una meteixa lletra és igual a un punt (dot). (S = ···, l'espai entre cada punt és un punt)</li>
-                <li>L'espai entre dues lletres de la mateixa paraula són tres punts (Per exemple entre las S i la O de SOS)</li>
-                <li>L'espai entre dues parules és igual a set punts (Pa ······· tomàquet)</li> 
-            </ul>
-            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    <div class="content-container">
+        <h1>Normes internacionals de codi Morse</h1>
+        <ul>
+            <li>Una línia (dash) és igual a tres punts</li>
+            <li>L'espai entre les parts d'una meteixa lletra és igual a un punt (dot). (S = ···, l'espai entre cada punt
+                és un punt)</li>
+            <li>L'espai entre dues lletres de la mateixa paraula són tres punts (Per exemple entre las S i la O de SOS)
+            </li>
+            <li>L'espai entre dues parules és igual a set punts (Pa ······· tomàquet)</li>
+        </ul>
+        <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
                 void eosz (int numFlashes) {
                     for (int i = 0; i < numFlashes; i++) {
                         digitalWrite(ledPin, HIGH);
@@ -790,9 +804,9 @@ void flash(int duration) {
                 }
             </code></pre>
 
-            <p>Crearem una funció que serà vàlida pels punts repetits i per les linies repetides amb dos paràametres.</p>
+        <p>Crearem una funció que serà vàlida pels punts repetits i per les linies repetides amb dos paràametres.</p>
 
-            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+        <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
 
 
                 void eosztmo (int numFlashes, int d) {
@@ -811,16 +825,20 @@ void flash(int duration) {
                     eosztmo(1, 200); //Això és la e
                 }
             </code></pre>
-        </div>
-        <div class="content-container">
+    </div>
+    <div class="content-container">
         <h1>Codi ASCII</h1>
-        <p>L'objectiu del codi següent és entendre que les cadenes o strings són conjunts de caràcters ASCII i podem accedir 
-            amb ells amb arrays que esta formats per parèntesis quadrats i el primer element és el 0. En llenguatge C i derivats
-            del C com Arduino podem utilitzar punters o pointers que permeten apuntar a un element. En python o JavaScript no hi
+        <p>L'objectiu del codi següent és entendre que les cadenes o strings són conjunts de caràcters ASCII i podem
+            accedir
+            amb ells amb arrays que esta formats per parèntesis quadrats i el primer element és el 0. En llenguatge C i
+            derivats
+            del C com Arduino podem utilitzar punters o pointers que permeten apuntar a un element. En python o
+            JavaScript no hi
             ha punters.</p>
-            <p>A continuació veuras els caracter ASCII en una taula, que son els utilitzats en els strings o cadenes</p>
-            <p>La taula següent està basada en un codi binari de 7 bits, perque 2 elevat a 7 (2^7) es 128, hi hauran desde 0 a 
-               127 caràcters diferents</p>
+        <p>A continuació veuras els caracter ASCII en una taula, que son els utilitzats en els strings o cadenes</p>
+        <p>La taula següent està basada en un codi binari de 7 bits, perque 2 elevat a 7 (2^7) es 128, hi hauran desde 0
+            a
+            127 caràcters diferents</p>
         <table>
             <thead>
                 <tr>
@@ -853,11 +871,12 @@ void flash(int duration) {
             </tbody>
             </th>
         </table>
-        <p>ASCII significa American Standard Code for Information Interchange i va ser descrit a l'any 1967 amb l'objectiu 
+        <p>ASCII significa American Standard Code for Information Interchange i va ser descrit a l'any 1967 amb
+            l'objectiu
             d'intercambiar informació amb ordinadors</p>
         <p>UTF8 és un sistema Unicode Transformation Format que permet escriure més d'un milió de caràcters diferents
             “🙂” U+1F642</p>
-            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+        <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
                 // sketch 05-03
 
                 char message[] = "Hello";
@@ -873,29 +892,41 @@ void flash(int duration) {
                 }
             </code></pre>
 
-        </div>
-        <div class="content-container">
-            <h3>Importància dels punters + Exemple de codi Morse</h3>
-            <p>Hi ha llenguatges amb i sense punters.</p> 
-            <ul>
-                <li>Exemples de llenguatges amb punters: C i els seus derivats com arduino</li>
-                <li>Exemples de llenguatges sense punters: Python i Javascript</li>
-            </ul>
-            <p>El punter llegeix el contingut d'una adreça de memoria i tambe la posició de la mateixa adreça i pot manipular-la. Hi ha posicions d'adreçes especials, com els sectors d'arrancada.</p>
-            <p>El punter serveix per tenir el control total per part del programador de la memoria i els recursos de l'ordinador</p>
-            <p>El "Problema" que te es que pot provocar errors a la memoria o accesos no permesos si no saps com fer funcionar correctament el punter</p>
-            <p>Els dos símbols per utilitzar punters son: L'arterisc "*", que serveix per llegir el contingut de l'adreça de memoria. I l'ampersand "&", que llegieix la posició de l'adreça de memoria</p>
-            <p>La memoria de l'ordinador la podem imaginar com caixes d'una llista on cada caixa te un valor unic assignat en hexadecimal que comença per 0x. Cada caixa te un contingut que pot ser buit (0) o pot contenir un valor</p>
-            
-            <h4>Operacions avançades amb punters</h4>
-            <ul>
-                <li><b>Accés directe a la memoria:</b> Permet modificar valors en posicions especifiques.</li>
-                <li><b>Manipulació eficient d'arrays i strings (cadenes):</b> L'array esencialment es una llista adreçes amb principi i final amb un punter al primer element.</li>
-                <li><b>Passar grans quantitats de dades a funcions:</b> En lloc de copiar valors, els punters passen la seva adreça, estalviant memoria i temps. Aquest es un dels motius per els que C i derivats son mes rapids que python o JS.</li>
-                <li><b>Creació d'estructures dinamiques:</b> Es pot crear coses com grafics o llistes enllaçades de forma facil</li>
-                <li><b>Interacció amb microcontroladors senzilla:</b> Els microcontroladors utilitzen llenguatges de baix nivell (low-level languages) que son mes properes al hardware. Encara que, gracies a l'augment de la memoria, s'han pogut crear llenguatges com micropython o circutpython.</li>
-            </ul>
-            <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    </div>
+    <div class="content-container">
+        <h3>Importància dels punters + Exemple de codi Morse</h3>
+        <p>Hi ha llenguatges amb i sense punters.</p>
+        <ul>
+            <li>Exemples de llenguatges amb punters: C i els seus derivats com arduino</li>
+            <li>Exemples de llenguatges sense punters: Python i Javascript</li>
+        </ul>
+        <p>El punter llegeix el contingut d'una adreça de memoria i tambe la posició de la mateixa adreça i pot
+            manipular-la. Hi ha posicions d'adreçes especials, com els sectors d'arrancada.</p>
+        <p>El punter serveix per tenir el control total per part del programador de la memoria i els recursos de
+            l'ordinador</p>
+        <p>El "Problema" que te es que pot provocar errors a la memoria o accesos no permesos si no saps com fer
+            funcionar correctament el punter</p>
+        <p>Els dos símbols per utilitzar punters son: L'arterisc "*", que serveix per llegir el contingut de l'adreça de
+            memoria. I l'ampersand "&", que llegieix la posició de l'adreça de memoria</p>
+        <p>La memoria de l'ordinador la podem imaginar com caixes d'una llista on cada caixa te un valor unic assignat
+            en hexadecimal que comença per 0x. Cada caixa te un contingut que pot ser buit (0) o pot contenir un valor
+        </p>
+
+        <h4>Operacions avançades amb punters</h4>
+        <ul>
+            <li><b>Accés directe a la memoria:</b> Permet modificar valors en posicions especifiques.</li>
+            <li><b>Manipulació eficient d'arrays i strings (cadenes):</b> L'array esencialment es una llista adreçes amb
+                principi i final amb un punter al primer element.</li>
+            <li><b>Passar grans quantitats de dades a funcions:</b> En lloc de copiar valors, els punters passen la seva
+                adreça, estalviant memoria i temps. Aquest es un dels motius per els que C i derivats son mes rapids que
+                python o JS.</li>
+            <li><b>Creació d'estructures dinamiques:</b> Es pot crear coses com grafics o llistes enllaçades de forma
+                facil</li>
+            <li><b>Interacció amb microcontroladors senzilla:</b> Els microcontroladors utilitzen llenguatges de baix
+                nivell (low-level languages) que son mes properes al hardware. Encara que, gracies a l'augment de la
+                memoria, s'han pogut crear llenguatges com micropython o circutpython.</li>
+        </ul>
+        <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
                 // Al principi del codi, abans de la funció de configuració "setup" i la funció principal 
                 // "loop" que s'executa continuament, hem d'escriure sempre variables o constants.
                 // A més, al principi del codi trobem les constants i variables globals, anomenades així perquè es poden cridar
@@ -1018,34 +1049,69 @@ void flash(int duration) {
                   delay(dotDelay * 3);    // gap between letters
                 }
                 
-                // La funció "flashSequence" que llegeix una determinada lletra que rep com a argument, letters[7] i reconeix que
-                // està formada per "...." i crida la funció
-                void flashDotOrDash(char dotOrDash) {
-                  digitalWrite(ledPin, HIGH);
-                  if (dotOrDash == '.') {
-                    delay(dotDelay);           
-                  }
-                  else { 
-                    // must be a dash 
-                    delay(dotDelay * 3);           
-                  }
-                  digitalWrite(ledPin, LOW);    
-                  delay(dotDelay); // gap between flashes
-                }
-            </code></pre>
-        </div>
-    <div class="content-container">
-    <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
-        
-    </code></pre>
+                // La funció "flashSequence" que llegeix una determinada lletra que rep com a argument, letters[7] i reconeix que 
+// està formada per "...." i crida la funció "flashDotOrDash" fins que s'acaben els punts o ratjes i deixa un espai
+// al final per indicar que és una lletra.
+// La funció "flashDorOrDash" té un parametre intern anomenat "dotOrDash". Aquesta funció sempre encen un led, i sempre
+// el deixa un temps encés o delay. En el cas que sigui una ratlla, el fa 3 vegades més llarg que un punt, gracies
+// a un condicional "if" o en cas contrari "else". No diem si és una ratlla, diem si no és un punt
+void flashDotOrDash(char dotOrDash) {
+  digitalWrite(ledPin, HIGH);
+  if (dotOrDash == '.') {
+    delay(dotDelay);           
+  }
+  else { 
+    // must be a dash 
+    delay(dotDelay * 3);           
+  }
+  digitalWrite(ledPin, LOW);    
+  delay(dotDelay); // gap between flashes
+}
+// El "loop" és un bucle i continuament crida a la funció "flashSequence" que el que fa és llegir cada lletra i convertirles
+// en punts i ratlles, aquesta funció crida a la funció "flashDotOrDash" continuament que fa que s'encenguin els leds segon
+// els punts i ratlles. Sempre hem de dividir un codi en diverses funcions, primer per fer-lo més modular i entendre que fa 
+// cada funció i a més ens fa més facil el manteniment i canvis futurs.
+
+</div>
+<div class="content-container">
+
+<h2>Input i Output: Entrades i sortides</h2>
+<p>Les entrades i sortdes poden ser de dues maneres diferents, digitals o analògiques, les digitals poden 
+ser de 0 voltso de 3,3 volts i en altres plaques arduino, poden ser 0 volts i 5 volts. Les analògiques
+serien graduals, de 0 a 3,3 volts o 5 volts en 2**n pasos, sent "n" el número de bits.</p>
+<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+
+const int outPin = 3;
+// pinMode és una funció predeterminada o "built-in", vol dir que està predefinida en el llenguatje
+// arduino i sempre ha de rebre 2 argument o parametres, el primer sempre ha de ser un númer enter o "int"
+// (integer) que correspon al número de pin que volem conectar (en aquet cas 3), el segon argument és el mode
+// que pot ser OUTPUT que significa sortida, o INPUT que significa entrada, també existeix INPUT_PULLUP
+void setup() {
+  pinMode(outPin, OUTPUT);
+  Serial.begin(9600); //Miguel Angel
+  Serial.println("Enter 1 or 0");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char ch = Serial.read();
+    if (ch == '1') {
+      digitalWrite(outPin, HIGH);
+    }
+    else if (ch == '0') {
+      digitalWrite(outPin, LOW);
+    }
+  }
+}
+</code></pre>
     </div>
 
 
-        <!-- Scripts necessaris -->
+    <!-- Scripts necessaris -->
 
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 
 </body>
 
