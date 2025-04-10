@@ -1187,8 +1187,7 @@ l'apaguem perqué la variable switchOpen que estava a 1 es transforma a !switchO
      digitalWrite(ledPin, ! switchOpen);
     }
     </code></pre>
-<iframe width="725" height="453" src="https://www.tinkercad.com/embed/6kmvYJBnQFx?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe><p> Toggles. </p>
-<pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+    <iframe width="800" height="500" src="https://www.tinkercad.com/embed/dUFK8vzcSWr?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe><pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
     const int inputPin = 5;
     const int ledPin = 13;
     int ledValue = LOW;
@@ -1227,6 +1226,10 @@ l'apaguem perqué la variable switchOpen que estava a 1 es transforma a !switchO
 </code></pre>
 </div>
 <div class="content-container">
+    <p>El "contact bounce" podríem traduir-ho com a rebot de contacte, és un problema comú a diferents dispositius com per exemple interruptors mecànics, 
+        reles (interruptor que canvia la posició d'una palanca interna mitjançant electromagnestisme), contactes de bateria. Tots aquest elements
+      tenen en comú que estan fets per metalls elàstics, de forma que quan jo apreto un interruptor mecànic el metall que tanca el circuit rebota 
+      diverses vegades sobre el contacte, provocant una inestabilitat en el senyal.</p>
 <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
     #include <Bounce2.h>
         const int inputPin = 5;
@@ -1249,6 +1252,8 @@ l'apaguem perqué la variable switchOpen que estava a 1 es transforma a !switchO
         }
  </code></pre>
     </div>
+    <p>Algunes sortides d'arduino i altres microcontroladors són</p>
+    <img src="https://ecastro4.github.io/robotica/arduino/pwm.png" width="800" height="533">
     
 
 
