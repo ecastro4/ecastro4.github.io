@@ -1256,6 +1256,42 @@ l'apaguem perqué la variable switchOpen que estava a 1 es transforma a !switchO
     <p>Algunes sortides d'arduino i altres microcontroladors són</p>
     <img src="https://ecastro4.github.io/robotica/arduino/pwm.png" width="800" height="533">
     </div>
+    <div class="content-container">
+    <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
+        const int outputPin = 3;
+
+        void setup() {
+          pinMode(outputPin, OUTPUT);
+          Serial.begin(9600);
+          Serial.println("Enter Volts 0 to 5");
+        }
+        
+        void loop() {
+          if (Serial.available() > 0) {
+            float volts = Serial.parseFloat();
+            int pwmValue = volts * 255.0 / 5.0;
+            analogWrite(outputPin, pwmValue);
+          }
+        }
+    </code></pre>
+        <p> El "const int outputPin" defineix el pin de sortida constant que no es pot canviar. Després de definir
+            el pin de sortida 3 i en output (sortida) i la velocitat bauds (9600), el codi demana que escrigui a la consola
+            del programa Arduino IDE: Enter volts 0-5.</p>
+            <p> Al loop principal comprova que hi hagi caràcters escrits a la consola, després agafa el valor que hem 
+            donat i el guarda en la variable volts. El valor pot ser en decimals perquè posa float ("Floating point number").
+            El mètode parseFloat l'apliquem amb la sintaxi del punt al objecte Serial (Que es posa en majúscula, normalment
+            seria una classe en majúscula) i agafa el valor de la consola sèrie</p>
+            <p> La variable pwmValue és entera (int o "integer") i el que fa és convertir el valor de volts (0-5) a valors
+            de 0-255, que és el numero de bits (2^8=256). Si fos un ESP32-S3 de 14 bits tal com indica el data
+            sheet o fulla de caracteristiques de el ESP32-S3la linea de codi seria:
+            "Serial.println("Enter Volts 0-3.3")
+            "int pwmValue = volts * 16384.0 / 3.3" </p>
+            
+            <p> El ESP32-S3 te l'avantatge de tenir més resolució, es a dir,  pot donar 16384 valors diferents entre 0-3,3 volts
+                Aixó pot que no es noti en un led, peró es nota en un motor, on l'ESP32 permet accedir a més velocitats diferents. Els
+                motors poden arribar a 16 bits, que es 2^16 o 65536 valors diferents, depenent del tipus de motor, pot ser observat o no
+                </p>
+    </div>
     
     
 
