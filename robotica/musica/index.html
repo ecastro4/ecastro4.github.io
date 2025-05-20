@@ -1,1 +1,40 @@
+<html>
+  <body>
+    <h1>Música</h1>
+        <p>La instrucció més important per fer música amb arduino és "tone" i té 3 arguments (3r optatiu):</p>
+        <ul>
+                <li>El primer argument és "El pin", la posició de l'arduino en la qual connecto: pin 8 o pin 4</li>
+                <li>El segon argument és "La freqüència" i s'expresa en Herz (Hz)</li>
+                <li>El tercer argument és optatiu i és "el temps de durada" </li>
+        </ul>
+        <img src="arduino_musica.webp">
+        <img src="nomenclatura_internacional.png">
+        <img src="noi.jpg">
+    
+         
+        #define NOTE_D4 293.665
+        #define NOTE_A4 293.665
+        #define NOTE_E4 440.000
+    int noidelamare[]{
+        NOTE_D4, NOTE_E4, NOTE_A4, NOTE_E4, NOTE_A4
+    }
 
+    int durades[]{
+        500, 125, 250, 500, 125
+    }
+    void setup(){
+    
+        }
+
+        void loop() {
+    int numNotes= sizeof(noidelamare)/sizeof(noidelamare[0]), 
+    //Calculem el número de notes dividint el número de bytes totals de la canço que ho calcula la
+    funcióf "sizeo" entre el número de bytes de una de les notes (en aquest cas la primera). En aquest
+    exemple tenim 5 notes i cada nota ocuparà un número enter que es igual a 2 bytes en arduino. Per
+    tant el noi de la mare ocupa 10 bytes que dividit entre el tamany de la primera nota que son
+    2 bytes dona 5 notes musicals. El número 5 el guardem a la variable numNotes
+    // L'avantatge que té aquest codi és que sempre contarà les notes i puc canviar quan vulgí la cancó
+        }
+
+  </body>
+</html>
