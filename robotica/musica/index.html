@@ -365,7 +365,7 @@
                 <li>El segon argument és "La freqüència" i s'expresa en Herz (Hz)</li>
                 <li>El tercer argument és optatiu i és "el temps de durada" </li>
         </ul>
-        <pre><code>
+    <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
     
          
         #define NOTE_D4 293.665
@@ -392,8 +392,7 @@
     // L'avantatge que té aquest codi és que sempre contarà les notes i puc canviar quan vulgí la cancó
         }
             </code></pre>
-    </div>
-    <div class="videoContainer">
+     <div class="videoContainer">
         <h2>Quina canço he agafat?
         </h2>
         <div id="videoContainer">
@@ -403,6 +402,8 @@
             </video>
         </div>
     </div>
+    </div>
+   
     <script>
         audioPlayer.addEventListener('ended', () => {
           const videoPlayer = document.getElementById('videoPlayer');
