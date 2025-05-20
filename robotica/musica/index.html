@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <title>Web d'Eric</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+    <script src="https://ecastro4.github.io/robotica/arduino/programacio/arduino.min.js"></script>
+
+    <script>hljs.highlightAll();</script>
+    <title>Música</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -178,32 +188,112 @@
         }
 
         table {
-            width: 50%; /* Ocupa el 50% de la anchura de la página */
-            border-collapse: collapse; /* Evita que aparezcan dobles líneas en las filas */
-            margin: 20px auto; /* Margen de 20px en la parte superior y centra la tabla */
+            width: 50%;
+            /* Ocupa el 50% de la anchura de la página */
+            border-collapse: collapse;
+            /* Evita que aparezcan dobles líneas en las filas */
+            margin: 20px auto;
+            /* Margen de 20px en la parte superior y centra la tabla */
         }
 
-        th, td {
-            border: 1px solid #ddd; /* Añade un borde fino de un píxel de color gris claro a todas las celdas (th y td) */
-            padding: 10px; /* Espacio interno dentro de cada celda */
-            text-align: center; /* Centra el texto dentro de cada celda */
+        th,
+        td {
+            border: 1px solid #ddd;
+            /* Añade un borde fino de un píxel de color gris claro a todas las celdas (th y td) */
+            padding: 10px;
+            /* Espacio interno dentro de cada celda */
+            text-align: center;
+            /* Centra el texto dentro de cada celda */
         }
 
         thead {
-            background: #f4f4f4; /* Cambia el color de fondo del thead a gris claro */
-            font-weight: bold; /* Hace que la cabecera de la tabla esté en negrita */
+            background: #f4f4f4;
+            /* Cambia el color de fondo del thead a gris claro */
+            font-weight: bold;
+            /* Hace que la cabecera de la tabla esté en negrita */
         }
 
-        tbody tr:nth-child(even) { /* Aplica estilo a las filas pares */
+        tbody tr:nth-child(even) {
+            /* Aplica estilo a las filas pares */
             background-color: #f9f9f9;
         }
 
-        tbody tr:hover { /* Cambia el color de fondo al pasar el ratón por encima */
+        tbody tr:hover {
+            /* Cambia el color de fondo al pasar el ratón por encima */
             background-color: #e2e2e2;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 50%;
+            background: linear-gradient(135deg, #ffe0b2, #ffccbc);
+            /* Fondo degradado */
+        }
+
+        .custom-button {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            /* Botón más grande */
+            font-size: 20px;
+            font-family: 'Arial', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            /* Bordes más redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .custom-button:hover {
+            background-color: #ff6f61;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        code {
+            font-family: monospace;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #007bff;
+        }
+        
+        #videoPlayer {
+          max-width: 100%;
+          border-radius: 10px; /* Opcional: bordes redondeados */
+        }
     </style>
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(codeBlock).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => { button.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
+            });
+        }
+    </script>
 </head>
+    
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
@@ -249,6 +339,7 @@
                             <a class="dropdown-item" href="https://ecastro4.github.io/robotica/coldplay">Coldplay</a>
                             <a class="dropdown-item" href="https://ecastro4.github.io/robotica/arduino">Arduino</a>
                             <a class="dropdown-item" href="https://ecastro4.github.io/robotica/fractals">Fractals</a>
+                            <a class="dropdown-item" href="https://ecastro4.github.io/robotica/musica">Música</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -296,6 +387,16 @@
     2 bytes dona 5 notes musicals. El número 5 el guardem a la variable numNotes
     // L'avantatge que té aquest codi és que sempre contarà les notes i puc canviar quan vulgí la cancó
         }
+    </div>
+    <div class="container">
+        <h2>Quina canço he agafat?
+        </h2>
+        <div id="videoContainer">
+            <video id="videoPlayer" width="640" height="320" controls>
+                <source src="ave_maria_piano.mp4" type="video/mp4">
+                Tu navegador no soporta la reproducción de videos.
+            </video>
+        </div>
     </div>
 
     <!-- Scripts necessaris -->
