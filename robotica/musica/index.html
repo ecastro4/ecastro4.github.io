@@ -278,10 +278,16 @@
             color: #007bff;
         }
         
+        #videoContainer {
+           text-align: center;
+           margin-top: 20px;
+        }
+
         #videoPlayer {
           max-width: 100%;
           border-radius: 10px; /* Opcional: bordes redondeados */
         }
+
     </style>
     <script>
         function copyCode(button) {
@@ -388,7 +394,7 @@
     // L'avantatge que té aquest codi és que sempre contarà les notes i puc canviar quan vulgí la cancó
         }
     </div>
-    <div class="container">
+    <div class="videoContainer">
         <h2>Quina canço he agafat?
         </h2>
         <div id="videoContainer">
@@ -398,6 +404,11 @@
             </video>
         </div>
     </div>
+    <script>
+        audioPlayer.addEventListener('ended', () => {
+          const videoPlayer = document.getElementById('videoPlayer');
+          videoPlayer.play();
+    </script>
 
     <!-- Scripts necessaris -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
