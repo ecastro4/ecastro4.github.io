@@ -366,30 +366,63 @@
                 <li>El tercer argument és optatiu i és "el temps de durada" </li>
         </ul>
     <pre><button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i></button><code class="language-arduino">
-    
-         
-        #define NOTE_D4 293.665
-        #define NOTE_A4 293.665
-        #define NOTE_E4 440.000
-    int noidelamare[]{
-        NOTE_D4, NOTE_E4, NOTE_A4, NOTE_E4, NOTE_A4
-    }
+    // Definimos las frecuencias de las notas (en Hz)
+double LAMS = 466.16;
+double DO = 523.25;
+double DOS = 554.37;
+double RE = 587.33;
+double RES = 622.25;
+double MI = 659.26;
+double FA = 698.46;
+double FAS = 739.99;
+double SOL = 783.99;
+double SOLS = 830.61;
+double LA = 880.00;
+double LAS = 932.33;
+double SI = 987.77;
+double DO2 = 1062.00;
+double RE2 = 1174.66;
+double FAS2 = 1479.98;
+double PAU = 0; // pausa
 
-    int durades[]{
-        500, 125, 250, 500, 125
-    }
-    void setup(){
-    
-        }
+// Duraciones de las notas (en milisegundos)
+int b = 1000; // blanca
+int n = 500;  // negra
+int c = 250;  // corchea
+int s = 125;  // semicorchea
 
-        void loop() {
-    int numNotes= sizeof(noidelamare)/sizeof(noidelamare[0]), 
-    //Calculem el número de notes dividint el número de bytes totals de la canço que ho calcula la
-    funcióf "sizeo" entre el número de bytes de una de les notes (en aquest cas la primera). En aquest
-    exemple tenim 5 notes i cada nota ocuparà un número enter que es igual a 2 bytes en arduino. Per
-    tant el noi de la mare ocupa 10 bytes que dividit entre el tamany de la primera nota que son
-    2 bytes dona 5 notes musicals. El número 5 el guardem a la variable numNotes
-    // L'avantatge que té aquest codi és que sempre contarà les notes i puc canviar quan vulgí la cancó
+// Melodía (frecuencias)
+double avemaria[] = {
+  RES, RES, RES, FA, RES, FA, SOL, LAMS, SOL, SOLS, SOL, FA,
+  RES, RES, RES, RES, FA, RES, SOLS, SOL, FA, RES, RES, FA,
+  SOLS, SOL, FA, RES, RES, FA, SOLS, SOL, SOLS, SOL, SOLS, LAS, LAS
+};
+
+// Duración de cada nota correspondiente
+int duracioNota[] = {
+  c, c, c, c, c, c, n, c, c, c, c, n,
+  n, c, c, c, c, c, n, c, n, n, n, b,
+  n, c, c, c, c, n, n, c, c, c, c, c, n
+};
+
+void setup() {
+  // Nada en setup
+}
+
+void loop() {
+  int numNotas = sizeof(avemaria) / sizeof(avemaria[0]);
+
+  for (int i = 0; i < numNotas; i++) {
+    if (avemaria[i] > 0) {
+      tone(8, avemaria[i]); //
+    }
+    delay(duracioNota[i]);
+    noTone(8);
+    delay(50); // pequeña pausa entre notas
+  }
+
+  delay(2000); // espera antes de repetir la melodía
+}
         }
             </code></pre>
      <div class="videoContainer">
