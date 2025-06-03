@@ -11,9 +11,6 @@ function setup() {
   bgColor = color(200, 220, 255);
   faceX = 300;
   faceY = 200;
-  
-  
-
 }
 
 function draw() {
