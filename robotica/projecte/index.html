@@ -266,6 +266,15 @@
         }
 
     </style>
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(codeBlock).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => { button.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
+            });
+        }
+    </script>
 </head>
 <body>
     <!-- Navbar -->
