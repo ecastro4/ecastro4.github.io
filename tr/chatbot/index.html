@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot del TR</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .header {
+            background: #ff5e62;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #chatbox {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #fff5f2;
+
+            /* Scroll fino para Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: #ff9966 #fff5f2;
+        }
+        /* Scroll fino para Chrome, Edge y Safari */
+        #chatbox::-webkit-scrollbar {
+            width: 6px;
+        }
+        #chatbox::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #chatbox::-webkit-scrollbar-thumb {
+            background-color: #ff9966;
+            border-radius: 10px;
+        }
+        #chatbox::-webkit-scrollbar-thumb:hover {
+            background-color: #ff5e62;
+        }
+        .message {
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+        .user {
+            align-self: flex-end;
+            background: #ff9966;
+            color: white;
+        }
+        .bot {
+            align-self: flex-start;
+            background: #f1f1f1;
+            color: #333;
+        }
+        .input-container {
+            display: flex;
+            border-top: 1px solid #ddd;
+            background: white;
+        }
+        #userInput {
+            flex: 1;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            outline: none;
+            background: white;
+        }
+        button {
+            background: #ff5e62;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #e14b4f;
+        }
+        /* Animación tres puntos */
+        .typing {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: #999;
+            border-radius: 50%;
+            animation: blink 1.4s infinite both;
+        }
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes blink {
+            0% { opacity: 0.2; }
+            20% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">💬 Chatbot del TR - Carla i Eric</div>
+        <div id="chatbox"></div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Fes una pregunta..." onkeypress="if(event.key === 'Enter') sendMessage()">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            let input = document.getElementById("userInput");
+            let chatbox = document.getElementById("chatbox");
+
+            if (!input.value.trim()) return;
+
+            // Mensaje del usuario
+            let userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user");
+            userMessage.innerText = input.value;
+            chatbox.appendChild(userMessage);
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            // Indicador de "escribiendo..."
+            let typingIndicator = document.createElement("div");
+            typingIndicator.classList.add("message", "bot", "typing");
+            typingIndicator.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+            chatbox.appendChild(typingIndicator);
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            let userText = input.value;
+            input.value = "";
+
+            try {
+                let response = await fetch("/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ pregunta: userText })
+                });
+
+                let data = await response.json();
+
+                // Eliminar indicador de escribiendo
+                chatbox.removeChild(typingIndicator);
+
+                // Mensaje del bot
+                let botMessage = document.createElement("div");
+                botMessage.classList.add("message", "bot");
+                botMessage.innerText = data.resposta;
+                chatbox.appendChild(botMessage);
+
+                chatbox.scrollTop = chatbox.scrollHeight;
+            } catch (error) {
+                chatbox.removeChild(typingIndicator);
+                let errorMessage = document.createElement("div");
+                errorMessage.classList.add("message", "bot");
+                errorMessage.innerText = "⚠️ Error en la connexió.";
+                chatbox.appendChild(errorMessage);
+            }
+        }
+    </script>
+</body>
+</html>
