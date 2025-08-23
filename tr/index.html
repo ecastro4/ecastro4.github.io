@@ -516,258 +516,127 @@
     </div>
     <!-- UI mínima -->
 <div id="emotionDisplay" style="font-size: 40px; text-align: center; margin-top: 12px;">😐 neutral</div>
-<button id="audioUnlock" style="position:fixed; inset:auto 16px 16px auto; z-index:9999; padding:10px 14px; border-radius:10px; border:0; box-shadow:0 4px 18px rgba(0,0,0,.15); cursor:pointer;">
+<button id="audioUnlock" style="position:fixed; top:20px; right:20px; z-index:9999; padding:10px; border-radius:8px;">
   🔊 Activar audio
 </button>
 
 <script>
-/* ============================
-   ESPERA A QUE EL DOM ESTÉ LISTO
-============================ */
 document.addEventListener('DOMContentLoaded', () => {
-  /* ============================
-     1) SHAPES (SVGs) + SECUENCIAS
-  ============================ */
+  // ===== 1) SVGs =====
   const shapeIds = [
-    // ERIC
     'coldplay1','lemonade','good','meditate','dance','nature','friends',
-    // OSCAR
     'diamont','heart','electricguitar','dream','monkey',
-    // TEO
     'wave1','wave2','wave3','wave4','wave5','wave6',
-    // JAN
     'circle','heart2','wepray','cross',
-    // MARTÍ y PEDRO
     'Barret','Cartas','Bola','Conill','corona','vida','nota_musical',
-    // GERARD y MIGUEL
     'elefante','manzana','mariposa','personas','cloud','heart3','eyes','star'
   ];
-
   const shapes = {};
   shapeIds.forEach(id => {
     const el = document.getElementById(id);
-    if (el) shapes[id] = el;
+    if(el) shapes[id] = el;
   });
-
-  function hideAllShapes() {
-    Object.keys(shapes).forEach(k => {
-      if (shapes[k]) shapes[k].style.display = 'none';
-    });
-  }
-  function showOnly(shapeKey) {
-    Object.keys(shapes).forEach(k => {
-      if (!shapes[k]) return;
-      shapes[k].style.display = (k === shapeKey) ? 'block' : 'none';
-    });
-  }
+  function hideAllShapes(){ Object.keys(shapes).forEach(k=>shapes[k]?.style && (shapes[k].style.display='none')); }
+  function showOnly(shapeKey){ Object.keys(shapes).forEach(k=>shapes[k]?.style && (shapes[k].style.display=(k===shapeKey?'block':'none'))); }
   hideAllShapes();
 
   const songConfig = {
-    Eric:   { shapeOrder: ['coldplay1','lemonade','good','meditate','dance','nature','friends'],
-              durations:  [3000,3000,3000,3000,3000,3000,3000] },
-    Oscar:  { shapeOrder: ['diamont','heart','electricguitar','dream','monkey'],
-              durations:  [4000,4000,4000,4000,4000] },
-    Teo:    { shapeOrder: ['wave1','wave2','wave3','wave4','wave5','wave6'],
-              durations:  [500,550,600,650,700,725] },
-    Jan:    { shapeOrder: ['circle','heart2','wepray','cross','coldplay1'],
-              durations:  [4000,4000,4000,4000,4000] },
-    Marti:  { shapeOrder: ['Barret','Cartas','Bola','Conill'],
-              durations:  [5000,5000,5000,5000] },
-    Pedro:  { shapeOrder: ['corona','vida','nota_musical'],
-              durations:  [5000,5000,5000] },
-    Gerard: { shapeOrder: ['coldplay1','elefante','manzana','mariposa','personas'],
-              durations:  [5000,5000,5000,5000,5000] },
-    Miguel: { shapeOrder: ['coldplay1','cloud','heart3','eyes','star'],
-              durations:  [5000,5000,5000,5000,5000] },
+    Eric:   { shapeOrder: ['coldplay1','lemonade','good','meditate','dance','nature','friends'], durations: [3000,3000,3000,3000,3000,3000,3000] },
+    Oscar:  { shapeOrder: ['diamont','heart','electricguitar','dream','monkey'], durations: [4000,4000,4000,4000,4000] },
+    Teo:    { shapeOrder: ['wave1','wave2','wave3','wave4','wave5','wave6'], durations: [500,550,600,650,700,725] },
+    Jan:    { shapeOrder: ['circle','heart2','wepray','cross','coldplay1'], durations: [4000,4000,4000,4000,4000] },
+    Marti:  { shapeOrder: ['Barret','Cartas','Bola','Conill'], durations: [5000,5000,5000,5000] },
+    Pedro:  { shapeOrder: ['corona','vida','nota_musical'], durations: [5000,5000,5000] },
+    Gerard: { shapeOrder: ['coldplay1','elefante','manzana','mariposa','personas'], durations: [5000,5000,5000,5000,5000] },
+    Miguel: { shapeOrder: ['coldplay1','cloud','heart3','eyes','star'], durations: [5000,5000,5000,5000,5000] }
   };
 
-  let cycleTimeout = null;
-  let currentShapeIndex = 0;
-  let currentSeqKey = 'Miguel';
-
-  function startCycleShapes(seqKey) {
-    clearTimeout(cycleTimeout);
-    currentSeqKey = seqKey;
-    currentShapeIndex = 0;
-    stepCycle();
+  let cycleTimeout = null, currentShapeIndex = 0, currentSeqKey = 'Miguel';
+  function startCycleShapes(seqKey){ clearTimeout(cycleTimeout); currentSeqKey=seqKey; currentShapeIndex=0; stepCycle(); }
+  function stepCycle(){
+    const conf = songConfig[currentSeqKey]; if(!conf) return;
+    const shapeKey = conf.shapeOrder[currentShapeIndex]; if(shapeKey) showOnly(shapeKey);
+    cycleTimeout=setTimeout(()=>{ currentShapeIndex=(currentShapeIndex+1)%conf.shapeOrder.length; stepCycle(); }, conf.durations[currentShapeIndex]);
   }
+  function getCurrentShape(){ const conf = songConfig[currentSeqKey]; return conf?conf.shapeOrder[currentShapeIndex]:null; }
 
-  function stepCycle() {
-    const conf = songConfig[currentSeqKey];
-    if (!conf) return;
-    const shapeKey = conf.shapeOrder[currentShapeIndex];
-    if (shapeKey) showOnly(shapeKey);
-
-    cycleTimeout = setTimeout(() => {
-      currentShapeIndex = (currentShapeIndex + 1) % conf.shapeOrder.length;
-      stepCycle();
-    }, conf.durations[currentShapeIndex]);
-  }
-
-  function getCurrentShape() {
-    const conf = songConfig[currentSeqKey];
-    if (!conf) return null;
-    return conf.shapeOrder[currentShapeIndex] || null;
-  }
-
-  /* ============================
-     2) AUDIO + FFT (Web Audio)
-  ============================ */
+  // ===== 2) AUDIO + FFT =====
   const audioPlayer = document.getElementById('audioPlayer');
-  const audioUnlock = document.getElementById('audioUnlock');
-  let audioContext = null, analyser = null, freqData = null, isAudioReady = false;
+  let audioContext=null, analyser=null, freqData=null, isAudioReady=false;
 
-  function initAudioGraph() {
-    if (isAudioReady) return;
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = audioContext.createAnalyser();
-    analyser.fftSize = 256;
-    freqData = new Uint8Array(analyser.frequencyBinCount);
+  async function unlockAudio(){
+    if(isAudioReady) return;
+    audioContext = new (window.AudioContext||window.webkitAudioContext)();
+    analyser = audioContext.createAnalyser(); analyser.fftSize=256;
+    freqData=new Uint8Array(analyser.frequencyBinCount);
     const source = audioContext.createMediaElementSource(audioPlayer);
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
-    isAudioReady = true;
+    source.connect(analyser); analyser.connect(audioContext.destination);
+    await audioContext.resume(); isAudioReady=true;
+    document.getElementById('audioUnlock').style.display='none';
     requestAnimationFrame(visualize);
   }
 
-  function visualize() {
-    if (!isAudioReady || audioContext.state !== 'running') {
-      requestAnimationFrame(visualize);
-      return;
-    }
+  function visualize(){
+    if(!isAudioReady){ requestAnimationFrame(visualize); return; }
     analyser.getByteFrequencyData(freqData);
-    const avg = freqData.reduce((a,b)=>a+b,0) / freqData.length;
-    const scale = avg / 255;
-
-    const shapeKey = getCurrentShape();
-    const el = shapeKey ? shapes[shapeKey] : null;
-    if (el) {
-      const hue = Math.round((avg / 255) * 360);
-      // Color reacción
-      el.setAttribute('fill', `hsl(${hue}, 100%, 50%)`);
-      // Escala (por si el SVG es un <path>/<g>)
-      el.setAttribute('transform', `scale(${(0.5 + scale).toFixed(3)})`);
-    }
+    const avg=freqData.reduce((a,b)=>a+b,0)/freqData.length;
+    const scale=avg/255; const hue=Math.round(scale*360);
+    const shapeKey=getCurrentShape(); const el=shapeKey?shapes[shapeKey]:null;
+    if(el){ el.setAttribute('transform',`scale(${(0.5+scale).toFixed(3)})`); el.setAttribute('fill',`hsl(${hue},100%,50%)`); }
     requestAnimationFrame(visualize);
   }
 
-  // Botón para desbloquear audio (política autoplay)
-  audioUnlock.addEventListener('click', async () => {
-    try {
-      initAudioGraph();
-      await audioContext.resume();
-      audioUnlock.style.display = 'none';
-    } catch (e) {
-      console.error(e);
-      alert('No se pudo activar el audio. Intenta de nuevo.');
-    }
-  });
+  document.getElementById('audioUnlock').addEventListener('click',unlockAudio);
 
-  // Asegura reanudar si el usuario da play
-  audioPlayer.addEventListener('play', () => {
-    if (audioContext && audioContext.state === 'suspended') {
-      audioContext.resume();
-    }
-  });
-
-  /* ============================
-     3) EMOCIONES (ml5 FaceApi)
-  ============================ */
-  let faceapi, detections = [];
-  let lastEmotion = 'neutral';
-  let lastSwitchTime = 0;
-  const cooldownMs = 2000;    // evita cambios muy rápidos
-  const intensityMin = 0.55;  // umbral mínimo de confianza de emoción
-
-  const emotionsEmoji = {
-    happy: "😄", sad: "😢", angry: "😠", surprised: "😲",
-    disgusted: "🤢", fearful: "😱", neutral: "😐"
+  // ===== 3) EMOCIONES ml5 =====
+  let faceapi,detections=[],lastEmotion='neutral',lastSwitchTime=0,cooldownMs=2000,intensityMin=0.55;
+  const emotionsEmoji={happy:"😄",sad:"😢",angry:"😠",surprised:"😲",disgusted:"🤢",fearful:"😱",neutral:"😐"};
+  const emotionToSong={
+    happy:{seq:'Eric',audio:'happy.mp3'},
+    sad:{seq:'Jan',audio:'sad.mp3'},
+    angry:{seq:'Oscar',audio:'angry.mp3'},
+    surprised:{seq:'Teo',audio:'surprised.mp3'},
+    disgusted:{seq:'Marti',audio:'disgusted.mp3'},
+    fearful:{seq:'Pedro',audio:'fearful.mp3'},
+    neutral:{seq:'Miguel',audio:'neutral.mp3'}
   };
 
-  // Mapea emoción → { secuencia, audio }
-  const emotionToSong = {
-    happy:     { seq: 'Eric',   audio: 'happy.mp3' },
-    sad:       { seq: 'Jan',    audio: 'sad.mp3' },
-    angry:     { seq: 'Oscar',  audio: 'angry.mp3' },
-    surprised: { seq: 'Teo',    audio: 'surprised.mp3' },
-    disgusted: { seq: 'Marti',  audio: 'disgusted.mp3' },
-    fearful:   { seq: 'Pedro',  audio: 'fearful.mp3' },
-    neutral:   { seq: 'Miguel', audio: 'neutral.mp3' }
-  };
-
-  // Lanza música + secuencia según emoción
-  async function triggerEmotion(emotion) {
-    const conf = emotionToSong[emotion] || emotionToSong['neutral'];
-    // Cambia texto/emoji
-    const label = `${emotionsEmoji[emotion] || '😐'} ${emotion}`;
-    const el = document.getElementById('emotionDisplay');
-    if (el) el.textContent = label;
-
-    // Cambia canción
-    try {
-      audioPlayer.pause();
-      audioPlayer.currentTime = 0;
-      audioPlayer.src = conf.audio; // coloca tus archivos .mp3 en la misma carpeta
-      if (!isAudioReady) initAudioGraph();
-      await audioPlayer.play(); // puede requerir que el usuario pulse "Activar audio" una vez
-    } catch (e) {
-      console.warn('Autoplay bloqueado hasta activar audio:', e);
-    }
-
-    // Cambia secuencia SVG
-    startCycleShapes(conf.seq);
+  async function triggerEmotion(emotion){
+    const conf = emotionToSong[emotion]||emotionToSong['neutral'];
+    document.getElementById('emotionDisplay').textContent=emotionsEmoji[emotion]+" "+emotion;
+    audioPlayer.pause(); audioPlayer.currentTime=0; audioPlayer.src=conf.audio;
+    if(!isAudioReady) await unlockAudio();
+    audioPlayer.play(); startCycleShapes(conf.seq);
   }
 
-  // p5: setup se ejecuta cuando la página está lista
-  window.setup = function setup() {
-    // No necesitamos canvas de dibujo, solo cámara
+  window.setup=function setup(){
     noCanvas();
-    const video = createCapture(VIDEO);
-    video.size(320, 240);
-    video.hide();
-    // Opciones: solo expresiones
-    const options = { withLandmarks: false, withExpressions: true, withDescriptors: false };
-    faceapi = ml5.faceApi(video, options, () => faceapi.detect(gotResults));
+    const video=createCapture(VIDEO); video.size(320,240); video.hide();
+    faceapi = ml5.faceApi(video,{withLandmarks:false,withExpressions:true,withDescriptors:false},()=>faceapi.detect(gotResults));
   };
 
-  function gotResults(err, results) {
-    if (err) {
-      console.error(err);
-      // reintenta suave
-      setTimeout(()=>faceapi.detect(gotResults), 300);
-      return;
-    }
-    detections = results || [];
-    if (detections.length > 0) {
-      // toma la emoción dominante con mayor intensidad entre rostros
-      let best = { emotion:'neutral', intensity: 0 };
-      detections.forEach(face => {
-        const expr = face.expressions || {};
-        const keys = Object.keys(expr);
-        if (!keys.length) return;
-        const dominant = keys.reduce((a,b)=>expr[a] > expr[b] ? a : b);
-        const inten = expr[dominant] || 0;
-        if (inten > best.intensity) best = { emotion: dominant, intensity: inten };
+  function gotResults(err,results){
+    if(err){ console.error(err); setTimeout(()=>faceapi.detect(gotResults),300); return; }
+    detections=results||[];
+    if(detections.length>0){
+      let best={emotion:'neutral',intensity:0};
+      detections.forEach(face=>{
+        const expr=face.expressions||{}; const keys=Object.keys(expr); if(!keys.length) return;
+        const dominant=keys.reduce((a,b)=>expr[a]>expr[b]?a:b); const inten=expr[dominant]||0;
+        if(inten>best.intensity) best={emotion:dominant,intensity:inten};
       });
-
-      const now = performance.now();
-      const canSwitch = (now - lastSwitchTime) > cooldownMs;
-
-      if (best.intensity >= intensityMin && canSwitch && best.emotion !== lastEmotion) {
-        lastEmotion = best.emotion;
-        lastSwitchTime = now;
-        triggerEmotion(best.emotion);
+      const now=performance.now();
+      if(best.intensity>=intensityMin && (now-lastSwitchTime)>cooldownMs && best.emotion!==lastEmotion){
+        lastEmotion=best.emotion; lastSwitchTime=now; triggerEmotion(best.emotion);
       }
     }
-    // seguir detectando
     faceapi.detect(gotResults);
   }
 
-  // Arranque por defecto (neutral) hasta que haya emoción
+  // Arranque inicial neutral
   triggerEmotion('neutral');
-}); // DOMContentLoaded
+});
 </script>
-  <div id="emotionDisplay" style="font-size: 40px; text-align: center; margin-top: 20px;">😐 Neutral</div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
