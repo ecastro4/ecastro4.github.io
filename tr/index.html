@@ -178,8 +178,8 @@
             </select>
             <br><br>
             <input type="file" id="audioFile" accept="audio/*">
+            <audio id="audioPlayer" controls style="display:none;"></audio>
             <br><br>
-            <audio id="audioPlayer" controls></audio>
         </div>
         
     <svg id="svgVisualizer" width="400" height="400" viewBox="0 0 100 100">
@@ -514,252 +514,258 @@
                 </g>
     </svg>
     </div>
-    <script>
-    <audio id="audioPlayer" controls style="display:none;"></audio>
+    <!-- UI mínima -->
+<div id="emotionDisplay" style="font-size: 40px; text-align: center; margin-top: 12px;">😐 neutral</div>
+<button id="audioUnlock" style="position:fixed; inset:auto 16px 16px auto; z-index:9999; padding:10px 14px; border-radius:10px; border:0; box-shadow:0 4px 18px rgba(0,0,0,.15); cursor:pointer;">
+  🔊 Activar audio
+</button>
 
-        const shapes = {
-            //ERIC
-            coldplay1: document.getElementById('coldplay1'),
-            lemonade: document.getElementById('lemonade'),
-            good: document.getElementById('good'),
-            meditate: document.getElementById('meditate'),
-            dance: document.getElementById('dance'),
-            nature: document.getElementById('nature'),
-            friends: document.getElementById('friends'),
-            // OSCAR
-            diamont: document.getElementById('diamont'),
-            heart: document.getElementById('heart'),
-            electricguitar: document.getElementById('electricguitar'),
-            dream: document.getElementById('dream'),
-            monkey: document.getElementById('monkey'),
-            // TEO
-            wave1: document.getElementById('wave1'),
-            wave2: document.getElementById('wave2'),
-            wave3: document.getElementById('wave3'),
-            wave4: document.getElementById('wave4'),
-            wave5: document.getElementById('wave5'),
-            wave6: document.getElementById('wave6'),
-            // JAN
-            circle: document.getElementById('circle'),
-            heart2: document.getElementById('heart2'),
-            wepray: document.getElementById('wepray'),
-            cross: document.getElementById('cross'),
-            //MARTÍ i PREDO
-            Barret: document.getElementById('Barret'),
-            Cartas: document.getElementById('Cartas'),
-            Bola: document.getElementById('Bola'),
-            Conill: document.getElementById('Conill'),
-            corona: document.getElementById('corona'),
-            vida: document.getElementById('vida'),
-            nota_musical: document.getElementById('nota_musical'),
-            //GERARD I MIGUEL
-            elefante: document.getElementById('elefante'),
-            manzana: document.getElementById('manzana'),
-            mariposa: document.getElementById('mariposa'),
-            personas: document.getElementById('personas'),
-            cloud: document.getElementById('cloud'),
-            heart3: document.getElementById('heart3'),
-            eyes: document.getElementById('eyes'),
-            star: document.getElementById('star'),
-        };
-    
-        // Oculta todas las formas inicialmente
-       function hideAllShapes() {
-        Object.keys(shapes).forEach(key => {
-            shapes[key].style.display = 'none';
-        });
+<script>
+/* ============================
+   ESPERA A QUE EL DOM ESTÉ LISTO
+============================ */
+document.addEventListener('DOMContentLoaded', () => {
+  /* ============================
+     1) SHAPES (SVGs) + SECUENCIAS
+  ============================ */
+  const shapeIds = [
+    // ERIC
+    'coldplay1','lemonade','good','meditate','dance','nature','friends',
+    // OSCAR
+    'diamont','heart','electricguitar','dream','monkey',
+    // TEO
+    'wave1','wave2','wave3','wave4','wave5','wave6',
+    // JAN
+    'circle','heart2','wepray','cross',
+    // MARTÍ y PEDRO
+    'Barret','Cartas','Bola','Conill','corona','vida','nota_musical',
+    // GERARD y MIGUEL
+    'elefante','manzana','mariposa','personas','cloud','heart3','eyes','star'
+  ];
+
+  const shapes = {};
+  shapeIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) shapes[id] = el;
+  });
+
+  function hideAllShapes() {
+    Object.keys(shapes).forEach(k => {
+      if (shapes[k]) shapes[k].style.display = 'none';
+    });
+  }
+  function showOnly(shapeKey) {
+    Object.keys(shapes).forEach(k => {
+      if (!shapes[k]) return;
+      shapes[k].style.display = (k === shapeKey) ? 'block' : 'none';
+    });
+  }
+  hideAllShapes();
+
+  const songConfig = {
+    Eric:   { shapeOrder: ['coldplay1','lemonade','good','meditate','dance','nature','friends'],
+              durations:  [3000,3000,3000,3000,3000,3000,3000] },
+    Oscar:  { shapeOrder: ['diamont','heart','electricguitar','dream','monkey'],
+              durations:  [4000,4000,4000,4000,4000] },
+    Teo:    { shapeOrder: ['wave1','wave2','wave3','wave4','wave5','wave6'],
+              durations:  [500,550,600,650,700,725] },
+    Jan:    { shapeOrder: ['circle','heart2','wepray','cross','coldplay1'],
+              durations:  [4000,4000,4000,4000,4000] },
+    Marti:  { shapeOrder: ['Barret','Cartas','Bola','Conill'],
+              durations:  [5000,5000,5000,5000] },
+    Pedro:  { shapeOrder: ['corona','vida','nota_musical'],
+              durations:  [5000,5000,5000] },
+    Gerard: { shapeOrder: ['coldplay1','elefante','manzana','mariposa','personas'],
+              durations:  [5000,5000,5000,5000,5000] },
+    Miguel: { shapeOrder: ['coldplay1','cloud','heart3','eyes','star'],
+              durations:  [5000,5000,5000,5000,5000] },
+  };
+
+  let cycleTimeout = null;
+  let currentShapeIndex = 0;
+  let currentSeqKey = 'Miguel';
+
+  function startCycleShapes(seqKey) {
+    clearTimeout(cycleTimeout);
+    currentSeqKey = seqKey;
+    currentShapeIndex = 0;
+    stepCycle();
+  }
+
+  function stepCycle() {
+    const conf = songConfig[currentSeqKey];
+    if (!conf) return;
+    const shapeKey = conf.shapeOrder[currentShapeIndex];
+    if (shapeKey) showOnly(shapeKey);
+
+    cycleTimeout = setTimeout(() => {
+      currentShapeIndex = (currentShapeIndex + 1) % conf.shapeOrder.length;
+      stepCycle();
+    }, conf.durations[currentShapeIndex]);
+  }
+
+  function getCurrentShape() {
+    const conf = songConfig[currentSeqKey];
+    if (!conf) return null;
+    return conf.shapeOrder[currentShapeIndex] || null;
+  }
+
+  /* ============================
+     2) AUDIO + FFT (Web Audio)
+  ============================ */
+  const audioPlayer = document.getElementById('audioPlayer');
+  const audioUnlock = document.getElementById('audioUnlock');
+  let audioContext = null, analyser = null, freqData = null, isAudioReady = false;
+
+  function initAudioGraph() {
+    if (isAudioReady) return;
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+    freqData = new Uint8Array(analyser.frequencyBinCount);
+    const source = audioContext.createMediaElementSource(audioPlayer);
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+    isAudioReady = true;
+    requestAnimationFrame(visualize);
+  }
+
+  function visualize() {
+    if (!isAudioReady || audioContext.state !== 'running') {
+      requestAnimationFrame(visualize);
+      return;
     }
-    hideAllShapes();
+    analyser.getByteFrequencyData(freqData);
+    const avg = freqData.reduce((a,b)=>a+b,0) / freqData.length;
+    const scale = avg / 255;
 
-    let currentShapeIndex = 0;
-    let cycleTimeout;
-
-    const songConfig = {
-        Eric: {
-            shapeOrder: ['coldplay1', 'lemonade', 'good', 'meditate', 'dance', 'nature', 'friends'],
-            durations: [3000, 3000, 3000, 3000, 3000, 3000, 3000]
-        },
-        Oscar: {
-            shapeOrder: ['diamont', 'heart', 'electricguitar', 'dream', 'monkey'],
-            durations: [4000, 4000, 4000, 4000, 4000]
-        },
-        Teo: {
-            shapeOrder: ['wave1', 'wave2', 'wave3', 'wave4', 'wave5', 'wave6'],
-            durations: [500, 550, 600, 650, 700, 725]
-        },
-        Jan: {
-            shapeOrder: ['circle', 'heart2', 'wepray', 'cross', 'coldplay1'],
-            durations: [4000, 4000, 4000, 4000, 4000]
-        },
-        Marti: {
-            shapeOrder: ['Barret','Cartas','Bola','Conill'],
-            durations: [5000, 5000, 5000, 5000]
-        },
-        Pedro: {
-            shapeOrder: ['corona', 'vida', 'nota_musical'],
-            durations: [5000, 5000, 5000]
-        },
-        Gerard: {
-            shapeOrder: ['coldplay1', 'elefante', 'manzana', 'mariposa', 'personas'],
-            durations: [5000, 5000, 5000, 5000, 5000]
-        },
-        Miguel: {
-            shapeOrder: ['coldplay1', 'cloud', 'heart3', 'eyes', 'star'],
-            durations: [5000, 5000, 5000, 5000, 5000]
-        },
-    };
-
-    function startCycleShapes(songKey) {
-        clearTimeout(cycleTimeout);
-        currentShapeIndex = 0;
-        cycleShapes(songKey);
+    const shapeKey = getCurrentShape();
+    const el = shapeKey ? shapes[shapeKey] : null;
+    if (el) {
+      const hue = Math.round((avg / 255) * 360);
+      // Color reacción
+      el.setAttribute('fill', `hsl(${hue}, 100%, 50%)`);
+      // Escala (por si el SVG es un <path>/<g>)
+      el.setAttribute('transform', `scale(${(0.5 + scale).toFixed(3)})`);
     }
+    requestAnimationFrame(visualize);
+  }
 
-    function cycleShapes(songKey) {
-        const songData = songConfig[songKey];
-        updateShapeVisibility(songData.shapeOrder[currentShapeIndex]);
-
-        cycleTimeout = setTimeout(() => {
-            currentShapeIndex = (currentShapeIndex + 1) % songData.shapeOrder.length;
-            cycleShapes(songKey);
-        }, songData.durations[currentShapeIndex]);
+  // Botón para desbloquear audio (política autoplay)
+  audioUnlock.addEventListener('click', async () => {
+    try {
+      initAudioGraph();
+      await audioContext.resume();
+      audioUnlock.style.display = 'none';
+    } catch (e) {
+      console.error(e);
+      alert('No se pudo activar el audio. Intenta de nuevo.');
     }
+  });
 
-    function updateShapeVisibility(shapeKey) {
-        Object.keys(shapes).forEach(key => {
-            shapes[key].style.display = key === shapeKey ? 'block' : 'none';
-        });
+  // Asegura reanudar si el usuario da play
+  audioPlayer.addEventListener('play', () => {
+    if (audioContext && audioContext.state === 'suspended') {
+      audioContext.resume();
     }
+  });
 
-    // ============================
-    // AUDIO + FFT
-    // ============================
-    const audioPlayer = document.getElementById('audioPlayer');
-    let audioContext, analyser, frequencyData;
-    let isInitialized = false;
+  /* ============================
+     3) EMOCIONES (ml5 FaceApi)
+  ============================ */
+  let faceapi, detections = [];
+  let lastEmotion = 'neutral';
+  let lastSwitchTime = 0;
+  const cooldownMs = 2000;    // evita cambios muy rápidos
+  const intensityMin = 0.55;  // umbral mínimo de confianza de emoción
 
-    function initAudio() {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        analyser = audioContext.createAnalyser();
-        analyser.fftSize = 256;
-        frequencyData = new Uint8Array(analyser.frequencyBinCount);
+  const emotionsEmoji = {
+    happy: "😄", sad: "😢", angry: "😠", surprised: "😲",
+    disgusted: "🤢", fearful: "😱", neutral: "😐"
+  };
 
-        const source = audioContext.createMediaElementSource(audioPlayer);
-        source.connect(analyser);
-        analyser.connect(audioContext.destination);
+  // Mapea emoción → { secuencia, audio }
+  const emotionToSong = {
+    happy:     { seq: 'Eric',   audio: 'happy.mp3' },
+    sad:       { seq: 'Jan',    audio: 'sad.mp3' },
+    angry:     { seq: 'Oscar',  audio: 'angry.mp3' },
+    surprised: { seq: 'Teo',    audio: 'surprised.mp3' },
+    disgusted: { seq: 'Marti',  audio: 'disgusted.mp3' },
+    fearful:   { seq: 'Pedro',  audio: 'fearful.mp3' },
+    neutral:   { seq: 'Miguel', audio: 'neutral.mp3' }
+  };
 
-        isInitialized = true;
-        visualize();
-    }
+  // Lanza música + secuencia según emoción
+  async function triggerEmotion(emotion) {
+    const conf = emotionToSong[emotion] || emotionToSong['neutral'];
+    // Cambia texto/emoji
+    const label = `${emotionsEmoji[emotion] || '😐'} ${emotion}`;
+    const el = document.getElementById('emotionDisplay');
+    if (el) el.textContent = label;
 
-    function visualize() {
-        if (audioContext && audioContext.state === 'running') {
-            requestAnimationFrame(visualize);
-            analyser.getByteFrequencyData(frequencyData);
-
-            const averageFrequency = frequencyData.reduce((a, b) => a + b) / frequencyData.length;
-            const scale = averageFrequency / 255;
-
-            const selectedShape = shapes[getCurrentShape()];
-            if (selectedShape) {
-                const hue = Math.round((averageFrequency / 255) * 360);
-                selectedShape.setAttribute('fill', `hsl(${hue}, 100%, 50%)`);
-                selectedShape.setAttribute('transform', `scale(${scale + 0.5})`);
-            }
-        }
-    }
-
-    function getCurrentShape() {
-        return songConfig[currentSong].shapeOrder[currentShapeIndex];
-    }
-
-    // ============================
-    // FACE-API PARA EMOCIONES
-    // ============================
-    let faceapi, detections = [], video;
-    let currentExpression = { dominant: 'neutral', intensity: 0 };
-    let lastEmotion = null;
-    let currentSong = "Miguel";
-
-    const emotionsEmoji = {
-        happy: "😄",
-        sad: "😢",
-        angry: "😠",
-        surprised: "😲",
-        disgusted: "🤢",
-        fearful: "😱",
-        neutral: "😐"
-    };
-
-    // Relacionar emociones con secuencias Y canciones
-    const emotionToSong = {
-        happy: {seq: "Eric", audio: "happy.mp3"},
-        sad: {seq: "Jan", audio: "sad.mp3"},
-        angry: {seq: "Oscar", audio: "angry.mp3"},
-        surprised: {seq: "Teo", audio: "surprised.mp3"},
-        disgusted: {seq: "Marti", audio: "disgusted.mp3"},
-        fearful: {seq: "Pedro", audio: "fearful.mp3"},
-        neutral: {seq: "Miguel", audio: "neutral.mp3"}
-    };
-
-    function setup() {
-        noCanvas();
-        video = createCapture(VIDEO);
-        video.size(320, 240);
-        video.hide();
-
-        const options = { withLandmarks: false, withExpressions: true, withDescriptors: false };
-        faceapi = ml5.faceApi(video, options, modelReady);
-    }
-
-    function modelReady() {
-        console.log("FaceAPI lista");
-        faceapi.detect(gotResults);
+    // Cambia canción
+    try {
+      audioPlayer.pause();
+      audioPlayer.currentTime = 0;
+      audioPlayer.src = conf.audio; // coloca tus archivos .mp3 en la misma carpeta
+      if (!isAudioReady) initAudioGraph();
+      await audioPlayer.play(); // puede requerir que el usuario pulse "Activar audio" una vez
+    } catch (e) {
+      console.warn('Autoplay bloqueado hasta activar audio:', e);
     }
 
-    function gotResults(err, results) {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        detections = results;
-        if (detections.length > 0) {
-            updateCurrentExpression();
-        }
-        faceapi.detect(gotResults);
+    // Cambia secuencia SVG
+    startCycleShapes(conf.seq);
+  }
+
+  // p5: setup se ejecuta cuando la página está lista
+  window.setup = function setup() {
+    // No necesitamos canvas de dibujo, solo cámara
+    noCanvas();
+    const video = createCapture(VIDEO);
+    video.size(320, 240);
+    video.hide();
+    // Opciones: solo expresiones
+    const options = { withLandmarks: false, withExpressions: true, withDescriptors: false };
+    faceapi = ml5.faceApi(video, options, () => faceapi.detect(gotResults));
+  };
+
+  function gotResults(err, results) {
+    if (err) {
+      console.error(err);
+      // reintenta suave
+      setTimeout(()=>faceapi.detect(gotResults), 300);
+      return;
     }
+    detections = results || [];
+    if (detections.length > 0) {
+      // toma la emoción dominante con mayor intensidad entre rostros
+      let best = { emotion:'neutral', intensity: 0 };
+      detections.forEach(face => {
+        const expr = face.expressions || {};
+        const keys = Object.keys(expr);
+        if (!keys.length) return;
+        const dominant = keys.reduce((a,b)=>expr[a] > expr[b] ? a : b);
+        const inten = expr[dominant] || 0;
+        if (inten > best.intensity) best = { emotion: dominant, intensity: inten };
+      });
 
-    function updateCurrentExpression() {
-        let maxIntensity = 0;
-        detections.forEach(face => {
-            const expr = face.expressions;
-            const dominant = Object.keys(expr).reduce((a, b) => expr[a] > expr[b] ? a : b);
-            if (expr[dominant] > maxIntensity) {
-                currentExpression = { dominant: dominant, intensity: expr[dominant] };
-                maxIntensity = expr[dominant];
-            }
-        });
+      const now = performance.now();
+      const canSwitch = (now - lastSwitchTime) > cooldownMs;
 
-        if (currentExpression.dominant !== lastEmotion) {
-            lastEmotion = currentExpression.dominant;
-            const conf = emotionToSong[lastEmotion];
-            currentSong = conf.seq;
-
-            // Mostrar emoji
-            document.getElementById("emotionDisplay").innerText =
-                emotionsEmoji[lastEmotion] + " " + lastEmotion;
-
-            // Cambiar música
-            audioPlayer.pause();
-            audioPlayer.src = conf.audio;
-            audioPlayer.play();
-
-            if (!isInitialized) initAudio();
-
-            // Arrancar secuencia de formas
-            startCycleShapes(conf.seq);
-        }
+      if (best.intensity >= intensityMin && canSwitch && best.emotion !== lastEmotion) {
+        lastEmotion = best.emotion;
+        lastSwitchTime = now;
+        triggerEmotion(best.emotion);
+      }
     }
+    // seguir detectando
+    faceapi.detect(gotResults);
+  }
+
+  // Arranque por defecto (neutral) hasta que haya emoción
+  triggerEmotion('neutral');
+}); // DOMContentLoaded
 </script>
   <div id="emotionDisplay" style="font-size: 40px; text-align: center; margin-top: 20px;">😐 Neutral</div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
