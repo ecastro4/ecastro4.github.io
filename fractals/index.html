@@ -77,12 +77,15 @@
 <body>
     <h1 class="main-title">Visualitzador Fractal d'Àudio</h1>
     <div class="controls-container">
-        <label for="audio-upload"></label>
+        <label for="audio-upload">Puja un arxiu d'àudio:</label>
         <input type="file" id="audio-upload" accept="audio/*" />
         
         <label for="shape-selector">Selecciona un fractal:</label>
         <select id="shape-selector">
-            <option value="fractal1">Triangle de Sierpinski</option>
+            <option value="fractal1">Logo Mitsubishi</option>
+            <option value="fractal2">Falguera de Barnsley</option>
+            <option value="fractal3">Triangle de Sierpinski</option>
+            <option value="fractal4">Arbre Fractal</option>
         </select>
 
         <button id="mic-button">Activar Micròfon</button>
@@ -129,20 +132,21 @@
                 listeners: {
                     play: () => {
                         if (isMicActive) {
-                            toggleMicrophone(false); // Desactiva el micro si es reprodueix arxiu
+                            toggleMicrophone(false);
                         }
-                        if (song) { // Assegura que 'song' (p5.SoundFile) existeix
-                            if (!song.isPlaying()) song.play(); // Reprodueix si no ho està fent
+                        // Usar directamente la etiqueta <audio> como fuente
+                        if (!song) {
+                            let audioElt = document.getElementById("player");
+                            song = new p5.MediaElement(audioElt); // crea un "envoltorio" p5
                             amplitude.setInput(song);
                             fft.setInput(song);
-                            loop();
                         }
+                        loop();
                     },
                     pause: () => {
-                        if (song && song.isPlaying()) song.pause(); // Pausa p5.SoundFile
                         if (!isMicActive) {
-                             noLoop();
-                             clearCanvasWithMessage("Àudio pausat.");
+                            noLoop();
+                            clearCanvasWithMessage("Àudio pausat.");
                         }
                     },
                     ended: () => { // Si el bucle de Plyr està desactivat o falla
@@ -266,9 +270,113 @@
             translate(width / 2, height / 2); 
 
             if (selectedShape === 'fractal1') { 
-              drawSierpinskiTriangle(level, avgFreq, scaleFactor, iterations);
-            } 
+                drawKochSnowflake(level, avgFreq, scaleFactor, iterations);
+            } else if (selectedShape === 'fractal2') { 
+                drawBarnsleyFern(level, avgFreq, scaleFactor, floor(map(level, 0, 0.5, 2000, 8000)));
+            } else if (selectedShape === 'fractal3') { 
+                drawSierpinskiTriangle(level, avgFreq, scaleFactor, iterations);
+            } else if (selectedShape === 'fractal4') { 
+                drawFractalTree(level, avgFreq, scaleFactor, iterations);
+            }
             pop(); 
+        }
+
+        function drawKochSnowflake(level, avgFreq, scaleFactor, depthInput) {
+            let baseSize = width * 0.25 * scaleFactor; 
+            let depth = constrain(floor(map(level, 0, 0.5, 1, 5)), 1, 5); // Profunditat
+            if (depthInput < 1) depth = 1; // Assegurar mínim 1 iteració si iterations globals són baixes
+
+            let hue = map(avgFreq, 0, 128, 0, 360);
+            colorMode(HSL);
+            stroke(hue, 90, 55 + level * 30); // Ajustar lluminositat
+            strokeWeight(constrain(map(level, 0, 0.5, 0.5, 4), 0.5, 4)); 
+            noFill();
+
+            push();
+            // Ajustar translació per centrar millor el floc
+             translate(0, -baseSize * 0.15); 
+
+            let p1x = -baseSize / 2;
+            let p1y = baseSize * sqrt(3) / 4; 
+            let p2x = baseSize / 2;
+            let p2y = baseSize * sqrt(3) / 4;
+            let p3x = 0;
+            let p3y = -baseSize * sqrt(3) / 4; 
+            
+            kochLine(p1x, p1y, p2x, p2y, depth);
+            kochLine(p2x, p2y, p3x, p3y, depth);
+            kochLine(p3x, p3y, p1x, p1y, depth);
+            pop();
+            colorMode(RGB); 
+        }
+
+        function kochLine(x1, y1, x2, y2, depth) {
+            if (depth <= 0) { // Canviat a <= 0 per assegurar finalització
+                line(x1, y1, x2, y2);
+                return;
+            }
+            let dx_total = x2 - x1;
+            let dy_total = y2 - y1;
+
+            let xA = x1 + dx_total / 3;
+            let yA = y1 + dy_total / 3;
+
+            let xB = x1 + 2 * dx_total / 3;
+            let yB = y1 + 2 * dy_total / 3;
+            
+            // Vector del segment central (A a B)
+            let seg_dx = xB - xA;
+            let seg_dy = yB - yA;
+
+            // Rotar aquest vector -60 graus (PI/3 en sentit horari) per obtenir el pic
+            let x_tip = xA + seg_dx * cos(-PI / 3) - seg_dy * sin(-PI / 3);
+            let y_tip = yA + seg_dx * sin(-PI / 3) + seg_dy * cos(-PI / 3);
+
+            kochLine(x1, y1, xA, yA, depth - 1);
+            kochLine(xA, yA, x_tip, y_tip, depth - 1);
+            kochLine(x_tip, y_tip, xB, yB, depth - 1);
+            kochLine(xB, yB, x2, y2, depth - 1);
+        }
+
+
+        function drawBarnsleyFern(level, avgFreq, scaleFactor, numPointsInput) {
+            let x = 0;
+            let y = 0;
+            
+            push();
+            translate(0, height * 0.35 * scaleFactor); 
+            scale(width * 0.055 * scaleFactor); 
+            
+            let numPoints = constrain(floor(numPointsInput), 1500, 10000);
+
+            let hue = map(avgFreq, 0, 128, 80, 160); 
+            colorMode(HSL);
+            stroke(hue, 85, 50 + level * 25); 
+            strokeWeight(constrain(map(level, 0, 0.5, 0.1, 1.2), 0.1, 1.2)); 
+
+            for (let i = 0; i < numPoints; i++) {
+                let nextX, nextY;
+                let r = random(1);
+
+                if (r < 0.01) {
+                    nextX = 0;
+                    nextY = 0.16 * y;
+                } else if (r < 0.86) {
+                    nextX = 0.85 * x + 0.04 * y;
+                    nextY = -0.04 * x + 0.85 * y + 1.6;
+                } else if (r < 0.93) {
+                    nextX = 0.2 * x - 0.26 * y;
+                    nextY = 0.23 * x + 0.22 * y + 1.6;
+                } else {
+                    nextX = -0.15 * x + 0.28 * y;
+                    nextY = 0.26 * x + 0.24 * y + 0.44;
+                }
+                point(nextX, -nextY); 
+                x = nextX;
+                y = nextY;
+            }
+            pop();
+            colorMode(RGB);
         }
 
         function drawSierpinskiTriangle(level, avgFreq, scaleFactor, depthInput) {
@@ -311,7 +419,61 @@
             sierpinski(x31, y31, x23, y23, x3, y3, depth - 1);
         }
 
-        
+        function drawFractalTree(level, avgFreq, scaleFactor, iterations) {
+            push();
+            translate(0, height * 0.40 * scaleFactor); 
+            
+            let baseLen = height * 0.18 * scaleFactor * map(level, 0, 0.5, 0.7, 1.3); 
+            baseLen = constrain(baseLen, height * 0.04, height * 0.35); 
+            
+            let hue = map(avgFreq, 0, 128, 20, 70); 
+            colorMode(HSL);
+            stroke(hue, 80, 45 + level * 20);
+            
+            // El gruix inicial depèn de la longitud base i el nivell
+            let initialStrokeWeight = map(baseLen, height * 0.04, height * 0.35, 1, 12 * scaleFactor);
+            initialStrokeWeight = constrain(initialStrokeWeight * (0.5 + level), 1, 15); // Ajustar gruix amb nivell
+            strokeWeight(initialStrokeWeight);
+
+            branch(baseLen, level, avgFreq, initialStrokeWeight); 
+            pop();
+            colorMode(RGB);
+        }
+
+        function branch(len, level, avgFreq, currentStrokeWeight) {
+            strokeWeight(max(0.5, currentStrokeWeight)); // Aplica el gruix actual
+            line(0, 0, 0, -len);
+            translate(0, -len);
+
+            // Condició de ramificació: ajustada pel nivell (més nivell, ramifica amb menys longitud)
+            // i un límit absolut petit per evitar recursió infinita o branques massa petites.
+            let minLenToBranch = Math.max(5, 15 * (1 - level * 0.8)); 
+                                                                    
+            if (len > minLenToBranch) { 
+                let angleVariance = map(avgFreq, 0, 128, -PI/16, PI/16) + map(level, 0, 0.5, -PI/24, PI/24);
+                let baseAngle = PI / 5; // Angle base més obert
+                let angle1 = baseAngle + angleVariance;
+                let angle2 = baseAngle - angleVariance / 2; // Angle lleugerament asimètric
+                
+                angle1 = constrain(angle1, PI/10, PI/3);
+                angle2 = constrain(angle2, PI/10, PI/3);
+
+                let shrinkFactor = 0.67 + map(level, 0, 0.5, -0.05, 0.1); 
+                shrinkFactor = constrain(shrinkFactor, 0.55, 0.78);
+                
+                let nextStrokeWeight = currentStrokeWeight * 0.65; // Reducció del gruix
+
+                push();
+                rotate(angle1);
+                branch(len * shrinkFactor, level, avgFreq, nextStrokeWeight);
+                pop();
+
+                push();
+                rotate(-angle2); // Angle negatiu per a l'altra branca
+                branch(len * shrinkFactor, level, avgFreq, nextStrokeWeight);
+                pop();
+            }
+        }
 
         function handleFileUpload(event) {
             let file = event.target.files[0];
@@ -319,33 +481,18 @@
 
             if (file && file.type.startsWith('audio/')) {
                 let fileURL = URL.createObjectURL(file);
-                
+
                 if (isMicActive) {
                     toggleMicrophone(false); 
                 }
 
-                document.getElementById('player').src = fileURL; // Estableix la font per a l'element <audio>
+                document.getElementById('player').src = fileURL; 
                 songTitle.textContent = file.name;
-                
-                if (song) { 
-                    song.stop();
-                }
-                // Plyr actualitza la seva font automàticament quan canvia el 'src' de l'element <audio>
-                // Però per a p5.sound, necessitem carregar el so explícitament
-                loadSound(fileURL, loadedP5Sound => {
-                    song = loadedP5Sound; // 'song' és ara el p5.SoundFile
-                    // No cal fer player.play() aquí, l'usuari controla amb Plyr.
-                    // L'event 'play' de Plyr s'encarregarà de iniciar el loop i song.play() de p5
-                    amplitude.setInput(song);
-                    fft.setInput(song);
-                    noLoop(); // Espera que l'usuari premi play
-                    clearCanvasWithMessage("Arxiu carregat: " + file.name);
-                }, err => {
-                    console.error("Error en carregar el so (p5.sound):", err);
-                    songTitle.textContent = "Error en carregar l'àudio";
-                });
 
-            } else {
+                noLoop();
+                clearCanvasWithMessage("Arxiu carregat: " + file.name);
+                    } 
+            else {
                 songTitle.textContent = 'Error: Arxiu no vàlid';
                 console.error('Please upload a valid audio file');
             }
@@ -353,3 +500,4 @@
     </script>
 </body>
 </html>
+
