@@ -164,11 +164,7 @@
     <div class="container">
         <h1>SVG Audio Visualizer</h1>
         <div class="controls">
-            <audio id="audioPlayer" src="tuCancion.mp3" preload="auto"></audio>
-            <br><br>
-            <button id="audioUnlock">🔊 Activar audio</button>
             <div id="emotionDisplay" style="font-size:30px; margin-top:10px;">😐 Neutral</div>
-            <br><br>
         </div>
         
     <svg id="svgVisualizer" width="400" height="400" viewBox="0 0 100 100">
@@ -505,118 +501,196 @@
     </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const audioPlayer = document.getElementById('audioPlayer');
-  const audioUnlock = document.getElementById('audioUnlock');
-  const emotionDisplay = document.getElementById('emotionDisplay');
+    // ============================
+    // SHAPES Y SECUENCIAS DE SVGs
+    // ============================
+    const shapes = {
+        coldplay1: document.getElementById('coldplay1'),
+        lemonade: document.getElementById('lemonade'),
+        good: document.getElementById('good'),
+        meditate: document.getElementById('meditate'),
+        dance: document.getElementById('dance'),
+        nature: document.getElementById('nature'),
+        friends: document.getElementById('friends'),
+        diamont: document.getElementById('diamont'),
+        heart: document.getElementById('heart'),
+        electricguitar: document.getElementById('electricguitar'),
+        dream: document.getElementById('dream'),
+        monkey: document.getElementById('monkey'),
+        wave1: document.getElementById('wave1'),
+        wave2: document.getElementById('wave2'),
+        wave3: document.getElementById('wave3'),
+        wave4: document.getElementById('wave4'),
+        wave5: document.getElementById('wave5'),
+        wave6: document.getElementById('wave6'),
+        circle: document.getElementById('circle'),
+        heart2: document.getElementById('heart2'),
+        wepray: document.getElementById('wepray'),
+        cross: document.getElementById('cross'),
+        Barret: document.getElementById('Barret'),
+        Cartas: document.getElementById('Cartas'),
+        Bola: document.getElementById('Bola'),
+        Conill: document.getElementById('Conill'),
+        corona: document.getElementById('corona'),
+        vida: document.getElementById('vida'),
+        nota_musical: document.getElementById('nota_musical'),
+        elefante: document.getElementById('elefante'),
+        manzana: document.getElementById('manzana'),
+        mariposa: document.getElementById('mariposa'),
+        personas: document.getElementById('personas'),
+        cloud: document.getElementById('cloud'),
+        heart3: document.getElementById('heart3'),
+        eyes: document.getElementById('eyes'),
+        star: document.getElementById('star'),
+    };
 
-  const shapes = {
-    coldplay1: document.getElementById('coldplay1'),
-    // ... todos los demás SVGs tal como los tenías
-  };
-
-  function hideAllShapes(){ Object.values(shapes).forEach(s=>s.style.display='none'); }
-
-  let audioContext, analyser, freqData, isAudioReady=false;
-
-  audioUnlock.addEventListener('click', async ()=>{
-    if(isAudioReady) return;
-    // Asegurarse que audio está cargado
-    await audioPlayer.play().catch(()=>{}); // desbloquea autoplay
-    audioContext = new (window.AudioContext||window.webkitAudioContext)();
-    analyser = audioContext.createAnalyser();
-    analyser.fftSize = 256;
-    freqData = new Uint8Array(analyser.frequencyBinCount);
-    const source = audioContext.createMediaElementSource(audioPlayer);
-    source.connect(analyser); analyser.connect(audioContext.destination);
-    isAudioReady = true;
-    audioUnlock.style.display='none';
-    visualize();
-  });
-
-  function visualize(){
-    if(!isAudioReady){ requestAnimationFrame(visualize); return; }
-    analyser.getByteFrequencyData(freqData);
-    const avg = freqData.reduce((a,b)=>a+b,0)/freqData.length;
-    const scale = avg/255;
-    const hue = Math.round(scale*360);
-    const currentShape = Object.values(shapes).find(s=>s.style.display==='block');
-    if(currentShape){
-      currentShape.setAttribute('fill',`hsl(${hue},100%,50%)`);
-      currentShape.setAttribute('transform',`scale(${0.5+scale})`);
+    function hideAllShapes() {
+        Object.keys(shapes).forEach(key => {
+            shapes[key].style.display = 'none';
+        });
     }
-    requestAnimationFrame(visualize);
-  }
-
-  // ml5 FaceAPI
-  let faceapi, detections=[], lastEmotion='neutral', cooldown=2000, lastTime=0;
-  const emotionsEmoji={happy:"😄",sad:"😢",angry:"😠",surprised:"😲",disgusted:"🤢",fearful:"😱",neutral:"😐"};
-
-  const emotionToSequence = {
-    happy:{shapeOrder:['coldplay1','lemonade','good'], durations:[3000,3000,3000]},
-    sad:{shapeOrder:['circle','heart2','wepray'], durations:[4000,4000,4000]},
-    angry:{shapeOrder:['diamont','heart','electricguitar'], durations:[4000,4000,4000]},
-    surprised:{shapeOrder:['wave1','wave2','wave3'], durations:[500,550,600]},
-    disgusted:{shapeOrder:['Barret','Cartas','Bola'], durations:[5000,5000,5000]},
-    fearful:{shapeOrder:['corona','vida','nota_musical'], durations:[5000,5000,5000]},
-    neutral:{shapeOrder:['coldplay1','cloud','heart3'], durations:[5000,5000,5000]}
-  };
-
-  let cycleTimeout=null, currentShapeIndex=0, currentSeq=null;
-
-  function startSequence(seq){
-    clearTimeout(cycleTimeout);
-    currentSeq = seq;
-    currentShapeIndex = 0;
-    nextShape();
-  }
-
-  function nextShape(){
-    if(!currentSeq) return;
-    const shapeKey = currentSeq.shapeOrder[currentShapeIndex];
     hideAllShapes();
-    if(shapeKey && shapes[shapeKey]) shapes[shapeKey].style.display='block';
-    cycleTimeout = setTimeout(()=>{
-      currentShapeIndex = (currentShapeIndex+1)%currentSeq.shapeOrder.length;
-      nextShape();
-    }, currentSeq.durations[currentShapeIndex]);
-  }
 
-  function triggerEmotion(emotion){
-    if(!isAudioReady) audioUnlock.click();
-    emotionDisplay.textContent = emotionsEmoji[emotion]+" "+emotion;
-    const seq = emotionToSequence[emotion]||emotionToSequence['neutral'];
-    startSequence(seq);
-  }
+    let currentShapeIndex = 0;
+    let cycleTimeout;
 
-  function gotResults(err,results){
-    if(err){ console.error(err); setTimeout(()=>faceapi.detect(gotResults),300); return; }
-    detections = results || [];
-    if(detections.length>0){
-      let best={emotion:'neutral',intensity:0};
-      detections.forEach(face=>{
-        const expr = face.expressions||{};
-        const keys = Object.keys(expr); if(!keys.length) return;
-        const dominant = keys.reduce((a,b)=>expr[a]>expr[b]?a:b);
-        if(expr[dominant]>best.intensity) best={emotion:dominant,intensity:expr[dominant]};
-      });
-      const now=performance.now();
-      if(best.intensity>=0.55 && best.emotion!==lastEmotion && (now-lastTime)>cooldown){
-        lastEmotion=best.emotion; lastTime=now; triggerEmotion(best.emotion);
-      }
+    const songConfig = {
+        Eric: {
+            shapeOrder: ['coldplay1', 'lemonade', 'good', 'meditate', 'dance', 'nature', 'friends'],
+            durations: [3000, 3000, 3000, 3000, 3000, 3000, 3000]
+        },
+        Oscar: {
+            shapeOrder: ['diamont', 'heart', 'electricguitar', 'dream', 'monkey'],
+            durations: [4000, 4000, 4000, 4000, 4000]
+        },
+        Teo: {
+            shapeOrder: ['wave1', 'wave2', 'wave3', 'wave4', 'wave5', 'wave6'],
+            durations: [500, 550, 600, 650, 700, 725]
+        },
+        Jan: {
+            shapeOrder: ['circle', 'heart2', 'wepray', 'cross', 'coldplay1'],
+            durations: [4000, 4000, 4000, 4000, 4000]
+        },
+        Marti: {
+            shapeOrder: ['Barret','Cartas','Bola','Conill'],
+            durations: [5000, 5000, 5000, 5000]
+        },
+        Pedro: {
+            shapeOrder: ['corona', 'vida', 'nota_musical'],
+            durations: [5000, 5000, 5000]
+        },
+        Gerard: {
+            shapeOrder: ['coldplay1', 'elefante', 'manzana', 'mariposa', 'personas'],
+            durations: [5000, 5000, 5000, 5000, 5000]
+        },
+        Miguel: {
+            shapeOrder: ['coldplay1', 'cloud', 'heart3', 'eyes', 'star'],
+            durations: [5000, 5000, 5000, 5000, 5000]
+        },
+    };
+
+    function startCycleShapes(songKey) {
+        clearTimeout(cycleTimeout);
+        currentShapeIndex = 0;
+        cycleShapes(songKey);
     }
-    faceapi.detect(gotResults);
-  }
 
-  window.setup=function(){
-    noCanvas();
-    const video=createCapture(VIDEO); video.size(320,240); video.hide();
-    faceapi = ml5.faceApi(video,{withLandmarks:false,withExpressions:true,withDescriptors:false},()=>faceapi.detect(gotResults));
-  }
+    function cycleShapes(songKey) {
+        const songData = songConfig[songKey];
+        updateShapeVisibility(songData.shapeOrder[currentShapeIndex]);
 
-  triggerEmotion('neutral'); // inicio
-});
+        cycleTimeout = setTimeout(() => {
+            currentShapeIndex = (currentShapeIndex + 1) % songData.shapeOrder.length;
+            cycleShapes(songKey);
+        }, songData.durations[currentShapeIndex]);
+    }
+
+    function updateShapeVisibility(shapeKey) {
+        Object.keys(shapes).forEach(key => {
+            shapes[key].style.display = key === shapeKey ? 'block' : 'none';
+        });
+    }
+
+    // ============================
+    // FACE-API PARA EMOCIONES
+    // ============================
+    let faceapi, detections = [], video;
+    let currentExpression = { dominant: 'neutral', intensity: 0 };
+    let lastEmotion = null;
+
+    const emotionsEmoji = {
+        happy: "😄",
+        sad: "😢",
+        angry: "😠",
+        surprised: "😲",
+        disgusted: "🤢",
+        fearful: "😱",
+        neutral: "😐"
+    };
+
+    // Relacionar emociones con secuencias
+    const emotionToSong = {
+        happy: "Eric",
+        sad: "Jan",
+        angry: "Oscar",
+        surprised: "Teo",
+        disgusted: "Marti",
+        fearful: "Pedro",
+        neutral: "Miguel"
+    };
+
+    function setup() {
+        noCanvas(); // no usamos canvas
+
+        video = createCapture(VIDEO);
+        video.size(320, 240);
+        video.hide();
+
+        const options = { withLandmarks: false, withExpressions: true, withDescriptors: false };
+        faceapi = ml5.faceApi(video, options, modelReady);
+    }
+
+    function modelReady() {
+        console.log("FaceAPI lista");
+        faceapi.detect(gotResults);
+    }
+
+    function gotResults(err, results) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        detections = results;
+        if (detections.length > 0) {
+            updateCurrentExpression();
+        }
+        faceapi.detect(gotResults);
+    }
+
+    function updateCurrentExpression() {
+        let maxIntensity = 0;
+        detections.forEach(face => {
+            const expr = face.expressions;
+            const dominant = Object.keys(expr).reduce((a, b) => expr[a] > expr[b] ? a : b);
+            if (expr[dominant] > maxIntensity) {
+                currentExpression = { dominant: dominant, intensity: expr[dominant] };
+                maxIntensity = expr[dominant];
+            }
+        });
+
+        if (currentExpression.dominant !== lastEmotion) {
+            lastEmotion = currentExpression.dominant;
+            const songKey = emotionToSong[lastEmotion];
+            console.log("Nueva emoción:", lastEmotion, "→ secuencia:", songKey);
+            startCycleShapes(songKey);
+
+            document.getElementById("emotionDisplay").innerText =
+                emotionsEmoji[lastEmotion] + " " + lastEmotion;
+        }
+    }
 </script>
+
+<!-- Emoji de emoción en pantalla -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
