@@ -93,9 +93,9 @@
         <input type="file" id="audio-upload" accept="audio/*" />
         <label for="shape-selector">Selecciona un fractal:</label>
         <select id="shape-selector">
-            <option value="fractal1">Logo Mitsubishi</option>
+            <option value="fractal1">Triangle de Sierpinski</option>
             <option value="fractal2">Falguera de Barnsley</option>
-            <option value="fractal3">Triangle de Sierpinski</option>
+            <option value="fractal3">Logo Mitsubishi</option>
             <option value="fractal4">Arbre Fractal</option>
         </select>
         <button id="mic-button">Activar Micròfon</button>
@@ -230,11 +230,11 @@
             push();
             translate(width / 2, height / 2);
             if (selectedShape === 'fractal1') {
-                drawKochSnowflake(level, avgFreq, scaleFactor, iterations);
+                drawSierpinskiTriangle(level, avgFreq, scaleFactor, iterations);
             } else if (selectedShape === 'fractal2') {
                 drawBarnsleyFern(level, avgFreq, scaleFactor, floor(map(level, 0, 0.5, 2000, 8000)));
             } else if (selectedShape === 'fractal3') {
-                drawSierpinskiTriangle(level, avgFreq, scaleFactor, iterations);
+                drawKochSnowflake(level, avgFreq, scaleFactor, iterations);
             } else if (selectedShape === 'fractal4') {
                 drawFractalTree(level, avgFreq, scaleFactor, iterations);
             }
