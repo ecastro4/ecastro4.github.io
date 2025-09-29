@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zuyombé - País Oficial</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f0f0f0; }
@@ -15,28 +13,22 @@
       background-color: rgba(255, 102, 0, 0.8);
       border-radius: 4px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: rgba(255, 102, 0, 1);
-    }
-
+    ::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 102, 0, 1); }
     * { scrollbar-width: thin; scrollbar-color: rgba(255,102,0,0.8) #f0f0f0; }
 
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to right, #f8f9fa, #eef1f5);
-      color: #333;
-      line-height: 1.6;
+      color: #333; line-height: 1.6;
     }
 
     section { padding: 100px 20px; max-width: 1100px; margin: auto; scroll-margin-top: 120px; }
     header { scroll-margin-top: 120px; }
 
     nav {
-      position: fixed;
-      top: 0; width: 100%; height: 70px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(6px);
+      position: fixed; top: 0; width: 100%; height: 70px;
+      background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(6px);
       display: flex; justify-content: space-between; align-items: center;
       padding: 0 15px; z-index: 1000;
     }
@@ -46,13 +38,11 @@
       color: white; font-size: 1.3em; font-weight: bold;
       cursor: pointer; text-decoration: none;
     }
-
     .logo-container img { height: 45px; width: auto; }
 
     .nav-links {
       display: flex; gap: 5px; flex-wrap: wrap; margin-right: 50px;
     }
-
     .nav-links a {
       color: white; text-decoration: none; padding: 12px 14px;
       font-size: 1em; font-weight: 500; transition: 0.3s;
@@ -65,7 +55,7 @@
       flex-direction: column;
       cursor: pointer;
       gap: 5px;
-      margin-right: 0; /* <-- cámbialo para mover el botón (ej: 10px, 20px...) */
+      margin-left: 10px; /* <-- más cerca del logo */
     }
     .menu-toggle span {
       width: 25px; height: 3px;
@@ -84,11 +74,12 @@
       background: rgba(0, 0, 0, 0.45); z-index: 0;
     }
     header h1, header p { position: relative; z-index: 1; }
-
     header h1 { font-size: 3em; margin-bottom: 20px; }
     header p { font-size: 1.2em; max-width: 600px; }
 
-    section h2 { text-align: center; color: #ff6600; margin-bottom: 20px; font-size: 2.2em; }
+    section h2 {
+      text-align: center; color: #ff6600; margin-bottom: 20px; font-size: 2.2em;
+    }
     section p { text-align: center; max-width: 800px; margin: auto; font-size: 1.1em; }
 
     .flag-placeholder {
@@ -124,18 +115,15 @@
       .nav-links {
         position: fixed;
         top: 70px;
-        right: -220px; /* <-- lo oculta fuera de pantalla */
+        right: -100%; /* <-- ahora totalmente escondido */
         background: rgba(0, 0, 0, 0.9);
         flex-direction: column; align-items: flex-start;
         width: 220px; height: 100vh; padding: 20px;
         transition: right 0.3s ease;
       }
-      .nav-links.active { right: 0; } /* <-- aparece pegado al borde derecho */
-
+      .nav-links.active { right: 0; } /* aparece al hacer click */
       .nav-links a { width: 100%; padding: 15px 10px; }
-
       .menu-toggle { display: flex; }
-
       .cards { grid-template-columns: 1fr; }
     }
   </style>
