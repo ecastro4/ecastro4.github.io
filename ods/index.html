@@ -55,7 +55,8 @@
       flex-direction: column;
       cursor: pointer;
       gap: 5px;
-      margin-left: 10px; /* <-- más cerca del logo */
+      position: absolute;
+      left: 10px; /* <-- pegado a la izquierda */
     }
     .menu-toggle span {
       width: 25px; height: 3px;
@@ -115,7 +116,7 @@
       .nav-links {
         position: fixed;
         top: 70px;
-        right: -100%; /* <-- ahora totalmente escondido */
+        right: -150%; /* <-- escondido aún más */
         background: rgba(0, 0, 0, 0.9);
         flex-direction: column; align-items: flex-start;
         width: 220px; height: 100vh; padding: 20px;
