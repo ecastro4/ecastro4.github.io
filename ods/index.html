@@ -57,7 +57,7 @@
       cursor: pointer;
       gap: 5px;
       position: absolute;
-      right: 50px; /* separado del borde, ajustable */
+      right: 50px; /* separado del borde */
       z-index: 1100;
       height: 25px;
       justify-content: space-between;
@@ -72,13 +72,13 @@
       transform-origin: center;
     }
     .menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      transform: rotate(45deg) translate(0, 8px); /* X centrada */
     }
     .menu-toggle.active span:nth-child(2) {
       opacity: 0;
     }
     .menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
+      transform: rotate(-45deg) translate(0, -8px); /* X centrada */
     }
 
     header {
@@ -135,7 +135,7 @@
       .nav-links {
         position: fixed;
         top: 70px;
-        right: -250%; /* escondido completamente */
+        right: -250%;
         background: rgba(0, 0, 0, 0.95);
         flex-direction: column; align-items: flex-start;
         width: 220px; height: 100vh; padding: 20px;
@@ -210,7 +210,7 @@
     const navLinks = document.getElementById("nav-links");
     toggle.addEventListener("click", () => {
       navLinks.classList.toggle("active");
-      toggle.classList.toggle("active"); // animación X
+      toggle.classList.toggle("active");
     });
   </script>
 </body>
