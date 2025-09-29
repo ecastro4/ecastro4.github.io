@@ -136,30 +136,34 @@
       padding: 30px 15px; margin-top: 50px;
     }
 
-    /* --------- MODO MÓVIL (CON CAMBIOS) --------- */
+    /* --------- MODO MÓVIL (CORREGIDO) --------- */
     @media (max-width: 768px) {
       header { background-attachment: scroll; }
       
       .nav-links {
         position: fixed;
         top: 70px;
-        right: 0; /* -> CAMBIO: Lo anclamos a la derecha */
-        width: 250px; /* Ancho del menú */
+        width: 250px; /* Ancho fijo del menú */
+        
+        /* === ARREGLO PRINCIPAL === */
+        /* 1. Lo escondemos poniendo 'right' al valor negativo de su ancho. */
+        /* Esto lo manda completamente fuera de la pantalla. */
+        right: -250px; 
+        
+        /* 2. Eliminamos 'transform' y hacemos la transición sobre 'right'. */
+        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        
         height: 100vh;
         padding: 20px;
         background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
         align-items: flex-start;
         z-index: 1050;
-        
-        /* -> CAMBIO: Usamos 'transform' para moverlo fuera de la pantalla. Es más fiable. */
-        transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
       }
       
       .nav-links.active {
-          /* -> CAMBIO: Al estar activo, lo devolvemos a su sitio. */
-          transform: translateX(0);
+          /* 3. Cuando está activo, lo posicionamos en el borde derecho. */
+          right: 0;
       }
       
       .nav-links a { width: 100%; padding: 15px 10px; }
