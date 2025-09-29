@@ -106,6 +106,21 @@
       border-radius: 6px;
     }
 
+    /* Botón hamburguesa (solo en móvil) */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+    }
+
     /* --------- HEADER HERO --------- */
     header {
       height: 100vh;
@@ -188,10 +203,9 @@
       height: auto;
       border-radius: 10px;
       background-color: #fff8f0;
-      border: 3px dashed #ff6600; /* borde solo para placeholder */
+      border: 3px dashed #ff6600;
     }
 
-    /* Si no es placeholder, quitamos borde y fondo */
     .flag-placeholder img:not([src*="placeholder.com"]) {
       border: none;
       background-color: transparent;
@@ -224,6 +238,44 @@
       padding: 30px 15px;
       margin-top: 50px;
     }
+
+    /* --------- MODO MÓVIL --------- */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 10px;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        align-items: flex-start;
+        width: 200px;
+        height: 100vh;
+        padding: 20px;
+        transition: right 0.3s ease;
+      }
+
+      .nav-links a {
+        width: 100%;
+        padding: 15px 10px;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      /* Cultura en vertical en móvil */
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -234,7 +286,12 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="Logo Zuyombé">
       <span>Zuyombé</span>
     </a>
-    <div class="nav-links">
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-links" id="nav-links">
       <a href="#inicio">Inicio</a>
       <a href="#historia">Historia</a>
       <a href="#cultura">Cultura</a>
@@ -253,9 +310,8 @@
     <p>Zuyombé nació hace más de 500 años como el lugar donde distintos pueblos decidieron unirse bajo una misma bandera. 
     Nuestra historia refleja unión, progreso y respeto por la naturaleza.</p>
 
-    <!-- Imagen de la bandera (solo cambia el src) -->
     <div class="flag-placeholder">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Bandera_de_Espa%C3%B1a.svg" alt="Bandera de Zuyombé">
+      <img src="https://via.placeholder.com/300x180?text=Bandera+de+Zuyombé" alt="Bandera de Zuyombé">
     </div>
   </section>
 
@@ -304,6 +360,16 @@
   <footer>
     © 2025 Zuyombé - Todos los derechos reservados
   </footer>
+
+  <script>
+    // Script para el menú hamburguesa
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    toggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
 
 </body>
 </html>
