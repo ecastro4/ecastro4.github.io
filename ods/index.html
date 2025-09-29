@@ -53,32 +53,39 @@
     /* Botón hamburguesa */
     .menu-toggle {
       display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
       position: absolute;
       right: 50px; /* separado del borde */
-      z-index: 1100;
-      height: 25px;
-      justify-content: space-between;
-    }
-    .menu-toggle span {
-      display: block;
-      height: 3px;
+      top: 50%; /* centrado vertical en nav */
+      transform: translateY(-50%);
       width: 25px;
+      height: 25px;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      z-index: 1100;
+    }
+
+    .menu-toggle span {
+      position: absolute;
+      width: 25px;
+      height: 3px;
       background: white;
       border-radius: 3px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      transform-origin: center;
+      transition: all 0.3s ease;
     }
+
+    .menu-toggle span:nth-child(1) { top: 0; }
+    .menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .menu-toggle span:nth-child(3) { bottom: 0; }
+
     .menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(0, 8px); /* X centrada */
+      transform: rotate(45deg);
+      top: 50%;
     }
-    .menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(0, -8px); /* X centrada */
+      transform: rotate(-45deg);
+      top: 50%;
     }
 
     header {
