@@ -21,6 +21,7 @@
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to right, #f8f9fa, #eef1f5);
       color: #333; line-height: 1.6;
+      overflow-x: hidden; /* evita que se vea borde gris al abrir menú */
     }
 
     section { padding: 120px 20px 100px 20px; max-width: 1100px; margin: auto; scroll-margin-top: 120px; }
@@ -125,19 +126,18 @@
 
     /* --------- MODO MÓVIL --------- */
     @media (max-width: 768px) {
-      header {
-        background-attachment: scroll;
-      }
+      header { background-attachment: scroll; }
       .nav-links {
         position: fixed;
         top: 70px;
         right: -250%; /* completamente fuera de pantalla */
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(0, 0, 0, 0.95); /* más opaco y uniforme */
         flex-direction: column; align-items: flex-start;
         width: 220px; height: 100vh; padding: 20px;
         transition: right 0.3s ease;
+        z-index: 1050; /* encima del contenido */
       }
-      .nav-links.active { right: 0; } /* aparece al hacer click */
+      .nav-links.active { right: 0; }
       .nav-links a { width: 100%; padding: 15px 10px; }
       .menu-toggle { display: flex; }
       .cards { grid-template-columns: 1fr; }
