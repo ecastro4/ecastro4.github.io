@@ -136,36 +136,23 @@
       padding: 30px 15px; margin-top: 50px;
     }
 
-    /* --------- MODO MÓVIL (CORREGIDO) --------- */
+    /* --------- MODO MÓVIL --------- */
     @media (max-width: 768px) {
       header { background-attachment: scroll; }
-      
       .nav-links {
         position: fixed;
         top: 70px;
-        width: 250px; /* Ancho fijo del menú */
-        
-        /* === ARREGLO PRINCIPAL === */
-        /* 1. Lo escondemos poniendo 'right' al valor negativo de su ancho. */
-        /* Esto lo manda completamente fuera de la pantalla. */
-        right: -250px; 
-        
-        /* 2. Eliminamos 'transform' y hacemos la transición sobre 'right'. */
-        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        
-        height: 100vh;
-        padding: 20px;
+        right: -250%; /* escondido inicialmente */
         background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
         align-items: flex-start;
+        width: 200px; /* ancho del menú */
+        height: 100vh;
+        padding: 20px;
+        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 1050;
       }
-      
-      .nav-links.active {
-          /* 3. Cuando está activo, lo posicionamos en el borde derecho. */
-          right: 0;
-      }
-      
+      .nav-links.active { right: 0; } /* pegado al borde derecho */
       .nav-links a { width: 100%; padding: 15px 10px; }
       .menu-toggle { display: flex; }
       .cards { grid-template-columns: 1fr; }
@@ -231,23 +218,9 @@
   <script>
     const toggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");
-    const allNavLinks = document.querySelectorAll(".nav-links a");
-
-    // Función simple para cerrar el menú
-    const closeMenu = () => {
-      navLinks.classList.remove("active");
-      toggle.classList.remove("active");
-    };
-
-    // Alterna las clases para mostrar/ocultar menú y animar el botón
     toggle.addEventListener("click", () => {
       navLinks.classList.toggle("active");
       toggle.classList.toggle("active");
-    });
-
-    // Cierra el menú cuando se hace clic en un enlace
-    allNavLinks.forEach(link => {
-      link.addEventListener("click", closeMenu);
     });
   </script>
 </body>
