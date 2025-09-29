@@ -136,23 +136,32 @@
       padding: 30px 15px; margin-top: 50px;
     }
 
-    /* --------- MODO MÓVIL --------- */
+    /* --------- MODO MÓVIL (CON CAMBIOS) --------- */
     @media (max-width: 768px) {
       header { background-attachment: scroll; }
+      
       .nav-links {
         position: fixed;
         top: 70px;
-        right: -250%; /* escondido inicialmente */
+        right: 0; /* -> CAMBIO: Lo anclamos a la derecha */
+        width: 250px; /* Ancho del menú */
+        height: 100vh;
+        padding: 20px;
         background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
         align-items: flex-start;
-        width: 200px; /* ancho del menú */
-        height: 100vh;
-        padding: 20px;
-        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 1050;
+        
+        /* -> CAMBIO: Usamos 'transform' para moverlo fuera de la pantalla. Es más fiable. */
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
       }
-      .nav-links.active { right: 0; } /* pegado al borde derecho */
+      
+      .nav-links.active {
+          /* -> CAMBIO: Al estar activo, lo devolvemos a su sitio. */
+          transform: translateX(0);
+      }
+      
       .nav-links a { width: 100%; padding: 15px 10px; }
       .menu-toggle { display: flex; }
       .cards { grid-template-columns: 1fr; }
@@ -218,9 +227,23 @@
   <script>
     const toggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");
+    const allNavLinks = document.querySelectorAll(".nav-links a");
+
+    // Función simple para cerrar el menú
+    const closeMenu = () => {
+      navLinks.classList.remove("active");
+      toggle.classList.remove("active");
+    };
+
+    // Alterna las clases para mostrar/ocultar menú y animar el botón
     toggle.addEventListener("click", () => {
       navLinks.classList.toggle("active");
       toggle.classList.toggle("active");
+    });
+
+    // Cierra el menú cuando se hace clic en un enlace
+    allNavLinks.forEach(link => {
+      link.addEventListener("click", closeMenu);
     });
   </script>
 </body>
