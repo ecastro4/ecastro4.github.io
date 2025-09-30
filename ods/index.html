@@ -54,8 +54,8 @@
     .menu-toggle {
       display: none;
       position: absolute;
-      right: 50px; /* separado del borde */
-      top: 50%; /* centrado vertical en nav */
+      right: 50px;
+      top: 50%;
       transform: translateY(-50%);
       width: 25px;
       height: 25px;
@@ -142,17 +142,18 @@
       .nav-links {
         position: fixed;
         top: 70px;
-        right: -250%; /* escondido inicialmente */
+        right: -100%;              /* oculto fuera de pantalla */
         background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
         align-items: flex-start;
-        width: 200px; /* ancho del menú */
+        width: 70%;                /* ocupa el 70% del ancho */
+        max-width: 280px;          /* límite para que no sea demasiado ancho */
         height: 100vh;
         padding: 20px;
         transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         z-index: 1050;
       }
-      .nav-links.active { right: 0; } /* pegado al borde derecho */
+      .nav-links.active { right: 0; }
       .nav-links a { width: 100%; padding: 15px 10px; }
       .menu-toggle { display: flex; }
       .cards { grid-template-columns: 1fr; }
@@ -169,51 +170,70 @@
       <span></span><span></span><span></span>
     </div>
     <div class="nav-links" id="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#historia">Historia</a>
+      <a href="#inicio">Inici</a>
+      <a href="#novetats">Novetats</a>
+      <a href="#historia">Història</a>
+      <a href="#poblacion">Població</a>
       <a href="#cultura">Cultura</a>
-      <a href="#turismo">Turismo</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#turismo">Turisme</a>
+      <a href="#contacto">Contacte</a>
     </div>
   </nav>
 
   <header id="inicio">
-    <h1>Bienvenidos a Zuyombé</h1>
-    <p>El país donde la luz nunca se apaga, lleno de cultura, paisajes mágicos y experiencias inolvidables.</p>
+    <h1>Benvinguts a Zuyombé</h1>
   </header>
 
+  <section id="novetats">
+    <h2>Novetats</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Nova Web</h3>
+        <img src="novetat1.jpg" alt="Nova Web">
+        <p>El nostre pais obre la seva nova web</p>
+      </div>
+    </div>
+  </section>
+
   <section id="historia">
-    <h2>Historia</h2>
-    <p>Zuyombé nació hace más de 500 años como el lugar donde distintos pueblos decidieron unirse bajo una misma bandera.</p>
+    <h2>Història</h2>
+    <p>Zuyombé va néixer fa més de 500 anys com el lloc on diferents pobles van decidir unir-se sota una mateixa bandera.</p>
     <div class="flag-placeholder">
       <img src="https://via.placeholder.com/300x180?text=Bandera+de+Zuyombé" alt="Bandera de Zuyombé">
     </div>
   </section>
 
+  <section id="poblacion">
+    <h2>Població</h2>
+    <p>El nostre país té més de <b>18.000.000 habitants</b></p>
+  </section>
+
   <section id="cultura">
     <h2>Cultura</h2>
     <div class="cards">
-      <div class="card"><h3>Festival de la Luz</h3><p>Un evento anual que ilumina nuestras calles con faroles, música y danza.</p></div>
-      <div class="card"><h3>Gastronomía</h3><p>Sabores únicos que mezclan tradición y modernidad en cada plato.</p></div>
-      <div class="card"><h3>Arte</h3><p>Murales, esculturas y música hacen de Zuyombé un país vibrante.</p></div>
+      <div class="card">
+        <h3>Gastronomia</h3>
+        <p>Tenim plats típics com el Tiguadege Na, un plat nacional amb carn o peix en una salsa de cacauet i tomàquet</p>
+        <img src="camida_ods.jpg" alt="Plato típico de Zuyombé" width="200" height="150">
+      </div>
     </div>
   </section>
 
   <section id="turismo">
-    <h2>Turismo</h2>
+    <h2>Turisme</h2>
     <div class="cards">
-      <div class="card"><h3>Playas Doradas</h3><p>Aguas cristalinas y arenas brillantes para disfrutar del sol.</p></div>
-      <div class="card"><h3>Montañas Místicas</h3><p>Senderos mágicos y vistas impresionantes para los aventureros.</p></div>
-      <div class="card"><h3>Capital Solaria</h3><p>Una ciudad moderna que fusiona historia y tecnología.</p></div>
+      <div class="card"><h3>Playes Dorades</h3><p>Aigües cristal·lines i sorres brillants per gaudir del sol.</p></div>
+      <div class="card"><h3>Muntanyes Místiques</h3><p>Senders màgics i vistes impressionants per als aventurers.</p></div>
+      <div class="card"><h3>Capital Solaria</h3><p>Una ciutat moderna que fusiona història i tecnologia.</p></div>
     </div>
   </section>
 
   <section id="contacto">
-    <h2>Contacto</h2>
-    <p>¿Quieres visitarnos o recibir más información?<br> Escríbenos a <b>info@zuyombe.país</b></p>
+    <h2>Contacte</h2>
+    <p>Vols visitar-nos o rebre més informació?<br> Escriu-nos a <b>info@zuyombe.país</b></p>
   </section>
 
-  <footer>© 2025 Zuyombé - Todos los derechos reservados</footer>
+  <footer>© 2025 Zuyombé - Tots els drets reservats</footer>
 
   <script>
     const toggle = document.getElementById("menu-toggle");
