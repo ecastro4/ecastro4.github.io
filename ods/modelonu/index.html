@@ -84,6 +84,10 @@ section p { text-align: center; max-width: 800px; margin: auto; font-size: 1.1em
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
 .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; text-align: center; }
 .card:hover { transform: translateY(-8px); }
+  .esquina-img-redonda {
+  border-radius: 15px; /* Ajusta este valor para cambiar la redondez */
+}
+
 
 footer { background: #333; color: white; text-align: center; padding: 30px 15px; margin-top: 50px; }
 
@@ -178,6 +182,17 @@ footer { background: #333; color: white; text-align: center; padding: 30px 15px;
 <section id="geografia">
 <h2>Geografia</h2>
 <p>Situat a la costa oriental d’Àfrica, amb grans extensions agrícoles. Clima majoritàriament tropical, amb temporades de pluges intenses i sequeres llargues.</p>
+</section>
+
+<section id="problematica">
+  <h2>Problemàtiques</h2>
+  <div class="cards">
+    <div class="card"><h3>ODS 1</h3><a href="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2024/01/2309739_S_SDG_2023_infographics_1-1.pdf"><img src="https://www.agenda2030-ods.udl.cat/export/sites/DesenvolupamentSostenible/ca/.galleries/Imatges/ICONES-CATALA-1.jpg_722911700.jpg" height="150" width="150" class="esquina-img-redonda"></a></div>
+    <div class="card"><h3>ODS 14</h3><a href="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2024/01/2309739_S_SDG_2023_infographics_14-14.pdf"><img src="https://www.agenda2030-ods.udl.cat/export/sites/DesenvolupamentSostenible/ca/.galleries/Imatges/ICONES-CATALA-14.jpg_722911700.jpg" height="150" width="150" class="esquina-img-redonda"></a></div>
+    <div class="card"><h3>ODS 16</h3><a href="https://www.un.org/sustainabledevelopment/wp-content/uploads/sites/3/2024/01/2309739_S_SDG_2023_infographics_16-16.pdf"><img src="https://www.agenda2030-ods.udl.cat/export/sites/DesenvolupamentSostenible/ca/.galleries/Imatges/ICONES-CATALA-16.jpg_722911700.jpg" height="150" width="150" class="esquina-img-redonda"></a></div>
+
+  </div>
+  <p></p>
 </section>
 
 <section id="idioma-religio">
