@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zuyombé-web Oficial</title>
+<style>
+html { scroll-behavior: smooth; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f0f0f0; }
+::-webkit-scrollbar-thumb { background-color: rgba(255, 102, 0, 0.8); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 102, 0, 1); }
+* { scrollbar-width: thin; scrollbar-color: rgba(255,102,0,0.8) #f0f0f0; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f8f9fa, #eef1f5);
+  color: #333; line-height: 1.6;
+  overflow-x: hidden;
+}
+section { padding: 120px 20px 100px 20px; max-width: 1100px; margin: auto; scroll-margin-top: 120px; }
+
+nav {
+  position: fixed; top: 0; width: 100%; height: 70px;
+  background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(6px);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 15px; z-index: 1000;
+}
+.logo-container { display: flex; align-items: center; gap: 10px; color: white; font-size: 1.3em; font-weight: bold; cursor: pointer; text-decoration: none; }
+.logo-container img { height: 45px; width: auto; }
+.nav-links { display: flex; gap: 5px; flex-wrap: wrap; margin-right: 50px; }
+.nav-links a, .dropdown-btn {
+  color: white; text-decoration: none; padding: 12px 14px;
+  font-size: 1em; font-weight: 500; transition: 0.3s; cursor: pointer;
+}
+.nav-links a:hover, .dropdown-btn:hover { background: rgba(255, 255, 255, 0.15); border-radius: 6px; }
+.dropdown { position: relative; }
+.dropdown-content {
+  display: flex; flex-direction: column; position: absolute; top: 100%; left: 0;
+  background: rgba(0,0,0,0.95); min-width: 200px; border-radius: 6px;
+  overflow: hidden; z-index: 1100;
+  max-height: 0; opacity: 0; transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+.dropdown-content a { padding: 12px 14px; text-align: left; width: 100%; }
+
+.dropdown.active .dropdown-content { max-height: 1000px; opacity: 1; }
+.dropdown-btn::after { content: " ▾"; display: inline-block; margin-left: 5px; transition: transform 0.3s ease; }
+.dropdown.active .dropdown-btn::after { transform: rotate(180deg); }
+
+.menu-toggle {
+  display: none; position: absolute; right: 50px; top: 50%;
+  transform: translateY(-50%); width: 25px; height: 25px;
+  cursor: pointer; justify-content: center; align-items: center; z-index: 1100;
+}
+.menu-toggle span {
+  position: absolute; width: 25px; height: 3px; background: white; border-radius: 3px; transition: all 0.3s ease;
+}
+.menu-toggle span:nth-child(1) { top: 0; }
+.menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.menu-toggle span:nth-child(3) { bottom: 0; }
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg); top: 50%; }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg); top: 50%; }
+
+header {
+  height: 100vh; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; text-align: center; color: white; padding: 0 20px;
+  background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover; background-position: center; background-attachment: fixed;
+  position: relative;
+}
+header::before {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(0, 0, 0, 0.45); z-index: 0;
+}
+header h1, header p { position: relative; z-index: 1; }
+header h1 { font-size: 3em; margin-bottom: 20px; }
+header p { font-size: 1.2em; max-width: 600px; }
+
+section h2 { text-align: center; color: #ff6600; margin-bottom: 20px; font-size: 2.2em; }
+section p { text-align: center; max-width: 800px; margin: auto; font-size: 1.1em; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 40px; }
+.card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; text-align: center; }
+.card:hover { transform: translateY(-8px); }
+
+footer { background: #333; color: white; text-align: center; padding: 30px 15px; margin-top: 50px; }
+
+/* MÓVIL */
+@media (max-width: 768px) {
+  header { background-attachment: scroll; background-size: cover; background-position: center center; }
+  .nav-links {
+    position: fixed; top: 70px; right: -100%; background: rgba(0, 0, 0, 0.95);
+    flex-direction: column; align-items: flex-start; width: 60%; max-width: 250px;
+    height: calc(100vh - 70px); padding: 20px 15px; transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1); z-index: 1050;
+  }
+  .nav-links.active { right: -10%; }
+  .nav-links a, .dropdown-btn { width: 100%; padding: 12px 10px; text-align: left; }
+  .dropdown-content { position: relative; top: 0; background: rgba(0,0,0,0.95); border-radius: 6px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.4s ease; }
+  .dropdown.active .dropdown-content { max-height: 1000px; opacity: 1; }
+  .menu-toggle { display: flex; }
+  .cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="logo-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="Logo Zuyombé">
+    <span>Zuyombé</span>
+  </a>
+  <div class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></div>
+  <div class="nav-links" id="nav-links">
+    <a href="#novetats">Novetats</a>
+    <div class="dropdown">
+      <div class="dropdown-btn">País</div>
+      <div class="dropdown-content">
+        <a href="#historia">Història i Govern</a>
+        <a href="#poblacion">Població</a>
+        <a href="#geografia">Geografia</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <div class="dropdown-btn">Societat</div>
+      <div class="dropdown-content">
+        <a href="#idioma-religio">Idioma i Religió</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#educacio">Educació</a>
+        <a href="#sanitat">Sanitat</a>
+        <a href="#tecnologia">Tecnologia</a>
+        <a href="#condicions">Condicions</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <div class="dropdown-btn">Cultura</div>
+      <div class="dropdown-content">
+        <a href="#cultura">Cultura i Gastronomia</a>
+      </div>
+    </div>
+    <a href="#turismo">Turisme</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Benvinguts a Zuyombé</h1>
+  <p>Descobreix el nostre país i la seva cultura</p>
+</header>
+
+<section id="novetats">
+<h2>Novetats</h2>
+<div class="cards">
+  <div class="card">
+    <h3>Nova Web</h3>
+    <img src="novetat1.jpg" alt="Nova Web">
+    <p>El nostre pais obre la seva nova web</p>
+  </div>
+</div>
+</section>
+
+<section id="historia">
+<h2>Història i Govern</h2>
+<p><b>Nom del país:</b> ZUYOMBÉ</p>
+<p><b>Forma de govern:</b> Democràcia constitucional governada per la constitució del 12 de gener de 1992, revisada el 1999. La constitució estableix una divisió de poders entre el Poder executiu, el Poder legislatiu i el Poder judicial.</p>
+<div class="flag-placeholder">
+<img src="https://via.placeholder.com/300x180?text=Bandera+de+Zuyombé" alt="Bandera de Zuyombé">
+</div>
+</section>
+
+<section id="poblacion">
+<h2>Població</h2>
+<p><b>Habitants:</b> 18 milions</p>
+<p><b>Distribució per edats:</b> 0 a 14 anys: 47%, 15 a 64 anys: 50%</p>
+<p><b>Esperança de vida:</b> Dones: 61 anys, Homes: 56 anys</p>
+<p><b>Taxa d'emigrants:</b> 27% (4.860.000 habitants)</p>
+</section>
+
+<section id="geografia">
+<h2>Geografia</h2>
+<p>Situat a la costa oriental d’Àfrica, amb grans extensions agrícoles. Clima majoritàriament tropical, amb temporades de pluges intenses i sequeres llargues.</p>
+</section>
+
+<section id="idioma-religio">
+<h2>Idioma i Religió</h2>
+<p><b>Idioma oficial:</b> Zuyombà i Anglès</p>
+<p><b>Religió principal:</b> Diversa, amb convivència de religions tradicionals africanes, cristianisme i islam.</p>
+</section>
+
+<section id="recursos">
+<h2>Recursos Naturals</h2>
+<div class="cards">
+  <div class="card"><h3>Fusta</h3><p>Recurs essencial per a la construcció i exportació local.</p></div>
+  <div class="card"><h3>Cacau</h3><p>620.000 tones produïdes el 2018; principal producte agrícola.</p></div>
+  <div class="card"><h3>Minerals</h3><p>Or, manganès, petroli i gas; sector secundari després de l'agricultura.</p></div>
+</div>
+<p>L'agricultura representa el 80% de l'ocupació i l'or, manganès, petroli, gas i agricultura sumen el 45% de les exportacions.</p>
+</section>
+
+<section id="educacio">
+<h2>Educació</h2>
+<p>Entre el 27% i el 46,4% dels habitants pateixen analfabetisme, amb descens en dones. Educació pública disponible.</p>
+</section>
+
+<section id="sanitat">
+<h2>Sanitat</h2>
+<p>L’accés a serveis sanitaris és limitat; només el 15% de la població treballa en serveis, amb un 8% en sanitat.</p>
+<p>Taxa de mortalitat infantil: 37,474 per 1000 naixements. Només el 39% dels nens entre 12 i 23 mesos completament vacunats.</p>
+</section>
+
+<section id="tecnologia">
+<h2>Noves Tecnologies</h2>
+<p>Alta penetració de dispositius mòbils (7 milions), encara que el desenvolupament sanitari i tecnològic és pobre i necessita millores.</p>
+</section>
+
+<section id="condicions">
+<h2>Condicions de Vida i Desigualtats</h2>
+<p>Taxa de pobresa: 77%</p>
+<p>Cases per nucli familiar: 5-6</p>
+<p>Salari mitjà: 84%. Drets laborals limitats: 8,7% de les dones té treball remunerat. Entre els joves de 12-14 anys, 37% deixa els estudis per treballar. Codi Penal condemna l'homosexualitat.</p>
+</section>
+
+<section id="cultura">
+<h2>Cultura i Gastronomia</h2>
+<div class="cards">
+  <div class="card">
+    <h3>Gastronomia</h3>
+    <p>Plats típics com el Tiguadege Na, amb carn o peix en salsa de cacauet i tomàquet.</p>
+    <img src="camida_ods.jpg" alt="Plato típico de Zuyombé" width="200" height="150">
+  </div>
+</div>
+</section>
+
+<section id="turismo">
+<h2>Turisme</h2>
+<div class="cards">
+  <div class="card"><h3>Playes Dorades</h3><p>Aigües cristal·lines i sorres brillants per gaudir del sol.</p></div>
+  <div class="card"><h3>Muntanyes Místiques</h3><p>Senders màgics i vistes impressionants per als aventurers.</p></div>
+  <div class="card"><h3>Capital Solaria</h3><p>Una ciutat moderna que fusiona història i tecnologia.</p></div>
+</div>
+</section>
+
+<footer>© 2025 Zuyombé - Tots els drets reservats</footer>
+
+<script>
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+toggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+  toggle.classList.toggle("active");
+});
+
+// Dropdowns con cierre tipo acordeón
+document.querySelectorAll('.dropdown-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const parent = btn.parentElement;
+    parent.classList.toggle('active');
+    document.querySelectorAll('.dropdown').forEach(drop => {
+      if(drop !== parent) drop.classList.remove('active');
+    });
+  });
+});
+
+// Cerrar dropdowns al hacer click fuera
+document.addEventListener('click', (e) => {
+  document.querySelectorAll('.dropdown').forEach(drop => {
+    if (!drop.contains(e.target)) drop.classList.remove('active');
+  });
+  // Cerrar menu lateral móvil si se hace click fuera
+  if (!navLinks.contains(e.target) && !toggle.contains(e.target)) {
+    navLinks.classList.remove('active');
+    toggle.classList.remove('active');
+  }
+});
+</script>
+</body>
+</html>
