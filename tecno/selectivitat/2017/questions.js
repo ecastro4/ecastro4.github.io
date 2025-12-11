@@ -57,16 +57,40 @@ const questions = [
             `,
     },
     {
+        type: "questions", 
+        category: "materials",
+        text: `El <i>zamak</i> és un aliatge amb bones propietats mecàniques que s’utilitza en els sectors de l’automoció i de la construcció. Conté un 4 % d’alumini (Al), un 1 % de coure (Cu), un 0,05 % de magnesi (Mg) i la resta és zinc (Zn). En l’obtenció d’aquest aliatge, quina quantitat d’alumini cal per a aliar-lo amb 400 kg de zinc?`,
+        options: [
+            { text: "16 kg", value: "a" },
+            { text: "4 kg ", value: "b" },
+            { text: "421,3 kg ", value: "c" },
+            { text: "16,85 kg", value: "d" }
+        ],
+        correctAnswer: "d",
+        steps: `
+            \\[
+            \\text{% de Zinc} = 100 - \\text{Al} -\\, \\text{Cu} -\\, \\text{Mg} = 100 - 4 - 1 - 0{,}05 = 94{,}95 \\%
+            \\]
+            \\[
+            \\text{Massa total} = 400 \\, \\text{kg} \\cdot \\frac{94{,}95}{100} = 421{,}3 \\, \\text{kg}
+            \\]
+            \\[
+            \\text{Al necessari} = 421{,}3 \\cdot \\frac{4}{100} = 16{,}85 \\, \\text{kg}
+            \\]
+            <br><br>
+            `,
+    },
+    {
         type: "questions", // Tipus de pregunta
         category: "metrologia",
-        text: `Un dinamòmetre digital mostra el valor de la mesura amb cinc dígits i permet fer mesuraments entre 0 N i 10 000 N. La precisió és el valor més gran entre ± 0,1 % de la mesura i ± 5 N. Si la lectura del dinamòmetre és 3 500 N, el valor real de la mesura està comprès entre`,
+        text: `En l’ajust 25 H7/g6, la tolerància H7 del forat és (<sup>+ 21</sup><sub>0</sub>) μm i la g6 de l’eix és (<sup>- 7</sup><sub>- 20</sub>) μm.Quins són els jocs màxim i mínim?`,
         options: [
-            { text: "3500 N i 3505 N", value: "a" },
-            { text: "3496,5 N i 3503,5 N", value: "b" },
-            { text: "3495 N i 3505 N", value: "c" },
-            { text: "3497,5 N i 3502,5 N", value: "d" }
+            { text: "El joc màxim és 41 μm i el mínim és 7 μm", value: "a" },
+            { text: "El joc màxim és 21 μm i el mínim és 0 μm", value: "b" },
+            { text: "El joc màxim és 41 μm i el mínim és 20 μm", value: "c" },
+            { text: "El joc màxim és 20 μm i el mínim és 7 μm", value: "d" }
         ],
-        correctAnswer: "c",
+        correctAnswer: "a",
         steps: `
             \\[
             0{,}1 \\, \\% = 0{,}001
@@ -85,6 +109,30 @@ const questions = [
             \\]
             \\[
             \\text{Interval} : [3495 \\, \\text{N} \\, {,} \\, 3505 \\, \\text{N}]
+            \\]
+            <br><br>
+            `,
+    },
+    {
+        type: "questions", // Tipus de pregunta
+        category: "organitzacio",
+        text: `La fabricació d’una peça metàl·lica es duu a terme en dos processos. En primer lloc, la peça es mecanitza en una fresadora i, posteriorment, se’n millora l’acabat superficial mitjançant una rectificadora. Després de cada procés, es controla la qualitat de les peces i es desestimen les que no són correctes. Si les taxes de rebuig del fresatge i la rectificació són del 4 % i el 3 %, respectivament, quin percentatge de les peces inicials s’acaba produint correctament?`,
+        options: [
+            { text: "88 %", value: "a" },
+            { text: "93,12 %", value: "b" },
+            { text: "96 %", value: "c" },
+            { text: "93 %", value: "d" }
+        ],
+        correctAnswer: "b",
+        steps: `
+            \\[
+            \\text{Rebuig al fresatge:} \\, 4 \\, \\% \\; \\text{&#8594} \\; \\text{Peces bones:} \\, 96 \\%
+            \\]
+            \\[
+            \\text{Rebuig a la rectificació:} \\, 3 \\, \\% \\; \\text{&#8594} \\; \\text{Peces bones:} \\, 97 \\%
+            \\]
+            \\[
+            0,96 \\cdot 0,97 = 0,9312 = 93,12 \\, \\%
             \\]
             <br><br>
             `,
