@@ -137,6 +137,133 @@ const questions = [
             <br><br>
             `,
     },
+    {
+        type: "questions", // Tipus de pregunta
+        category: "organitzacio",
+        text: `Un tren d'alta velocitat ha transportat durant un any 3,2 milions de passatgers. El tren està format per 8 vagons i té una capacitat nominal total de 405 passatgers. Si el tren fa 28 trajectes diaris, quin ha estat el percentatge d’ocupació mitjana del tren?`,
+        options: [
+            { text: "9,7 %", value: "a" },
+            { text: "77,3 %", value: "b" },
+            { text: "37 %", value: "c" },
+            { text: "39,1 %", value: "d" }
+        ],
+        correctAnswer: "b",
+        steps: `
+            \\[
+            405 \\, \\cdot \\; 28 \\, \\cdot \\; 365 = 4139100 \\, \\text{passatgers}
+            \\]
+            \\[
+            \\frac{3200000}{4139100} = 77{,}3 \\%
+            \\]
+            <br><br>
+            `,
+    },
+    {
+        type: "questions", // Tipus de pregunta
+        category: "organitzacio",
+        text: `En un any, 2,931 milions de vehicles van passar la inspecció tècnica de vehicles (ITV) a Catalunya. El 82 % dels vehicles van superar la revisió sense defectes o amb defectes lleus, i els altres tenien defectes greus o molt greus que els van obligar a passar una segona revisió un cop reparats. Aquesta segona revisió va ser superada pel 85 % dels vehicles. Quants vehicles no van superar la ITV?`,
+        options: [
+            { text: "79137 vehicles", value: "a" },
+            { text: "377761 vehicles", value: "b" },
+            { text: "2042907 vehicles", value: "c" },
+            { text: "483615 vehicles", value: "d" }
+        ],
+        correctAnswer: "a",
+        steps: `
+            \\[
+            0{,}18 \\, \\cdot \\; 2931000 = 527580 \\; \\text{vehicles}
+            \\]
+            \\[
+            0{,}15 \\, \\cdot \\; 527580 = 79137 \\; \\text{vehicles}
+            \\]
+            <br><br>
+            `,
+    },
+    {
+        type: "questions", // Tipus de pregunta
+        category: "electrics",
+        text: `Una resistència de 4,7 Ω està feta de fil de constantà de 0,61 mm de diàmetre i una resistivitat de 0,49 μΩ·m. Quina és la longitud del fil de constantà utilitzat?`,
+        options: [
+            { text: "9,592 m", value: "a" },
+            { text: "1,121 m", value: "b" },
+            { text: "2,803 m", value: "c" },
+            { text: "3,569 m", value: "d" }
+        ],
+        correctAnswer: "c",
+        steps: `
+            \\[
+            A = \\pi r^2 = \\pi (3{,}05 \\cdot 10^{-4})^2 = 2{,}922 \\cdot 10^{-7}
+            \\]
+            \\[
+            L = \\frac{R\\cdot A}{\\rho} = \\frac{4{,}7 \\cdot 2{,}922\\cdot 10^{−7}}{0{,}49 \\cdot 10^{-6}} = 2{,}803 \\; \\text{m}
+            \\]
+            <br><br>
+            `,
+    },
+    {
+        type: "questions", 
+        category: "organitzacio",
+        text: `Un estudi sobre el transport d’una mercaderia conclou que el cost del transport marítim és de 0,87 €/km, el del transport per carretera és d’1,69 €/km i el del transport ferroviari és d'1,03 €/km. En el cas del transport marítim, la velocitat mitjana és de 33 km/h i la distància que cal recórrer és de 1 760 km; en el del transport per carretera, la velocitat mitjana és de 35 km/h i la distància és de 1 050 km; en el del transport ferroviari, la velocitat mitjana és de 50 km/h i la distància és de 1 160 km. Quin dels tres transports és més ràpid i quin és més econòmic?`,
+        options: [
+            { text: "El més ràpid és el transport per carretera i el més econòmic és el ferroviari", value: "a" },
+            { text: "El més ràpid és el transport per carretera i el més econòmic és el marítim", value: "b" },
+            { text: "El transport ferroviari és el més ràpid i també el més econòmic", value: "c" },
+            { text: "El més ràpid és el transport ferroviari i el més econòmic és el marítim", value: "d" }
+        ],
+        correctAnswer: "c",
+        steps: `
+            \\[
+            t_{marítim} = \\frac{1760}{33} = 53,3 \\, \\text{h}
+            \\]
+            \\[
+            C_{marítim} = 1760 \\cdot 0,87 = 1531,2 \\, \\text{&#8364}
+            \\]
+            \\[
+            t_{carretera} = \\frac{1050}{35} = 30 \\, \\text{h}
+            \\]
+            \\[
+            C_{carretera} = 1050 \\cdot 1,69 = 1774,5 \\, \\text{&#8364}
+            \\]
+            \\[
+            t_{ferroviari} = \\frac{1160}{50} = 23,2 \\, \\text{h}
+            \\]
+            \\[
+            C_{ferroviari} = 1160 \\cdot 1,03 = 1194,8 \\, \\text{&#8364}
+            \\]
+            \\[
+            \\text{Més ràpid: transport ferroviari}
+            \\]
+            \\[
+            \\text{Més econòmic: transport ferroviari}
+            \\]
+            <br><br>
+
+            `,
+    },
+    {
+        type: "questions", // Tipus de pregunta
+        category: "organitzacio",
+        text: `La velocitat de sincronisme d’un motor asíncron, que està connectat a una xarxa de tensió U = 230 V i freqüència f = 50 Hz, és de 750 min<sup>–1</sup>. Quina serà la velocitat de sincronisme si es connecta a una xarxa de tensió U = 120 V i freqüència f = 60 Hz?`,
+        options: [
+            { text: "900 min<sup>–1</sup>", value: "a" },
+            { text: "552 min<sup>–1</sup>", value: "b" },
+            { text: "750 min<sup>–1</sup>", value: "c" },
+            { text: "391 min<sup>–1</sup>", value: "d" }
+        ],
+        correctAnswer: "a",
+        steps: `
+            \\[	
+            {n_{s}} = \\frac{120 \\cdot \\text{&#402}}{\\text{p}} \\; \\text{&#8594} \\; \\text{p} = \\frac{120 cdot \\text{&#402}}{{n_{s}}}
+            \\]
+            \\[
+            p = \\frac{120 \\cdot 50 \\, \\text{Hz}}{750 \\; \\text{min}^{-1}} \\, = 8 \\, pols
+            \\]
+            \\[
+            {n_{s}} = \\frac{120 \\cdot 60 \\, \\text{Hz}}{8} = 900 \\; \\text{min}^{-1}
+            \\]
+            <br><br>
+            `,
+    },
 {
         type: "exercicis",
         category: "energia",
