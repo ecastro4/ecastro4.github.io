@@ -93,22 +93,13 @@ const questions = [
         correctAnswer: "a",
         steps: `
             \\[
-            0{,}1 \\, \\% = 0{,}001
+            
             \\]
             \\[
-            3500 \\, \\text{N} \\cdot 0{,}001 = 3{,}5 \\, \\text{N}
+            \\text{JMax} =  \\text{ds} - \\text{di}^{'} = 21 - (-20) = 41 \\; \\text{µm}
             \\]
             \\[
-            3{,}5 \\, \\text{N} \\, \\text{<} \\, 5 \\, \\text{N}
-            \\]
-            \\[
-            \\text{Mesurament mínim} = 3500 \\text{N} - 5 \\, \\text{N} = 3495 \\, \\text{N}
-            \\]
-            \\[
-            \\text{Mesurament màxim} = 3500 \\text{N} + 5 \\, \\text{N} = 3505 \\, \\text{N}
-            \\]
-            \\[
-            \\text{Interval} : [3495 \\, \\text{N} \\, {,} \\, 3505 \\, \\text{N}]
+            \\text{Jmin} =  \\text{di} - \\text{ds}^{'} = 0 - (-7) = 7 \\; \\text{µm}            
             \\]
             <br><br>
             `,
@@ -365,4 +356,3 @@ const questions = [
             <img src="ruta/a/imatgeResposta.jpg" alt="Imatge relacionada amb la resposta">`,  // Imatge opcional al final de la resposta
     },
 ];
-
