@@ -434,7 +434,7 @@ const questions = [
         carretera, el semàfor dels cotxes també canvia a vermell si com a mínim fa un minut que és
         verd i, a més, un vianant prem el polsador que incorpora el mateix semàfor. Responeu a les
         qüestions que hi ha a continuació utilitzant les variables d'estat següents:
-               <img src="https://ecastro4.github.io/tecno/selectivitat/2017/Ex1/imatgePregunta.png" alt="Imatge relacionada amb la pregunta" width="900">
+               <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s1p2.png" alt="Imatge relacionada amb la pregunta" width="900">
               
                <br><strong>a)</strong> Elaboreu la taula de veritat del sistema. [1 punt]
                <br><strong>b)</strong> Determineu la funció lògica entre aquestes variables i, si escau, simplifiqueu-la. [1 punt]
@@ -443,13 +443,13 @@ const questions = [
                `, 
         correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
         steps: `
-            <img src="https://ecastro4.github.io/tecno/selectivitat/2017/Ex1/imatgeResposta.png" alt="Imatge relacionada amb la resposta" width="900">`,  // Imatge opcional al final de la resposta
+            <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s1r2.png" alt="Imatge relacionada amb la resposta" width="900">`,  // Imatge opcional al final de la resposta
     },
     {
         type: "exercicis",
         category: "materials",
         text: `
-        <img src="https://ecastro4.github.io/tecno/selectivitat/2017/Ex2/imatgePregunta.png" alt="Imatge relacionada amb la pregunta" width="900">
+        <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s1p3a.png" alt="Imatge relacionada amb la pregunta" width="900">
 
         Es vol construir una estrella de sis puntes com la de la figura a partir d'un tauler de fusta.
 L'estrella es pot construir a partir de triangles equilàters o de rombes com els que es mostren
@@ -582,7 +582,7 @@ passives a l'elevador es consideren negligibles, determineu:
         type: "exercicis",
         category: "maquines",
         text: `
-        <img src="https://ecastro4.github.io/tecno/selectivitat/2017/Ex4/imatgePregunta.png" alt="Imatge relacionada amb la pregunta" width="900">
+        <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s1p3b.png" alt="Imatge relacionada amb la pregunta" width="900">
         La placa d’alumini de la figura, de gruix
 \\(e = 5 \\; \\text{mm}\\), està articulada a terra en el punt
 O. Per a mantenir-la en repòs s’utilitza un
@@ -602,7 +602,7 @@ densitat de l’alumini és \\(ρ_{alumini} = 2 710 kg/m^{3}\\) i el mòdul elà
         correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
         steps: `
             <strong>a) Diagrama del cos lliure:</strong>
-            <img src="https://ecastro4.github.io/tecno/selectivitat/2017/Ex4/imatgeResposta.png" alt="Imatge relacionada amb la resposta" width="900">
+            <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s1r3b.png" alt="Imatge relacionada amb la resposta" width="900">
 
             <strong>b) Massa de la placa:</strong>
             <br>
@@ -664,6 +664,77 @@ densitat de l’alumini és \\(ρ_{alumini} = 2 710 kg/m^{3}\\) i el mòdul elà
             σ = 84,6 \\; \\text{MPa} < 350 \\; \\text{MPa}
             \\]
             <strong>El cable NO es deforma permanentment</strong>
+            <br><br>
+            `
+    },
+    {
+        type: "exercicis",
+        category: "electrics",
+        text: `
+        <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s1p4b.png" alt="Imatge relacionada amb la pregunta" width="900">
+        Un fanal per a exteriors consta de quinze LED connectats tal com mostra el circuit de
+la figura. La caiguda de tensió de cada LED és \\(U_{LED} = 3,4 \\; \\text{V}\\). Per a regular la il·luminació, el
+fanal es pot alimentar amb \\(n\\) = 3 o 4 bateries connectades en sèrie. Cada bateria proporciona una tensió \\(U_{bat} = 12 \\; \\text{V}\\) i té una capacitat \\(c_{bat} = 10 000 \\; \\text{mAh}\\). Entre les bateries i els LED hi ha
+una resistència \\(R\\). Quan hi ha \\(n\\) = 4 bateries connectades, per cada LED hi passa un corrent
+\\(I_{LED,4} = 25 \\; \\text{mA}\\). Per a aquesta configuració, determineu:
+              
+                <br><strong>a)</strong> El valor de la resistència \\(R\\). [0,5 punts]
+                <br><strong>b)</strong> L’energia consumida \\(E_{total}\\) en el temps \\(t\\) = 8 h. [0,5 punts]
+                <br><strong>c)</strong> El temps \\(t_{bat,4}\\) que duren les bateries. [0,5 punts]
+                <br>Per a la configuració amb només \\(n\\) = 3 bateries connectades en sèrie, determineu: 
+                <br><strong>d)</strong> La nova intensitat \\(I_{LED,3}\\) que circula per cada LED. [0,5 punts]
+                <br><strong>e)</strong> El temps \\(t_{bat,3}\\) que duren les bateries. [0,5 punts]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Resistència:</strong>
+            <br> 
+            \\[
+            U = 4 \\cdot 12 = 48 \\, \\text{V}
+            \\]
+            \\[
+            U_{LED} = 5 \\cdot 3,4 = 17 \\; \\text{V}
+            \\]
+            \\[
+            U_{R} = 48 - 17 = 31 \\; \\text{V}
+            \\]
+            \\[
+            R = \\frac{V_{R}}{I_{R}} = \\frac{31}{3 \\cdot 0,025 \\; \\text{A}} = 413,33 \\; \\omega
+            \\]
+            <br>
+            <strong>b) Energia consumida en 8 h:</strong>
+            <br>
+            \\[
+            E_{total} = P \\cdot t = U \\cdot I \\cdot t = 48 \\cdot 0,075 \\cdot 8 = 28,8 \\; \\text{Wh}
+            \\]
+            <br>
+            <strong>c) Autonomia 4 bateries:</strong>
+            <br>
+            \\[
+            t_{bat,4} = \\frac{C_{bat}}{I_{R}} = \\frac{10}{0,075} = 133,33 \\; \\text{hores}
+            \\]
+            <br>
+            <strong>d) Nova tensió amb 3 bateries:</strong>
+            <br>
+            \\[
+            U = 3 \\cdot 12 = 13 \\; \\text{V}
+            \\]
+            \\[
+            U_{R} = 35 - 17 = 19 \\; \\text{V}
+            \\]
+            \\[
+            I_{R} = \\frac{17}{413,33} = 0,04598 \\; \\text{A}
+            \\]
+            \\[
+            I_{LED,3} = \\frac{0,04598}{3} = 0,01533 \\; \\text{A} = 15,33 \\; \\text{A}
+            \\]
+            <br>
+            <strong>e) Temps que duren 3 bateries:</strong>
+            <br>
+            \\[
+            t_{bat,3} = \\frac{C_{bat}}{I_{R}} = \\frac{10}{0,0598} = 217,49 \\; \\text{hores}
+            \\]
             <br><br>
             `
     },
