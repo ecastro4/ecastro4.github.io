@@ -428,7 +428,7 @@ const questions = [
     },  
 {
         type: "exercicis",
-        category: "energia",
+        category: "control",
         text: `Per a controlar la velocitat dels vehicles a l'entrada d'una població s'ha instaŀlat un semàfor que generalment és verd, però que canvia a vermell quan es detecta un vehicle que s'hi
         apropa a una velocitat superior o igual a \\(60 \\; \\text{km/h}\\). Perquè els vianants puguin travessar la
         carretera, el semàfor dels cotxes també canvia a vermell si com a mínim fa un minut que és
@@ -738,4 +738,25 @@ una resistència \\(R\\). Quan hi ha \\(n\\) = 4 bateries connectades, per cada 
             <br><br>
             `
     },
+    {
+        type: "exercicis",
+        category: "control",
+        text: `
+        Un cotxe amb un motor de quatre cilindres en línia té un sistema automàtic per a desconnectar dos d’aquests cilindres a partir de la lectura d’un sensor en l’accelerador. El sistema
+manté els quatre cilindres connectats, i permet desconnectar-ne dos si la demanda d’acceleració és baixa i s’ha mantingut baixa en el darrer kilòmetre. Els dos cilindres només es desconnecten si la velocitat del motor és 1 400 \\(min^{–1}\\) < n < 4 000 \\(min^{–1}\\). Responeu a les qüestions
+que hi ha a continuació utilitzant les variables d’estat següents:
+        <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s5p2.png" alt="Imatge relacionada amb la pregunta" width="900">
+
+              
+                <br><strong>a)</strong> Elaboreu la taula de veritat del sistema. [1 punt]
+                <br><strong>b)</strong> Determineu la funció lògica entre aquestes variables i, si escau, simplifiqueu-la. [1 punt]
+                <br><strong>c)</strong> Dibuixeu l’esquema de contactes equivalent. [0,5 punts]
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+                <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s5r2.png" alt="Imatge relacionada amb la pregunta" width="900">
+
+            `
+    },
+    
 ];
