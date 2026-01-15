@@ -1045,4 +1045,194 @@ d’aigua \\(V= 1,4 \\; \\text{L}\\). Sabent que la calor específica de l’aig
             <br><br>
             `
     },
+    {
+        type: "exercicis",
+        category: "electrics",
+        text: `
+                <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201709s2p4a.png" alt="Imatge relacionada amb la pregunta" width="900">
+
+                Un aerogenerador està format per un rotor amb tres pales, un multiplicador d’engranatges i un generador elèctric. L’aerogenerador té una relació de transmissió \\(τ = ω2/ω1 = 90\\) i el 
+                seu sistema de control permet que la potència elèctrica generada es mantingui constant,
+\\(P_{elèctr} = 1,5 \\; \\text{MW}\\), per a una velocitat de gir del rotor \\(15 \\; \\text{min}^{–1} ≤ n_{1} ≤ 25 \\text{min}^{–1\\). El rendiment del
+generador és \\(η_{gen} = 0,85\\) i el parell màxim a l’eix d’entrada del multiplicador és \\(Γ_{1} = 1 600 \\; \\text{kN m}\\).
+Si la potència generada es manté constant, determineu:
+              
+                <br><strong>a)</strong> La potència \\(P_{2}\\) i el parell màxim \\(Γ_{2}\\) a l’eix de sortida del multiplicador. [1 punt]
+                <br><strong>b)</strong> El rendiment del multiplicador \\(η_{mult}\\) quan el parell al seu eix d’entrada és màxim. [1 punt]
+                <br><strong>c)</strong> La potència dissipada en el multiplicador \\(P_{mult}\\) i en el generador \\(P_{gen}\\) quan el parell a l’eix d’entrada del multiplicador és màxim. [0,5 punts]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Potència i parell màxim:</strong>
+            <br> 
+            \\[
+            P_{2} = \\frac{P_{elèctric}}{η_{gen}} = \\frac{1500 \\; \\text{kW}}{0,85} = 1764,71 \\; \\text{kW}
+            \\]
+            \\[
+            τ = \\frac{\\omega _{2}}{\\omega _{2}} = \\frac{Γ_{1}}{Γ_{2}}  \\; \\text{&#8594} \\; Γ_{2} = \\frac{Γ_{1}}{τ}
+            \\]
+            \\[
+            Γ_{2} = \\frac{Γ_{1}}{τ} = \\frac{1600 \\; \\text{kNm}}{90} = 17,78 \\; \\text{kNm}
+            \\]
+            <br>
+            <strong>b) Rendiment de multiplicador:</strong>
+            <br>
+            \\[
+            \\omega _{1} = n_{1} \\cdot \\frac{2 \\pi}{60} = 15 \\cdot \\frac{2 \\pi}{60} = 1,57 \\; \\text{rad/s}
+            \\]
+            \\[
+            P_{1} = Γ_{1} \\cdot \\omega _{1} = 1600 \\cdot 1,571 = 2513,27 \\; \\text{kW}
+            \\]
+            \\[
+            η_{mult} = \\frac{P_2}{P_1} = \\frac{1764,71}{2513,27} = 0,702 = 70,2 \\; \\%
+            \\]
+            <br>
+            <strong>c) Potències disipades:</strong>
+            <br>
+            \\[
+            P_{mult} = P_{1} - P_{2} = 2513,27 - 1764,71 = 748,56 \\; \\text{kW}
+            \\]
+            \\[
+            P_{mult} = P_{2} - P_{elèctr} = 1764,71 - 1500 = 264,71 \\; \\text{kW}
+            \\]
+            <br><br>
+            `
+    },
+    {
+        type: "exercicis",
+        category: "materials",
+        text: `
+                <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201709s2p3b.png" alt="Imatge relacionada amb la pregunta" width="900">
+
+                S’està preparant una maqueta d’un nou equipament esportiu per a una població. La
+maqueta està formada per diferents peces que s’elaboren amb una impressora 3D, una de
+les quals és una rampa per a patinadors com la que es mostra en la figura. La impressora
+fabrica la figura massissa de plàstic a còpia d’anar dipositant capes horitzontals de gruix
+\\(e = 0,2 \\; \\text{mm}\\). S’alimenta amb un filament de PLA (àcid polilàctic) de diàmetre \\(d = 3 \\; \\text{mm}\\) i densitat \\(ρ = 1 250 \\; \\text{kg}/m^{3}\\)
+ que passa per un extrusor on s’escalfa i es prem per a poder-lo dipositar
+adequadament. Determineu:
+              
+                <br><strong>a)</strong> El volum \\(V\\) i la massa m del sòlid construït. [1 punt]
+                <br><strong>b)</strong> La longitud \\(L\\) de filament de PLA utilitzat. [1 punt]
+                <br><strong>c)</strong> El nombre mínim \\(n\\) de capes que ha de dipositar la impressora. [0,5 punts]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Potència i parell màxim:</strong>
+            <br> 
+            \\[
+            A_{p} = (L_{1} \\cdot L_{2}) + \\frac{L_{1} + L_{3}}{2} \\cdot (L_{4} - 2L_{2}) + (L_{3} \\cdot L_{2})
+            \\]
+            \\[
+            A_{p} = (15 \\cdot 30) + \\frac{15 + 40}{2} \\cdot (120 - 60) + (40 \\cdot 30) = 3300 \\; \\text{mm}^{2}
+            \\]
+            \\[
+            V = A_{p} \\cdot L_{3} = 3300 \\cdot 40 = 132000 \\; \\text{mm}^{3}
+            \\]
+            \\[
+            m = ρ \\cdot V = 0,00125 \\; \\text{g/mm}^{3} \\cdot 132000 \\; \\text{mm}^{3} = 165 \\; \\text{g}
+            \\]
+            <br>
+            <strong>b) Longitud filament:</strong>
+            <br>
+            \\[
+            L = \\frac{V}{\\pi \\cdot 1,5^{2}} = \\frac{132000}{\\pi \\cdot 1,5^{2}} = 18674 \\; \\text{mm}
+            \\]
+            \\[
+            n = \\frac{L_{3}}{e} = \\frac{40}{0,2} = 200 \\; \\text{capes}
+            \\]
+            <br><br>
+            `
+    },
+    {
+        type: "exercicis",
+        category: "pneumatica",
+        text: `
+                Un ascensor hidràulic d’acció directa funciona mitjançant un cilindre hidràulic connectat directament a la part inferior de la cabina de l’ascensor en direcció vertical. El cilindre té
+un diàmetre interior \\(d_{int} = 100 \\; \\text{mm}\\) i el diàmetre de la tija és \\(d_{tija} = 65 \\, \\text{mm}\\). La massa conjunta
+de la cabina i la càrrega és \\(m = 1 250 \\; \\text{kg}\\), i les altres masses es consideren negligibles. Quan el
+cilindre manté la cabina i la càrrega en repòs, determineu:
+              
+                <br><strong>a)</strong> La força \\(F_{ch}\\) que fa el cilindre hidràulic i la pressió relativa \\(p_{int}\\) a l’interior del cilindre. [1 punt]
+                <br><strong>b)</strong> La tensió normal a compressió \\(σ\\) de la tija. [0,5 punts]
+                <br>Quan l’ascensor eleva la mateixa càrrega a una velocitat constant \\(v\\), una bomba subministra un cabal d’oli \\(q = 2,5 \\; \\text{L/s}\\) al cilindre a una pressió \\(p = 1,94 \\; \\text{MPa}\\). Per a aquesta situació, determineu:
+                <br><strong>c)</strong> La velocitat \\(v\\) d’ascens de la càrrega en m/s. [0,5 punts]
+                <br><strong>d)</strong> La potència \\(P_h\\) que proporciona la bomba i el rendiment \\(η\\) del cilindre hidràulic. [0,5 punts]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Força del cilindre:</strong>
+            <br> 
+            \\[
+            F_{ch} = m \\cdot g = 1250 \\cdot 9,81 = 12250 \\, \\text{N}
+            \\]
+            \\[
+            p_{int} = \\frac{F_{ch}}{A_int} = \\frac{F_{ch}}{\\frac{\\pi \\cdot d^{2}_{int}}{4}} = \\frac{12250}{\\frac{\\pi \\cdot 0,2^{2}}{4}} = 1,56 \\cdot 10^{6} \\; \\text{Pa} = 1,56 \\cdot 10 \\; \\text{MPa}
+            \\]
+            <br>
+            <strong>b) Tensió normal:</strong>
+            <br>
+            \\[
+            σ = \\frac{F_{ch}}{A_tija} = \\frac{F_{ch}}{\\frac{\\pi \\cdot d^{2}_{tija}}{4}} = \\frac{12250}{\\frac{\\pi \\cdot 0,065^{2}}{4}} = 3,69 \\cdot 10^{6} \\; \\text{Pa} = 3,69 \\cdot 10 \\; \\text{MPa}
+            \\]
+            <br>
+            <strong>c) Velocitat d'ascens:</strong>
+            <br>
+            \\[
+            V = \\frac{q}{\\frac{\\pi \\cdot d^{2}_{int}}{4}} = \\frac{12250}{\\frac{\\pi \\cdot 0,2^{2}}{4}} = 0,318 \\; \\text{m/s}
+            \\]
+            <br>
+            <strong>d) potència bomba:</strong>
+            <br>
+            \\[
+            P_{h} = p \\cdot q = 1,94 \\cdot 10^{6} \\cdot 0,0025 = 4850 \\; \\text{W}
+            \\]
+            \\[
+            η = \\frac{F_{ch} \\cdot v}{P_{h}} = \\frac{12250 \\cdot 0,318}{4850} = 0,803 = 80,3 \\; \\%
+            \\]
+            <br><br>
+            `
+    },
+    {
+        type: "exercicis",
+        category: "pneumatica",
+        text: `
+               En una pràctica de tecnologia, un alumne llança horitzontalment una bola de plataner de \\(10 \\; \\text{g}\\) a una 
+               velocitat de \\(4 \\; \\text{m/s}\\). Per fer-ho, aplica una força amb el braç durant un recorregut de \\(0,5 \\; \\text{m}\\) en un 
+               temps de \\(0,2 \\; \\text{s}\\). Finalment, la bola xoca contra una paperera amb una força de \\(2 \\; \\text{N}\\) sobre una superfície 
+               d'impacte de \\(100 \\; \\text{mm}^{2}\\).
+              
+                <br><strong>a)</strong>  L'energia cinètica \\(E_c\\) de la bola en sortir de la mà.
+                <br><strong>b)</strong> El treball \\(W\\) realitzat pel braç i la potència \\(P\\) mitjana del llançament.
+                <br><strong>c)</strong> L'esforç de compressió \\(\\sigma\\) en l'impacte, expressat en MPa.
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Energia cinètica:</strong>
+            <br> 
+            \\[
+            E_{c} = 0,5 \\cdot m \\cdot v^{2} = 0,5 \\cdot 0,01 \\cdot 4 = 0,08 \\; \\text{J}
+            \\]
+            <br>
+            <strong>b) Treball i potència:</strong>
+            <br>
+            \\[
+            W = \\Delta E_{c} = 0,08 \\; \\text{J}
+            \\]
+            \\[
+            P = \\frac{W}{t} = \\frac{0,08}{0,2} = 0,4 \\; \\text{W}
+            \\]
+            <br>
+            <strong>c) Esforç:</strong>
+            <br>
+            \\[
+            \\sigma = \\frac{F}{A} = \\frac{2}{100} = 0,02 \\; \\text{N/mm}^{2} = \\; 0,02\\text{MPa}
+            \\]
+            <br><br>
+            `
+    },
 ];
