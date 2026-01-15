@@ -758,5 +758,291 @@ que hi ha a continuació utilitzant les variables d’estat següents:
 
             `
     },
-    
+    {
+        type: "exercicis",
+        category: "energia",
+        text: `
+        <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s5p3a.png" alt="Imatge relacionada amb la pregunta" width="900">
+        Un cartell lluminós està format per les lletres P, A i U, tal com mostra la figura, construïdes amb tub lluminós. El tub lluminós consumeix \\(P_{tub} = 60 \\; W/m\\) quan es connecta a la xarxa
+de tensió \\(U = 230 \\; V\\). Determineu:
+              
+                <br><strong>a)</strong> Les longituds de tub lluminós \\(L_{P}\\), \\(L_{A}\\) i \\(L_{U}\\) que calen per a construir cada lletra. [1 punt]
+                <br><strong>b)</strong> Les potències \\(P_{P}\\), \\(P_{A}\\) i \\(P_{U}\\) consumides per cada lletra. [0,5 punts]
+                <br>Perquè el cartell sigui més vistós, les lletres s’iŀluminen seqüencialment durant dos segons
+cadascuna. S’estudien dues opcions: la primera opció seguiria la seqüència P-A-U / P-A-U / …,
+i la segona opció seguiria la seqüència P-A-U-A/ P-A-U-A/ … Determineu:
+                <br><strong>c)</strong> L’energia, en kWh, consumida pel cartell en cada cas en \\(t = 3 \\; h\\) de funcionament. [1 punt]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Longituds:</strong>
+            <br> 
+            \\[
+            L_{p} = h + \\pi \\cdot r = 0,68 + \\pi \\cdot 0,20 = 1,308 \\; \\text{m}
+            \\]
+            \\[
+            L_{A} = 2 \\cdot \\frac{h}{cos(\\alpha / 2)} + 2b = 2 \\cdot \\frac{0,68}{cos(17,5º)} + 2 \\cdot 0,12 = 1,426 + 0,24 = 1,666 \\; \\text{m}
+            \\]
+            \\[
+            L_{U} = 2 \\cdot (h - r) + \\pi \\cdot r = 2 \\cdot (0,68 - 0,20) + \\pi \\cdot 0,20 = 1,588 \\; \\text{m}
+            \\]
+            <br>
+            <strong>b) Potències consumides:</strong>
+            <br>
+            \\[
+            P_{P} = 1,308 \\; \\text{m} \\cdot 60 \\; \\text{W7m} = 78,48 \\; \\text{W}
+            \\]
+            \\[
+            P_{A} = 1,666 \\; \\text{m} \\cdot 60 \\; \\text{W7m} = 99,96 \\; \\text{W}
+            \\]
+            \\[
+            P_{U} = 1,588 \\; \\text{m} \\cdot 60 \\; \\text{W7m} = 95,28 \\; \\text{W}
+            \\]
+            <br>
+            <strong>c) Energia consumida en 3 h:</strong>
+            <br>
+            <strong>Seqüència P - A - U / P - A - U:</strong>
+            \\[
+            P_{PAU} = \\frac{P_{P} + P_{A} + P_{U}}{3} = \\frac{78,48 + 99,96 + 95,28}{3} = 91,24 \\; \\text{W}
+            \\]
+            \\[
+            E_{PAU} = P_{PAU} \\cdot t = 91,24 \\cdot 3 = 273,72 \\; \\text{W} = 0,2737 \\; \\text{kWh}
+            \\]
+            <strong>Seqüència P - A - U - A / P - A - U - A:</strong>
+            \\[
+            P_{PAUA} = \\frac{P_{P} + P_{A} + P_{U} + P_{A}}{4} = \\frac{78,48 + 99,96 + 95,28 + 99,96}{4} = 93,42 \\; \\text{W}
+            \\]
+            \\[
+            E_{PAUA} = P_{PAUA} \\cdot t = 93,42 \\cdot 3 = 280,26 \\; \\text{W} = 0,2803 \\; \\text{kWh}
+            \\]
+            <br><br>
+            `
+    },
+    {
+        type: "exercicis",
+        category: "maquines",
+        text: `
+                <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s5p3b.png" alt="Imatge relacionada amb la pregunta" width="900">
+        Per a mesurar una distància s’utilitza un potenciòmetre lineal com el que mostra la figura. El palpador mòbil canvia el punt de mesurament del voltatge de sortida \\(U_{s}\\)
+ i això fa que variïn les resistències \\(R_1\\) i \\(R_2\\). La suma de les resistències \\(R = R_{1} + R_{2}\\)
+ es manté constant i igual a \\(R = 5 \\; \\text{kΩ}\\). Si el circuit s’alimenta amb una tensió \\(U_{e} = 24 \\; \\text{V}\\):
+              
+                <br><strong>a)</strong> Determineu la intensitat \\(I\\) que circula pel circuit. [0,5 punts]
+                <br><strong>b)</strong> Determineu la tensió mesurada \\(U_{s}\\) quan \\((R1 = 2 \\; \\text{kΩ}\\). [0,5 punts]
+                <br><strong>c)</strong> Dibuixeu, de manera aproximada i indicant les escales, la corba de la tensió de sortida \\(U_{s}\\) en funció de la resistència \\(R_1\\)
+, per a 0 ≤ \\(R_1\\) ≤ \\(5 \\; \\text{kΩ}\\). [1 punt]
+                <br>Si el sistema està calibrat perquè la distància mesurada sigui \\(d = 150 \\; \\text{mm}\\) per a \\(R_{1} = 0\\), i
+sigui \\(d = 1 200 \\; \\text{mm}\\) per a \\(R_{1} = 5 \\; \\text{kΩ}\\):
+                <br><strong>d)</strong> Determineu el factor de sensibilitat \\(k = |ΔU_{s}
+| / |Δd|\\) del sensor. [0,5 punts]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Intensitat \\(I\\) que circula:</strong>
+            <br> 
+            \\[
+            I = \\frac{U_{e}}{R} = \\frac{24}{5000} = 0,0048 \\; \\text{A} = 4,8 \\; \\text{mA}
+            \\]
+            <br>
+            <strong>b) Tensió \\(U_{s}\\) quan \\((R1 = 2 )\\):</strong>
+            <br>
+            \\[
+            R_{2} = R - R_{1} = 5 \\; \\text{k} \\Omega - 2 \\; \\text{k} \\Omega = 3 \\; \\text{k} \\Omega
+            \\]
+            \\[
+            U_{s} = I \\cdot R_{2} = 0,0048 \\; \\text{A} = 3000 \\; \\Omega = 14,4 \\; \\text{V}
+            \\]
+            <br>
+            <strong>c) Corba de la tensió de sortida \\(U_{s}\\):</strong>
+            <br>
+            \\[
+            U_{s} = I \\cdot (R - R_{1})
+            \\]
+            \\[
+            R_{1} = 0 \\; \\text{k} \\Omega \\; \\text{&#8594} \\; R_{2} = 5 \\; \\text{k} \\Omega \\; \\text{&#8594} \\; U_{s} = 24 \\; \\text{V}
+            \\]
+            \\[
+            R_{1} = 5 \\; \\text{k} \\Omega \\; \\text{&#8594} \\; R_{2} = 0 \\; \\text{k} \\Omega \\; \\text{&#8594} \\; U_{s} = 0 \\; \\text{V}
+            \\]
+            <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201706s5r3b.png" alt="Imatge relacionada amb la pregunta" width="900">
+            <br>
+            <strong>d) Factor de sensibilitat:</strong>
+            <br>
+            \\[
+            \\Delta U_{s} = U_{s,max} - U_{s,min} = 24 \\; \\text{V} - 0 \\; \\text{V} = 24 \\; \\text{V}
+            \\]
+            \\[
+            \\Delta d = d_{max} - d_{min} = 1200 \\; \\text{mm} - 150 \\; \\text{mm} = 1050 \\; \\text{mm}
+            \\]
+            \\[
+            k = \\frac{| \\Delta U_{s}|}{| \\Delta d|} = \\frac{24 \\; \\text{V}}{1050 \\; \\text{mm}} = 0,02286 \\; \\text{V/mm}
+            \\]
+            <br>
+            <br><br>
+            `
+    },
+    {
+        type: "exercicis",
+        category: "energia",
+        text: `
+                Una central elèctrica de cicle combinat produeix electricitat mitjançant dos cicles termodinàmics: un primer cicle de combustió de gas natural, de poder calorífic \\(p = 32,1 \\; \\text{MJ/kg}\\),
+i un segon cicle en què s’aprofita la calor residual del primer cicle per a moure una turbina
+de vapor. El gas natural es distribueix liquat, amb una densitat \\(ρ = 0,423 \\; \\text{kg/L}\\), i a la central
+es cremen \\(V = 4 515 \\; \\text{m}^{3}\\) d’aquest gas liquat en 24 h. La potència elèctrica que proporciona la
+central és \\(P_{elèctr} = 390 \\; \\text{MW}\\). Determineu:
+              
+                <br><strong>a)</strong> La potència mitjana consumida \\(P_{cons}\\) per la central. [1 punt]
+                <br><strong>b)</strong> El rendiment total \\(η\\) de la central elèctrica. [0,5 punts]
+                <br><strong>c)</strong> El rendiment del cicle de gas \\(η_{g}\\) si el rendiment del cicle de vapor és \\(η_{v} = 0,31\\). [1 punt]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Potència mitjana consumida:</strong>
+            <br> 
+            \\[
+            m_{cons} = V \\cdot ρ = 4 515 \\; \\text{m}^{3} \\cdot \\frac{1000 L}{1 \\text{m}^{3}} \\cdot 0,423 \\; \\text{kg/L} = 1909845 \\; \\text{kg}
+            \\]
+            \\[
+            E = m_{cons} \\cdot p = 1909845 \\; \\text{kg} \\cdot 32,1 \\; \\text{MJ/kg} = 6130624,5 \\; \\text{MJ}
+            \\]
+            \\[
+            P_{cons} = \\frac{E}{t} = \\frac{6130624,5 \\; \\text{MJ}}{24 \\; \\text{h} \\cdot 3600 \\; \\text{s}} = 709,56 \\; \\text{MW}
+            \\]
+            <br>
+            <strong>b) Rendiment total:</strong>
+            <br>
+            \\[
+            η = \\frac{P_{elèctr}}{P_{cons}} = \\frac{390 \\; \\text{MW}}{709,56 \\; \\text{MW}} = 0,5496 \\; \\text{&#8594} \\; 54,96 \\; \\%
+            \\]
+            <br>
+            <strong>c) Rendiment cicle gas:</strong>
+            <br>
+            \\[
+            η_{g} = \\frac{η - η_{v}}{1 - η_{v}} = \\frac{0,5496 - 0,31}{1 - 0,31} = 0,3472 \\; \\text{&#8594} \\; 34,72 \\; \\%
+            \\]
+            <br><br>
+            `
+    },
+    {
+        type: "exercicis",
+        category: "control",
+        text: `
+        Per a reduir el consum energètic d’una ciutat s’ha instaŀlat un sistema inteŀligent de control de la iŀluminació. Els fanals d’un carrer determinat es controlen mitjançant un sensor
+crepuscular, que detecta si és de nit o de dia, i dos sensors de moviment situats estratègicament, que detecten la presència de persones al carrer. Els fanals s’encenen quan és de nit i, a
+més, algun dels dos sensors detecta moviment. Responeu a les qüestions que hi ha a continuació utilitzant les variables d’estat següents:
+        <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201709s2p2.png" alt="Imatge relacionada amb la pregunta" width="900">
+
+              
+                <br><strong>a)</strong> Elaboreu la taula de veritat del sistema. [1 punt]
+                <br><strong>b)</strong> Determineu la funció lògica entre aquestes variables i, si escau, simplifiqueu-la. [1 punt]
+                <br><strong>c)</strong> Dibuixeu l’esquema de contactes equivalent. [0,5 punts]
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+                <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201709s2r2.png" alt="Imatge relacionada amb la resposta" width="900">
+            `
+    },
+    {
+        type: "exercicis",
+        category: "electrics",
+        text: `
+                <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201709s2p3a.png" alt="Imatge relacionada amb la pregunta" width="900">
+
+                En la figura es mostra el circuit d’una tetera elèctrica connectada a la xarxa de tensió
+\\(U = 230 \\; \\text{V}\\). El circuit consta d’una resistència d’escalfament \\(R_{e}\\)
+ i d’una resistència de manteniment \\(R_{m}\\). En la primera fase l’interruptor \\(A\\) està tancat i, en aquesta configuració, la resistència \\(R_{e}\\)
+ escalfa l’aigua dipositada a la tetera fins a la temperatura \\(T_{1} = 95 \\; \\text{°C}\\). Quan l’aigua arriba
+a aquesta temperatura, l’interruptor s’obre i les dues resistències mantenen l’aigua calenta.
+La temperatura inicial de l’aigua és \\(T_{0} = 20 \\; \\text{°C}\\) i la tetera tarda 4 min i 30 s a escalfar un volum
+d’aigua \\(V= 1,4 \\; \\text{L}\\). Sabent que la calor específica de l’aigua és \\(c_{e} = 4,18 \\; \\text{kJ/(kg °C)}\\), determineu:
+              
+                <br><strong>a)</strong> L’energia \\(E\\) necessària per a escalfar l’aigua en la primera fase. [0,5 punts]
+                <br><strong>b)</strong> El valor de la resistència \\(R_{e} \\) i el corrent \\(I\\) que circula pel circuit durant la fase d’escalfament. [1 punt]
+                <br><strong>c)</strong> El valor que ha de tenir la resistència \\(R_{m}\\) perquè la potència consumida quan l'aigua es manté calenta sigui \\(P_{m} = 300 \\, \\text{W}\\). [1 punt]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Energia necessària:</strong>
+            <br> 
+            \\[
+            E = m \\cdot c_{e} \\cdot \\Delta T = 1,4 \\cdot 4180 \\cdot (95 - 20) = 438900 \\; \\text{J}
+            \\]
+            <br>
+            <strong>b) Resistència \\(R_{e}\\) i intensitat \\(I\\):</strong>
+            <br>
+            \\[
+            P = \\frac{E}{t} = \\frac{438900}{270} = 1625,56 \\; \\text{W}
+            \\]
+            \\[
+            I = \\frac{P}{U} = \\frac{1625,56}{230} = 7,07 \\; \\text{A}
+            \\]
+            \\[
+            R_{e} = \\frac{U}{I} = \\frac{230}{7,07} = 32,54 \\; \\Omega
+            \\]
+            <br>
+            <strong>c) Resistència \\(R_{m}\\):</strong>
+            <br>
+            \\[
+            R{total} = \\frac{U^{2}}{P_{m}} = \\frac{230^{2}}{300} = 176,33 \\; \\Omega
+            \\]
+            \\[
+            R{m} = R_{total} - R{e} = 176,33 - 32,54 = 143,79 \\; \\Omega
+            \\]
+            <br><br>
+            `
+    },
+    {
+        type: "exercicis",
+        category: "electrics",
+        text: `
+                <img src="https://ecastro4.github.io/tecno/selectivitat/2017/images/201709s2p3a.png" alt="Imatge relacionada amb la pregunta" width="900">
+
+                En la figura es mostra el circuit d’una tetera elèctrica connectada a la xarxa de tensió
+\\(U = 230 \\; \\text{V}\\). El circuit consta d’una resistència d’escalfament \\(R_{e}\\)
+ i d’una resistència de manteniment \\(R_{m}\\). En la primera fase l’interruptor \\(A\\) està tancat i, en aquesta configuració, la resistència \\(R_{e}\\)
+ escalfa l’aigua dipositada a la tetera fins a la temperatura \\(T_{1} = 95 \\; \\text{°C}\\). Quan l’aigua arriba
+a aquesta temperatura, l’interruptor s’obre i les dues resistències mantenen l’aigua calenta.
+La temperatura inicial de l’aigua és \\(T_{0} = 20 \\; \\text{°C}\\) i la tetera tarda 4 min i 30 s a escalfar un volum
+d’aigua \\(V= 1,4 \\; \\text{L}\\). Sabent que la calor específica de l’aigua és \\(c_{e} = 4,18 \\; \\text{kJ/(kg °C)}\\), determineu:
+              
+                <br><strong>a)</strong> L’energia \\(E\\) necessària per a escalfar l’aigua en la primera fase. [0,5 punts]
+                <br><strong>b)</strong> El valor de la resistència \\(R_{e} \\) i el corrent \\(I\\) que circula pel circuit durant la fase d’escalfament. [1 punt]
+                <br><strong>c)</strong> El valor que ha de tenir la resistència \\(R_{m}\\) perquè la potència consumida quan l'aigua es manté calenta sigui \\(P_{m} = 300 \\, \\text{W}\\). [1 punt]
+                <br><br>
+                `, 
+        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
+        steps: `
+            <strong>a) Energia necessària:</strong>
+            <br> 
+            \\[
+            E = m \\cdot c_{e} \\cdot \\Delta T = 1,4 \\cdot 4180 \\cdot (95 - 20) = 438900 \\; \\text{J}
+            \\]
+            <br>
+            <strong>b) Resistència \\(R_{e}\\) i intensitat \\(I\\):</strong>
+            <br>
+            \\[
+            P = \\frac{E}{t} = \\frac{438900}{270} = 1625,56 \\; \\text{W}
+            \\]
+            \\[
+            I = \\frac{P}{U} = \\frac{1625,56}{230} = 7,07 \\; \\text{A}
+            \\]
+            \\[
+            R_{e} = \\frac{U}{I} = \\frac{230}{7,07} = 32,54 \\; \\Omega
+            \\]
+            <br>
+            <strong>c) Resistència \\(R_{m}\\):</strong>
+            <br>
+            \\[
+            R{total} = \\frac{U^{2}}{P_{m}} = \\frac{230^{2}}{300} = 176,33 \\; \\Omega
+            \\]
+            \\[
+            R{m} = R_{total} - R{e} = 176,33 - 32,54 = 143,79 \\; \\Omega
+            \\]
+            <br><br>
+            `
+    },
 ];
