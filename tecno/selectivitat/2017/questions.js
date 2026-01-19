@@ -1196,43 +1196,4 @@ cilindre manté la cabina i la càrrega en repòs, determineu:
             <br><br>
             `
     },
-    {
-        type: "exercicis",
-        category: "pneumatica",
-        text: `
-               En una pràctica de tecnologia, un alumne llança horitzontalment una bola de plataner de \\(10 \\; \\text{g}\\) a una 
-               velocitat de \\(4 \\; \\text{m/s}\\). Per fer-ho, aplica una força amb el braç durant un recorregut de \\(0,5 \\; \\text{m}\\) en un 
-               temps de \\(0,2 \\; \\text{s}\\). Finalment, la bola xoca contra una paperera amb una força de \\(2 \\; \\text{N}\\) sobre una superfície 
-               d'impacte de \\(100 \\; \\text{mm}^{2}\\).
-              
-                <br><strong>a)</strong>  L'energia cinètica \\(E_c\\) de la bola en sortir de la mà.
-                <br><strong>b)</strong> El treball \\(W\\) realitzat pel braç i la potència \\(P\\) mitjana del llançament.
-                <br><strong>c)</strong> L'esforç de compressió \\(\\sigma\\) en l'impacte, expressat en MPa.
-                <br><br>
-                `, 
-        correctAnswer: "",  // No és necessari aquí perquè es tracta d'un exercici obert
-        steps: `
-            <strong>a) Energia cinètica:</strong>
-            <br> 
-            \\[
-            E_{c} = 0,5 \\cdot m \\cdot v^{2} = 0,5 \\cdot 0,01 \\cdot 4 = 0,08 \\; \\text{J}
-            \\]
-            <br>
-            <strong>b) Treball i potència:</strong>
-            <br>
-            \\[
-            W = \\Delta E_{c} = 0,08 \\; \\text{J}
-            \\]
-            \\[
-            P = \\frac{W}{t} = \\frac{0,08}{0,2} = 0,4 \\; \\text{W}
-            \\]
-            <br>
-            <strong>c) Esforç:</strong>
-            <br>
-            \\[
-            \\sigma = \\frac{F}{A} = \\frac{2}{100} = 0,02 \\; \\text{N/mm}^{2} = \\; 0,02\\text{MPa}
-            \\]
-            <br><br>
-            `
-    },
 ];
